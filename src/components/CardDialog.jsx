@@ -113,34 +113,30 @@ export default function CardDialog({ open, onClose, user, set, card, onSaved }) 
       title={editing ? 'Редактировать карточку' : 'Добавить слова'}
     >
       <form onSubmit={submit} className="space-y-4">
-        <label className="block">
-          <Label>Английское слово *</Label>
-          <Textarea
-            ref={enRef}
-            autoFocus
-            rows={1}
-            value={form.word_en}
-            onChange={(e) => setForm({ ...form, word_en: e.target.value })}
-            onKeyDown={submitOnEnter}
-            placeholder="platypus"
-            required
-          />
-        </label>
+        <Textarea
+          ref={enRef}
+          autoFocus
+          rows={1}
+          value={form.word_en}
+          onChange={(e) => setForm({ ...form, word_en: e.target.value })}
+          onKeyDown={submitOnEnter}
+          placeholder="Английское слово"
+          aria-label="Английское слово"
+          required
+        />
 
-        <label className="block">
-          <Label>Перевод *</Label>
-          <Textarea
-            rows={1}
-            value={form.word_ru}
-            onChange={(e) => setForm({ ...form, word_ru: e.target.value })}
-            onKeyDown={submitOnEnter}
-            placeholder="утконос"
-            required
-          />
-        </label>
+        <Textarea
+          rows={1}
+          value={form.word_ru}
+          onChange={(e) => setForm({ ...form, word_ru: e.target.value })}
+          onKeyDown={submitOnEnter}
+          placeholder="Перевод"
+          aria-label="Перевод"
+          required
+        />
 
         <div>
-          <Label>Изображение (необязательно)</Label>
+          <Label>Изображение</Label>
           {preview ? (
             <div className="relative">
               <img
@@ -173,15 +169,13 @@ export default function CardDialog({ open, onClose, user, set, card, onSaved }) 
           )}
         </div>
 
-        <label className="block">
-          <Label>Предложение-контекст (необязательно)</Label>
-          <Textarea
-            rows={2}
-            value={form.context}
-            onChange={(e) => setForm({ ...form, context: e.target.value })}
-            placeholder="Perry the platypus is a secret agent."
-          />
-        </label>
+        <Textarea
+          rows={2}
+          value={form.context}
+          onChange={(e) => setForm({ ...form, context: e.target.value })}
+          placeholder="Предложение-контекст"
+          aria-label="Предложение-контекст"
+        />
 
         <ErrorText>{error}</ErrorText>
 

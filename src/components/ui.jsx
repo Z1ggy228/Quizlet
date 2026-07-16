@@ -138,6 +138,53 @@ export function ErrorText({ children }) {
   )
 }
 
+/** Настройка режима, переживающая перезагрузку: хранится локально в браузере. */
+export function useSetting(key, initial) {
+  const [value, setValue] = useState(() => {
+    try {
+      return localStorage.getItem(key) ?? initial
+    } catch {
+      return initial
+    }
+  })
+  useEffect(() => {
+    try {
+      localStorage.setItem(key, value)
+    } catch {
+      /* приватный режим — переживём без сохранения */
+    }
+  }, [key, value])
+  return [value, setValue]
+}
+
+/** Выбор одного варианта из нескольких — плитками, а не радиокнопками. */
+export function OptionGroup({ label, value, onChange, options }) {
+  return (
+    <div>
+      {label && <Label>{label}</Label>}
+      <div className="grid gap-2 sm:grid-cols-2">
+        {options.map((o) => (
+          <button
+            key={o.value}
+            type="button"
+            onClick={() => onChange(o.value)}
+            className={`rounded-lg p-3 text-left ring-1 transition ${
+              value === o.value
+                ? 'bg-indigo-50 ring-2 ring-indigo-600 dark:bg-indigo-950/60'
+                : 'ring-slate-200 hover:ring-indigo-400 dark:ring-slate-700 dark:hover:ring-indigo-600'
+            }`}
+          >
+            <span className="block text-sm font-medium">{o.label}</span>
+            {o.hint && (
+              <span className="block text-xs text-slate-500 dark:text-slate-400">{o.hint}</span>
+            )}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function useTheme() {
   const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'))
   useEffect(() => {

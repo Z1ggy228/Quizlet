@@ -53,9 +53,6 @@ export default function FoldersView({ user, onOpen }) {
       <div className="mb-5 flex items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">Папки</h1>
-          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
-            Например «Финес и Ферб» — внутри наборы по сериям.
-          </p>
         </div>
         <Button onClick={() => open('create')}>
           <PlusIcon /> <span className="hidden sm:inline">Новая папка</span>
@@ -69,7 +66,6 @@ export default function FoldersView({ user, onOpen }) {
       ) : folders.length === 0 ? (
         <EmptyState
           title="Пока нет ни одной папки"
-          hint="Папка — это тема или сериал. Внутри лежат наборы слов."
           action={<Button onClick={() => open('create')}>Создать первую папку</Button>}
         />
       ) : (

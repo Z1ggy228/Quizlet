@@ -105,11 +105,11 @@ export default function SetsView({ user, folder, onOpen }) {
       <div className="mb-5 flex items-center justify-between gap-3">
         <div className="min-w-0">
           <h1 className="truncate text-2xl font-semibold">{folder.name}</h1>
-          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
-            {sets.length > 0
-              ? `${sets.length} наборов · ${plural(totalCards)}`
-              : 'Наборы внутри папки — например «Серия 1».'}
-          </p>
+          {sets.length > 0 && (
+            <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
+              {plural(sets.length, ['набор', 'набора', 'наборов'])} · {plural(totalCards)}
+            </p>
+          )}
         </div>
         <div className="flex shrink-0 gap-2">
           <Button
@@ -135,7 +135,6 @@ export default function SetsView({ user, folder, onOpen }) {
       ) : sets.length === 0 ? (
         <EmptyState
           title="В этой папке пока нет наборов"
-          hint="Набор — это порция слов, которую вы учите за раз."
           action={<Button onClick={() => open('create')}>Создать набор</Button>}
         />
       ) : (
@@ -171,8 +170,9 @@ export default function SetsView({ user, folder, onOpen }) {
       <Modal open={learnAllOpen} onClose={() => setLearnAllOpen(false)} title="Учить всю папку">
         <div className="space-y-4">
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            Все слова из {sets.length} наборов папки «{folder.name}» — {plural(totalCards)} — одной
-            сессией. Прогресс сохраняется тем же карточкам, что и при изучении набора по отдельности.
+            Все слова папки «{folder.name}» — {plural(totalCards)} из{' '}
+            {plural(sets.length, ['набора', 'наборов', 'наборов'])} — одной сессией. Прогресс
+            сохраняется тем же карточкам, что и при изучении набора по отдельности.
           </p>
 
           <div className="grid gap-2 sm:grid-cols-2">
@@ -286,10 +286,11 @@ function ModeOption({ title, hint, active, onClick }) {
   )
 }
 
-function plural(n) {
+/** Склонение: plural(2, ['слово','слова','слов']) → «2 слова». */
+function plural(n, forms = ['слово', 'слова', 'слов']) {
   const mod10 = n % 10
   const mod100 = n % 100
-  if (mod10 === 1 && mod100 !== 11) return `${n} слово`
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} слова`
-  return `${n} слов`
+  if (mod10 === 1 && mod100 !== 11) return `${n} ${forms[0]}`
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} ${forms[1]}`
+  return `${n} ${forms[2]}`
 }

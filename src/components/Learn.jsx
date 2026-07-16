@@ -1,9 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import * as db from '../lib/db'
 import { imageUrl } from '../lib/supabase'
-import { Button, Card, ErrorText, Input, Spinner } from './ui'
+import { Button, Card, ErrorText, Input, Modal, OptionGroup, Spinner, useSetting } from './ui'
 
 const MASTERED = 3 // столько правильных ответов подряд — и слово считается выученным
+
+/**
+ * Сколько слов тренажёр держит в работе одновременно.
+ *
+ * Без этого ограничения на большом наборе прогресс стоит намертво: выбирая
+ * случайно из полутора тысяч слов, одно и то же слово почти невозможно встретить
+ * три раза подряд, а без этого оно не выучится. Поэтому берём небольшую пачку,
+ * доводим её до конца и подтягиваем следующие слова.
+ */
+const ACTIVE_BATCH = 7
 
 const PRAISE = [
   'Отлично!',
@@ -92,17 +102,21 @@ function pickWeighted(pool) {
   return pool[pool.length - 1]
 }
 
-function buildQuestion(states, allCards, lastId) {
+function buildQuestion(states, allCards, lastId, questionMode) {
   const pool = states.filter((s) => s.mastery < MASTERED)
   if (!pool.length) return null
 
+  // Работаем пачкой: пока эти слова не выучены, следующие не подключаем.
+  const active = pool.slice(0, ACTIVE_BATCH)
   // Не спрашиваем то же слово два раза подряд, пока есть выбор.
-  const candidates = pool.length > 1 ? pool.filter((s) => s.id !== lastId) : pool
-  const st = pickWeighted(candidates.length ? candidates : pool)
+  const candidates = active.length > 1 ? active.filter((s) => s.id !== lastId) : active
+  const st = pickWeighted(candidates.length ? candidates : active)
 
   // Новые слова — выбором из вариантов, освоенные — ручным вводом.
   let type
-  if (st.mastery === 0) type = 'choice'
+  if (questionMode === 'choice') type = 'choice'
+  else if (questionMode === 'input') type = 'input'
+  else if (st.mastery === 0) type = 'choice'
   else if (st.mastery === 1) type = Math.random() < 0.5 ? 'choice' : 'input'
   else type = 'input'
   if (allCards.length < 2) type = 'input'
@@ -130,6 +144,8 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
   const [stats, setStats] = useState({ correct: 0, wrong: 0 })
   const [error, setError] = useState('')
   const [resetting, setResetting] = useState(false)
+  const [questionMode, setQuestionMode] = useSetting('learn.questions', 'mix') // mix | choice | input
+  const [settingsOpen, setSettingsOpen] = useState(false)
 
   const nextStatesRef = useRef(states)
   const lastIdRef = useRef(null)
@@ -137,7 +153,7 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
   const inputRef = useRef(null)
 
   useEffect(() => {
-    const q = buildQuestion(states, cards, null)
+    const q = buildQuestion(states, cards, null, questionMode)
     if (q) setQuestion(q)
     else setFinished(true)
     return () => clearTimeout(timerRef.current)
@@ -151,7 +167,7 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
   function advance() {
     clearTimeout(timerRef.current)
     const s = nextStatesRef.current
-    const q = buildQuestion(s, cards, lastIdRef.current)
+    const q = buildQuestion(s, cards, lastIdRef.current, questionMode)
     setFeedback(null)
     setTyped('')
     if (!q) setFinished(true)
@@ -207,7 +223,7 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
       setFeedback(null)
       setTyped('')
       setFinished(false)
-      setQuestion(buildQuestion(fresh, cards, null))
+      setQuestion(buildQuestion(fresh, cards, null, questionMode))
     } catch (e) {
       setError(e.message)
     } finally {
@@ -240,14 +256,25 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <div className="mb-4 flex items-center justify-between gap-3">
+      <div className="mb-4 flex items-center justify-between gap-2">
         <Button variant="ghost" onClick={onExit} className="px-2">
           ← <span className="hidden sm:inline">К набору</span>
         </Button>
-        <span className="truncate text-sm text-slate-500 dark:text-slate-400">{setName}</span>
-        <span className="text-sm tabular-nums text-slate-500 dark:text-slate-400">
-          {mastered} / {total}
-        </span>
+        <span className="min-w-0 truncate text-sm text-slate-500 dark:text-slate-400">{setName}</span>
+        <Button
+          variant="ghost"
+          onClick={() => setSettingsOpen(true)}
+          className="shrink-0 px-2"
+          title="Настройки"
+        >
+          <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+            <path
+              fillRule="evenodd"
+              d="M8.34 1.804A1 1 0 0 1 9.32 1h1.36a1 1 0 0 1 .98.804l.295 1.473c.497.144.971.342 1.416.587l1.25-.834a1 1 0 0 1 1.262.125l.962.962a1 1 0 0 1 .125 1.262l-.834 1.25c.245.445.443.919.587 1.416l1.473.294a1 1 0 0 1 .804.98v1.361a1 1 0 0 1-.804.98l-1.473.295a6.95 6.95 0 0 1-.587 1.416l.834 1.25a1 1 0 0 1-.125 1.262l-.962.962a1 1 0 0 1-1.262.125l-1.25-.834c-.445.245-.919.443-1.416.587l-.294 1.473a1 1 0 0 1-.98.804H9.32a1 1 0 0 1-.98-.804l-.295-1.473a6.95 6.95 0 0 1-1.416-.587l-1.25.834a1 1 0 0 1-1.262-.125l-.962-.962a1 1 0 0 1-.125-1.262l.834-1.25a6.95 6.95 0 0 1-.587-1.416l-1.473-.294A1 1 0 0 1 1 10.68V9.32a1 1 0 0 1 .804-.98l1.473-.295c.144-.497.342-.971.587-1.416l-.834-1.25a1 1 0 0 1 .125-1.262l.962-.962A1 1 0 0 1 5.38 3.03l1.25.834a6.95 6.95 0 0 1 1.416-.587l.294-1.473ZM13 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </Button>
       </div>
 
       <ProgressBar mastered={mastered} total={total} />
@@ -342,6 +369,28 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
         Верно: {stats.correct} · с ошибкой: {stats.wrong}
         {toReview > 0 && ` · на повторении: ${toReview}`}
       </p>
+
+      <Modal open={settingsOpen} onClose={() => setSettingsOpen(false)} title="Настройки Learn">
+        <div className="space-y-4">
+          <OptionGroup
+            label="Тип вопросов"
+            value={questionMode}
+            onChange={setQuestionMode}
+            options={[
+              { value: 'mix', label: 'Чередовать', hint: 'Новые слова тестом, знакомые вводом' },
+              { value: 'choice', label: 'Только тест', hint: 'Выбор из четырёх вариантов' },
+              { value: 'input', label: 'Только ввод', hint: 'Печатать слово целиком' },
+            ]}
+          />
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Новый тип применится со следующего вопроса, настройка запоминается. Длинные фразы и
+            диалоги всё равно спрашиваются тестом — их не набрать без опечатки.
+          </p>
+          <div className="flex justify-end">
+            <Button onClick={() => setSettingsOpen(false)}>Готово</Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }
@@ -379,14 +428,23 @@ function ProgressBar({ mastered, total }) {
   // Чекпоинты — четверти набора, в подписи количество слов.
   const checkpoints = [0.25, 0.5, 0.75, 1].map((p) => ({
     p,
-    count: Math.max(1, Math.ceil(total * p)),
+    count: Math.max(1, Math.round(total * p)),
   }))
 
   return (
     <div>
-      <div className="relative h-2.5 rounded-full bg-slate-200 dark:bg-slate-800">
+      <div className="mb-1.5 flex items-baseline justify-between">
+        <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+          Выучено {mastered} из {total}
+        </span>
+        <span className="text-sm font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">
+          {Math.round(pct)}%
+        </span>
+      </div>
+
+      <div className="relative h-5 rounded-full bg-slate-200 shadow-inner dark:bg-slate-800">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-emerald-500 transition-all duration-500"
+          className="h-full min-w-[1.25rem] rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600 shadow-[0_0_12px_rgba(16,185,129,0.5)] transition-all duration-700 ease-out"
           style={{ width: `${pct}%` }}
         />
         {checkpoints.map(({ p, count }) => {
@@ -394,30 +452,43 @@ function ProgressBar({ mastered, total }) {
           return (
             <span
               key={p}
-              className={`absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition ${
+              className={`absolute top-1/2 grid h-6 w-6 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 transition ${
                 reached
-                  ? 'animate-pop border-emerald-500 bg-emerald-500'
-                  : 'border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-900'
+                  ? 'animate-pop border-emerald-600 bg-emerald-500 text-white'
+                  : 'border-slate-300 bg-white text-transparent dark:border-slate-600 dark:bg-slate-900'
               }`}
               style={{ left: `${p * 100}%` }}
               title={`${count} слов`}
             >
-              {reached && (
-                <svg viewBox="0 0 20 20" fill="white" className="h-full w-full p-0.5">
-                  <path
-                    fillRule="evenodd"
-                    d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              )}
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                <path
+                  fillRule="evenodd"
+                  d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
+                  clipRule="evenodd"
+                />
+              </svg>
             </span>
           )
         })}
       </div>
-      <div className="mt-1.5 flex justify-between text-[10px] tabular-nums text-slate-400 dark:text-slate-500">
+
+      {/* Подписи позиционируем так же, как отметки, иначе они разъезжаются. */}
+      <div className="relative mt-2 h-4">
         {checkpoints.map(({ p, count }) => (
-          <span key={p}>{count}</span>
+          <span
+            key={p}
+            className={`absolute text-[11px] tabular-nums ${
+              mastered >= count
+                ? 'font-semibold text-emerald-600 dark:text-emerald-400'
+                : 'text-slate-400 dark:text-slate-500'
+            }`}
+            style={{
+              left: `${p * 100}%`,
+              transform: p === 1 ? 'translateX(-100%)' : 'translateX(-50%)',
+            }}
+          >
+            {count}
+          </span>
         ))}
       </div>
     </div>
