@@ -35,9 +35,10 @@ export const Input = forwardRef(function Input({ className = '', ...props }, ref
   )
 })
 
-export function Textarea({ className = '', ...props }) {
+export const Textarea = forwardRef(function Textarea({ className = '', ...props }, ref) {
   return (
     <textarea
+      ref={ref}
       className={`w-full rounded-lg border-0 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm
         ring-1 ring-inset ring-slate-300 placeholder:text-slate-400
         focus:ring-2 focus:ring-inset focus:ring-indigo-600
@@ -46,7 +47,7 @@ export function Textarea({ className = '', ...props }) {
       {...props}
     />
   )
-}
+})
 
 export function Label({ children, className = '' }) {
   return (

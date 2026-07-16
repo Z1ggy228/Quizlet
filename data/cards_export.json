@@ -1,0 +1,7124 @@
+{
+  "folder": "Английский с нуля",
+  "sets": [
+    {
+      "name": "Lesson 1-2",
+      "cards": [
+        {
+          "term": "get",
+          "definition": "получать, добираться, покупать, понимать, слышать, заставлять, становиться"
+        },
+        {
+          "term": "it",
+          "definition": "оно"
+        },
+        {
+          "term": "start",
+          "definition": "начинать"
+        },
+        {
+          "term": "live (лив)",
+          "definition": "жить"
+        },
+        {
+          "term": "work",
+          "definition": "работать"
+        },
+        {
+          "term": "go",
+          "definition": "идти, ходить, ехать"
+        },
+        {
+          "term": "do",
+          "definition": "делать, выполнять (д/з)"
+        },
+        {
+          "term": "watch",
+          "definition": "смотреть (YouTube)"
+        },
+        {
+          "term": "miss",
+          "definition": "скучать, пропускать"
+        },
+        {
+          "term": "relax",
+          "definition": "отдыхать"
+        },
+        {
+          "term": "finish",
+          "definition": "заканчивать"
+        },
+        {
+          "term": "Moscow (мОскоу)",
+          "definition": "Москва"
+        },
+        {
+          "term": "Saint Petersburg (сЭйнт пИтасбёёг)",
+          "definition": "Санкт-Петербург"
+        },
+        {
+          "term": "Nizhny Novgorod",
+          "definition": "Нижний Новгород"
+        },
+        {
+          "term": "Sochi",
+          "definition": "Сочи"
+        },
+        {
+          "term": "London (лАндн)",
+          "definition": "Лондон"
+        },
+        {
+          "term": "Great Britain (грЭйт бритн)",
+          "definition": "Великобритания"
+        },
+        {
+          "term": "New York (нью йОк)",
+          "definition": "Нью-Йорк"
+        },
+        {
+          "term": "the USA (ðэ ю эс эй)",
+          "definition": "США"
+        },
+        {
+          "term": "Paris (пЭрис)",
+          "definition": "Париж"
+        },
+        {
+          "term": "France (фрАанс)",
+          "definition": "Франция"
+        },
+        {
+          "term": "Beijing (бэйджИн)",
+          "definition": "Пекин"
+        },
+        {
+          "term": "in",
+          "definition": "С городами и странами используем предлог"
+        },
+        {
+          "term": "Monday",
+          "definition": "понедельник"
+        },
+        {
+          "term": "Tuesday",
+          "definition": "вторник"
+        },
+        {
+          "term": "Wednesday",
+          "definition": "среда"
+        },
+        {
+          "term": "Thursday",
+          "definition": "четверг"
+        },
+        {
+          "term": "Friday",
+          "definition": "пятница"
+        },
+        {
+          "term": "Saturday",
+          "definition": "суббота"
+        },
+        {
+          "term": "Sunday",
+          "definition": "воскресенье"
+        },
+        {
+          "term": "on",
+          "definition": "С днями неделями используем предлог"
+        },
+        {
+          "term": "do homework",
+          "definition": "делать домашнее задание"
+        },
+        {
+          "term": "film",
+          "definition": "фильм"
+        },
+        {
+          "term": "go to school",
+          "definition": "ходить в школу"
+        },
+        {
+          "term": "passport",
+          "definition": "паспорт"
+        },
+        {
+          "term": "I",
+          "definition": "я"
+        },
+        {
+          "term": "we",
+          "definition": "мы"
+        },
+        {
+          "term": "you",
+          "definition": "ты, вы"
+        },
+        {
+          "term": "they",
+          "definition": "они"
+        },
+        {
+          "term": "he",
+          "definition": "он"
+        },
+        {
+          "term": "she",
+          "definition": "она"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 3",
+      "cards": [
+        {
+          "term": "too",
+          "definition": "тоже, также (используем на конце предложения)"
+        },
+        {
+          "term": "like",
+          "definition": "нравиться"
+        },
+        {
+          "term": "I like",
+          "definition": "мне нравится (я люблю)"
+        },
+        {
+          "term": "want",
+          "definition": "хотеть"
+        },
+        {
+          "term": "travel",
+          "definition": "путешествовать"
+        },
+        {
+          "term": "present (прЭзант)",
+          "definition": "1) подарок\n2) настоящее (время)"
+        },
+        {
+          "term": "fast",
+          "definition": "быстрый, быстро"
+        },
+        {
+          "term": "go home",
+          "definition": "идти домой"
+        },
+        {
+          "term": "at home",
+          "definition": "дома"
+        },
+        {
+          "term": "at school",
+          "definition": "в школе"
+        },
+        {
+          "term": "at university",
+          "definition": "в университете"
+        },
+        {
+          "term": "at work",
+          "definition": "на работе"
+        },
+        {
+          "term": "visit",
+          "definition": "посещать"
+        },
+        {
+          "term": "help",
+          "definition": "помогать"
+        },
+        {
+          "term": "study",
+          "definition": "изучать, учиться"
+        },
+        {
+          "term": "try",
+          "definition": "пробовать, стараться, пытаться"
+        },
+        {
+          "term": "play",
+          "definition": "играть"
+        },
+        {
+          "term": "play football",
+          "definition": "играть в футбол"
+        },
+        {
+          "term": "foot",
+          "definition": "ступня"
+        },
+        {
+          "term": "ball",
+          "definition": "мяч"
+        },
+        {
+          "term": "stay",
+          "definition": "останавливаться, оставаться"
+        },
+        {
+          "term": "read",
+          "definition": "читать"
+        },
+        {
+          "term": "English",
+          "definition": "английский"
+        },
+        {
+          "term": "well",
+          "definition": "хорошо"
+        },
+        {
+          "term": "need",
+          "definition": "нужно, нуждаться"
+        },
+        {
+          "term": "I need",
+          "definition": "мне нужно"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 4",
+      "cards": [
+        {
+          "term": "I have",
+          "definition": "у меня есть"
+        },
+        {
+          "term": "he has",
+          "definition": "у него есть"
+        },
+        {
+          "term": "(a) family",
+          "definition": "семья"
+        },
+        {
+          "term": "(a) mother",
+          "definition": "мама"
+        },
+        {
+          "term": "(a) father",
+          "definition": "папа"
+        },
+        {
+          "term": "(a) sister",
+          "definition": "сестра"
+        },
+        {
+          "term": "(a) brother",
+          "definition": "брат"
+        },
+        {
+          "term": "(a) daughter",
+          "definition": "дочь"
+        },
+        {
+          "term": "(a) son",
+          "definition": "сын"
+        },
+        {
+          "term": "(a) grandmother",
+          "definition": "бабушка"
+        },
+        {
+          "term": "(a) grandfather",
+          "definition": "дедушка"
+        },
+        {
+          "term": "(a) mother-in-law",
+          "definition": "теща, свекровь"
+        },
+        {
+          "term": "(a) cousin (кАзн)",
+          "definition": "двоюродный брат/сестра"
+        },
+        {
+          "term": "(an) aunt",
+          "definition": "тётя"
+        },
+        {
+          "term": "(an) uncle",
+          "definition": "дядя"
+        },
+        {
+          "term": "(a) husband",
+          "definition": "муж"
+        },
+        {
+          "term": "(a) wife",
+          "definition": "жена"
+        },
+        {
+          "term": "(an) orange",
+          "definition": "апельсин"
+        },
+        {
+          "term": "orange",
+          "definition": "оранжевый"
+        },
+        {
+          "term": "(an) eye",
+          "definition": "глаз"
+        },
+        {
+          "term": "(an) island (Айлнд)",
+          "definition": "остров"
+        },
+        {
+          "term": "my father",
+          "definition": "мой папа"
+        },
+        {
+          "term": "our family",
+          "definition": "наша семья"
+        },
+        {
+          "term": "your mother",
+          "definition": "твоя мама"
+        },
+        {
+          "term": "their son",
+          "definition": "их сын"
+        },
+        {
+          "term": "his sister",
+          "definition": "его сестра"
+        },
+        {
+          "term": "her daughter",
+          "definition": "её дочь"
+        },
+        {
+          "term": "its museums",
+          "definition": "его (своими) музеями"
+        },
+        {
+          "term": "(a) museum",
+          "definition": "музей"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 5",
+      "cards": [
+        {
+          "term": "what",
+          "definition": "что?"
+        },
+        {
+          "term": "where",
+          "definition": "где?"
+        },
+        {
+          "term": "when",
+          "definition": "когда?"
+        },
+        {
+          "term": "know",
+          "definition": "знать"
+        },
+        {
+          "term": "run",
+          "definition": "бегать"
+        },
+        {
+          "term": "jump",
+          "definition": "прыгать"
+        },
+        {
+          "term": "remember",
+          "definition": "помнить"
+        },
+        {
+          "term": "swim",
+          "definition": "плавать"
+        },
+        {
+          "term": "write (рАйт)",
+          "definition": "писать"
+        },
+        {
+          "term": "think",
+          "definition": "думать"
+        },
+        {
+          "term": "paint",
+          "definition": "рисовать (красками)"
+        },
+        {
+          "term": "make",
+          "definition": "делать (своими руками), создавать"
+        },
+        {
+          "term": "understand",
+          "definition": "понимать"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 6",
+      "cards": [
+        {
+          "term": "stand",
+          "definition": "стоять"
+        },
+        {
+          "term": "sit",
+          "definition": "сидеть"
+        },
+        {
+          "term": "call",
+          "definition": "звать, звонить, называть"
+        },
+        {
+          "term": "send",
+          "definition": "отправлять, посылать"
+        },
+        {
+          "term": "give",
+          "definition": "давать"
+        },
+        {
+          "term": "take",
+          "definition": "брать, взять"
+        },
+        {
+          "term": "lesson",
+          "definition": "урок"
+        },
+        {
+          "term": "question (квЭсчн)",
+          "definition": "вопрос"
+        },
+        {
+          "term": "information",
+          "definition": "информация"
+        },
+        {
+          "term": "apple - apples",
+          "definition": "яблоко, яблоки"
+        },
+        {
+          "term": "emails",
+          "definition": "электронные письма"
+        },
+        {
+          "term": "how",
+          "definition": "как"
+        },
+        {
+          "term": "how much",
+          "definition": "сколько? (про неисчисляемое: деньги, время, информация, действие)"
+        },
+        {
+          "term": "How many",
+          "definition": "сколько? (про исчисляемое: все предметы, к которым мы можем прибавить -s на конце)"
+        },
+        {
+          "term": "How often (Офн)",
+          "definition": "как часто"
+        },
+        {
+          "term": "How far (фа)",
+          "definition": "насколько далеко"
+        },
+        {
+          "term": "come (кам)",
+          "definition": "приходить, приезжать"
+        },
+        {
+          "term": "ask",
+          "definition": "Спрашивать, просить, задавать (вопрос)"
+        },
+        {
+          "term": "answer",
+          "definition": "отвечать"
+        },
+        {
+          "term": "drive",
+          "definition": "водить (машину)"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 7",
+      "cards": [
+        {
+          "term": "one",
+          "definition": "один"
+        },
+        {
+          "term": "two",
+          "definition": "два"
+        },
+        {
+          "term": "three",
+          "definition": "три"
+        },
+        {
+          "term": "four",
+          "definition": "четыре"
+        },
+        {
+          "term": "five",
+          "definition": "пять"
+        },
+        {
+          "term": "six",
+          "definition": "шесть"
+        },
+        {
+          "term": "seven",
+          "definition": "семь"
+        },
+        {
+          "term": "eight",
+          "definition": "восемь"
+        },
+        {
+          "term": "nine",
+          "definition": "девять"
+        },
+        {
+          "term": "ten",
+          "definition": "десять"
+        },
+        {
+          "term": "eleven",
+          "definition": "одиннадцать"
+        },
+        {
+          "term": "twelve",
+          "definition": "двенадцать"
+        },
+        {
+          "term": "at three pm",
+          "definition": "в три часа дня"
+        },
+        {
+          "term": "am",
+          "definition": "с 12 часов ночи (как новый год) до 12 часов дня (полдень)"
+        },
+        {
+          "term": "pm",
+          "definition": "от 12 часов дня до 12 часов ночи"
+        },
+        {
+          "term": "in the morning",
+          "definition": "утром"
+        },
+        {
+          "term": "in the evening",
+          "definition": "вечером"
+        },
+        {
+          "term": "at night (нАйт)",
+          "definition": "ночью"
+        },
+        {
+          "term": "at the weekend",
+          "definition": "на выходных"
+        },
+        {
+          "term": "on weekend",
+          "definition": "на выходных"
+        },
+        {
+          "term": "every day",
+          "definition": "каждый день"
+        },
+        {
+          "term": "every week",
+          "definition": "каждую неделю"
+        },
+        {
+          "term": "every year",
+          "definition": "каждый год"
+        },
+        {
+          "term": "play video games",
+          "definition": "играть в компьютерные игры"
+        },
+        {
+          "term": "or",
+          "definition": "или"
+        },
+        {
+          "term": "meet",
+          "definition": "встречать(ся), знакомиться"
+        },
+        {
+          "term": "cook",
+          "definition": "готовить"
+        },
+        {
+          "term": "buy",
+          "definition": "покупать"
+        },
+        {
+          "term": "tell",
+          "definition": "рассказывать"
+        },
+        {
+          "term": "clean",
+          "definition": "прибираться, убираться"
+        },
+        {
+          "term": "see",
+          "definition": "видеть (физически глазами)"
+        },
+        {
+          "term": "hear",
+          "definition": "слышать"
+        },
+        {
+          "term": "lose (лУуз)",
+          "definition": "терять, проигрывать"
+        },
+        {
+          "term": "find",
+          "definition": "находить"
+        },
+        {
+          "term": "teach",
+          "definition": "преподавать, обучать"
+        },
+        {
+          "term": "teacher",
+          "definition": "учитель"
+        },
+        {
+          "term": "friends",
+          "definition": "друзья"
+        },
+        {
+          "term": "here (хИа)",
+          "definition": "здесь, тут"
+        },
+        {
+          "term": "at three o'clock",
+          "definition": "в три часа"
+        },
+        {
+          "term": "at three am",
+          "definition": "в три ночи"
+        },
+        {
+          "term": "in the afternoon",
+          "definition": "днём"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 8",
+      "cards": [
+        {
+          "term": "break (брЭйк)",
+          "definition": "ломать"
+        },
+        {
+          "term": "friend (фрЭнд)",
+          "definition": "друг"
+        },
+        {
+          "term": "friends (фрЭндс)",
+          "definition": "друзья"
+        },
+        {
+          "term": "here (хИа)",
+          "definition": "здесь"
+        },
+        {
+          "term": "present",
+          "definition": "настоящее время, подарок"
+        },
+        {
+          "term": "simple",
+          "definition": "простой, легкий"
+        },
+        {
+          "term": "always (Олвэйс)",
+          "definition": "всегда"
+        },
+        {
+          "term": "usually (Южали)",
+          "definition": "обычно"
+        },
+        {
+          "term": "often (Офн)",
+          "definition": "часто"
+        },
+        {
+          "term": "sometimes (самтАймс)",
+          "definition": "иногда"
+        },
+        {
+          "term": "seldom (сЭлдм), rarely (рЭали)",
+          "definition": "редко"
+        },
+        {
+          "term": "never (нЭва)",
+          "definition": "никогда"
+        },
+        {
+          "term": "eat (ит)",
+          "definition": "есть, кушать"
+        },
+        {
+          "term": "porridge",
+          "definition": "каша"
+        },
+        {
+          "term": "oatmeal",
+          "definition": "овсяная каша"
+        },
+        {
+          "term": "drink (дринк)",
+          "definition": "пить"
+        },
+        {
+          "term": "water",
+          "definition": "вода"
+        },
+        {
+          "term": "tea (тии)",
+          "definition": "чай"
+        },
+        {
+          "term": "forget",
+          "definition": "забывать"
+        },
+        {
+          "term": "key (ки)",
+          "definition": "ключ"
+        },
+        {
+          "term": "keys (кис)",
+          "definition": "ключи"
+        },
+        {
+          "term": "children",
+          "definition": "дети"
+        },
+        {
+          "term": "toys",
+          "definition": "игрушки"
+        },
+        {
+          "term": "spend (спЭнд)",
+          "definition": "проводить, тратить"
+        },
+        {
+          "term": "summer",
+          "definition": "лето"
+        },
+        {
+          "term": "country, countryside, village",
+          "definition": "деревня (три варианта слова)"
+        },
+        {
+          "term": "walk (вок)",
+          "definition": "гулять, ходить пешком"
+        },
+        {
+          "term": "with",
+          "definition": "с"
+        },
+        {
+          "term": "with friends",
+          "definition": "с друзьями"
+        },
+        {
+          "term": "pay (пЭй)",
+          "definition": "платить"
+        },
+        {
+          "term": "pay by card",
+          "definition": "платить картой"
+        },
+        {
+          "term": "use (юз)",
+          "definition": "использовать"
+        },
+        {
+          "term": "this",
+          "definition": "этот"
+        },
+        {
+          "term": "road",
+          "definition": "дорога"
+        },
+        {
+          "term": "put (пут)",
+          "definition": "ставить"
+        },
+        {
+          "term": "here",
+          "definition": "здесь, тут, сюда"
+        },
+        {
+          "term": "show (шоу)",
+          "definition": "показывать"
+        },
+        {
+          "term": "photo",
+          "definition": "фотография"
+        },
+        {
+          "term": "photos",
+          "definition": "фотографии"
+        },
+        {
+          "term": "together (тугэðа)",
+          "definition": "вместе"
+        },
+        {
+          "term": "fiction (фикшн)",
+          "definition": "художественная литература"
+        },
+        {
+          "term": "in the park (паак)",
+          "definition": "парк"
+        },
+        {
+          "term": "essay (Эсэй)",
+          "definition": "эссе"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 9",
+      "cards": [
+        {
+          "term": "wake up",
+          "definition": "просыпаться"
+        },
+        {
+          "term": "get up",
+          "definition": "вставать (с кровати)"
+        },
+        {
+          "term": "take a shower",
+          "definition": "принимать душ"
+        },
+        {
+          "term": "take a bath",
+          "definition": "принимать ванну"
+        },
+        {
+          "term": "brush/clean my teeth",
+          "definition": "чистить зубы"
+        },
+        {
+          "term": "get dressed",
+          "definition": "одеваться"
+        },
+        {
+          "term": "have breakfast",
+          "definition": "завтракать"
+        },
+        {
+          "term": "have lunch",
+          "definition": "обедать"
+        },
+        {
+          "term": "have dinner",
+          "definition": "ужинать"
+        },
+        {
+          "term": "I have porridge for breakfast",
+          "definition": "Я ем кашу на завтрак"
+        },
+        {
+          "term": "do sport",
+          "definition": "заниматься спортом"
+        },
+        {
+          "term": "do yoga",
+          "definition": "заниматься йогой"
+        },
+        {
+          "term": "do pilates",
+          "definition": "заниматься пилатесом"
+        },
+        {
+          "term": "go to the gym",
+          "definition": "ходить в спортзал"
+        },
+        {
+          "term": "go jogging",
+          "definition": "заниматься бегом для здоровья"
+        },
+        {
+          "term": "go swimming",
+          "definition": "заниматься плаванием"
+        },
+        {
+          "term": "go dancing",
+          "definition": "заниматься танцами"
+        },
+        {
+          "term": "play basketball",
+          "definition": "играть в баскетбол"
+        },
+        {
+          "term": "play tennis",
+          "definition": "играть в теннис"
+        },
+        {
+          "term": "play volleyball",
+          "definition": "играть в волейбол"
+        },
+        {
+          "term": "ski",
+          "definition": "кататься на лыжах"
+        },
+        {
+          "term": "skate",
+          "definition": "кататься на коньках"
+        },
+        {
+          "term": "ride a bike",
+          "definition": "кататься на велосипеде"
+        },
+        {
+          "term": "play the piano",
+          "definition": "играть на пианино"
+        },
+        {
+          "term": "play the violin",
+          "definition": "играть на скрипке"
+        },
+        {
+          "term": "play the guitar",
+          "definition": "играть на гитаре"
+        },
+        {
+          "term": "read books",
+          "definition": "читать книги"
+        },
+        {
+          "term": "watch TV shows (US), series (UK)",
+          "definition": "смотреть сериалы"
+        },
+        {
+          "term": "listen to music",
+          "definition": "слушать музыку"
+        },
+        {
+          "term": "listen to audio books",
+          "definition": "слушать аудиокниги"
+        },
+        {
+          "term": "then",
+          "definition": "затем, потом"
+        },
+        {
+          "term": "for",
+          "definition": "для"
+        },
+        {
+          "term": "also",
+          "definition": "также, тоже (ставим между subject и verb)"
+        },
+        {
+          "term": "too",
+          "definition": "тоже (ставим на конец предложения)"
+        },
+        {
+          "term": "free time",
+          "definition": "свободное время"
+        },
+        {
+          "term": "especially (эспЭшали)",
+          "definition": "особенно"
+        },
+        {
+          "term": "apartment, flat",
+          "definition": "квартира"
+        },
+        {
+          "term": "house",
+          "definition": "дом (здание)"
+        },
+        {
+          "term": "about",
+          "definition": "о; около, приблизительно"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 10",
+      "cards": [
+        {
+          "term": "be on time",
+          "definition": "быть вовремя"
+        },
+        {
+          "term": "team",
+          "definition": "команда"
+        },
+        {
+          "term": "I am (I'm)",
+          "definition": "я есть"
+        },
+        {
+          "term": "we are (we're)",
+          "definition": "мы есть"
+        },
+        {
+          "term": "they are (they're)",
+          "definition": "они есть"
+        },
+        {
+          "term": "she is (she's)",
+          "definition": "она есть"
+        },
+        {
+          "term": "it is (it's)",
+          "definition": "это есть"
+        },
+        {
+          "term": "person",
+          "definition": "человек"
+        },
+        {
+          "term": "driver",
+          "definition": "водитель"
+        },
+        {
+          "term": "students",
+          "definition": "студенты, ученики"
+        },
+        {
+          "term": "to be or not to be",
+          "definition": "быть или не быть"
+        },
+        {
+          "term": "pilot (пАйлт)",
+          "definition": "пилот"
+        },
+        {
+          "term": "you are (you're)",
+          "definition": "ты, вы есть"
+        },
+        {
+          "term": "he is (he's)",
+          "definition": "он есть"
+        },
+        {
+          "term": "from",
+          "definition": "из, от"
+        },
+        {
+          "term": "on holiday",
+          "definition": "в отпуске"
+        },
+        {
+          "term": "doctor",
+          "definition": "врач, доктор"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 11",
+      "cards": [
+        {
+          "term": "- How's life?\n- Not bad. Can't complain.",
+          "definition": "- Как жизнь?\n- Неплохо. Не могу жаловаться."
+        },
+        {
+          "term": "complain",
+          "definition": "жаловаться"
+        },
+        {
+          "term": "pleasure (плЭжа)",
+          "definition": "удовольствие"
+        },
+        {
+          "term": "relatives",
+          "definition": "родственники"
+        },
+        {
+          "term": "Good evening",
+          "definition": "Добрый вечер"
+        },
+        {
+          "term": "- How are you?\n- I'm good. / I'm fine. / It's okay (и так далее)",
+          "definition": "- Как ты? (заезженная версия)\n- Хорошо."
+        },
+        {
+          "term": "- How're you doing?\n- I'm doing okay / well.",
+          "definition": "- Как твои дела? (актуальный вариант).\n- У меня всё хорошо."
+        },
+        {
+          "term": "Tell me about your last week.",
+          "definition": "Расскажи мне о своей прошлой неделе."
+        },
+        {
+          "term": "(You're) welcome! / My pleasure. / No problem.",
+          "definition": "Пожалуйста."
+        },
+        {
+          "term": "Welcome",
+          "definition": "добро пожаловать"
+        },
+        {
+          "term": "Nice to meet you. / Pleasure to meet you.",
+          "definition": "Приятно познакомиться"
+        },
+        {
+          "term": "name",
+          "definition": "имя"
+        },
+        {
+          "term": "Where are you from?",
+          "definition": "Откуда ты (страна, город)?"
+        },
+        {
+          "term": "Where do you live?",
+          "definition": "Где ты живёшь?"
+        },
+        {
+          "term": "How old are you?",
+          "definition": "Сколько тебе лет?"
+        },
+        {
+          "term": "today",
+          "definition": "сегодня"
+        },
+        {
+          "term": "on holiday",
+          "definition": "в отпуске"
+        },
+        {
+          "term": "holidays",
+          "definition": "каникулы"
+        },
+        {
+          "term": "Hello",
+          "definition": "Здравствуйте"
+        },
+        {
+          "term": "(Good) morning!",
+          "definition": "(Доброе) утро"
+        },
+        {
+          "term": "Good afternoon",
+          "definition": "Добрый день"
+        },
+        {
+          "term": "Hi / Hey / What's up",
+          "definition": "привет"
+        },
+        {
+          "term": "- Hey. What's up?\n- Not much. You?",
+          "definition": "- Привет, как дела? (вариант вызывающий ступор)\n- Нормально. Ты как?"
+        },
+        {
+          "term": "What's new?",
+          "definition": "Что нового?"
+        },
+        {
+          "term": "Thank you (so much). / Thanks.",
+          "definition": "Спасибо."
+        },
+        {
+          "term": "Nice to see you. / Pleasure to see you.",
+          "definition": "Рад видеть тебя."
+        },
+        {
+          "term": "What's your name?",
+          "definition": "Как тебя зовут?"
+        },
+        {
+          "term": "My name is... / I'm....",
+          "definition": "Меня зовут"
+        },
+        {
+          "term": "Where do you study / work?",
+          "definition": "Где ты учишься / работаешь?"
+        },
+        {
+          "term": "What do you like to do when you have free time?",
+          "definition": "Что ты любишь делать, когда у тебя есть свободное время?"
+        },
+        {
+          "term": "Tell me about your family.",
+          "definition": "Расскажите мне о своей семье."
+        },
+        {
+          "term": "now",
+          "definition": "сейчас, теперь"
+        },
+        {
+          "term": "holiday",
+          "definition": "отпуск, праздник"
+        },
+        {
+          "term": "parents",
+          "definition": "родители"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 12",
+      "cards": [
+        {
+          "term": "boring",
+          "definition": "скучный"
+        },
+        {
+          "term": "good",
+          "definition": "хороший"
+        },
+        {
+          "term": "sad",
+          "definition": "грустный"
+        },
+        {
+          "term": "big",
+          "definition": "большой"
+        },
+        {
+          "term": "small",
+          "definition": "маленький"
+        },
+        {
+          "term": "fast",
+          "definition": "быстрый"
+        },
+        {
+          "term": "quiet",
+          "definition": "тихий"
+        },
+        {
+          "term": "long",
+          "definition": "длинный"
+        },
+        {
+          "term": "short",
+          "definition": "короткий"
+        },
+        {
+          "term": "hot",
+          "definition": "горячий, жаркий"
+        },
+        {
+          "term": "cold",
+          "definition": "холодный"
+        },
+        {
+          "term": "dangerous",
+          "definition": "опасный"
+        },
+        {
+          "term": "safe",
+          "definition": "безопасный"
+        },
+        {
+          "term": "beautiful",
+          "definition": "красивый"
+        },
+        {
+          "term": "old",
+          "definition": "старый"
+        },
+        {
+          "term": "it is cold",
+          "definition": "холодно"
+        },
+        {
+          "term": "now",
+          "definition": "сейчас, теперь"
+        },
+        {
+          "term": "today",
+          "definition": "сегодня"
+        },
+        {
+          "term": "concert",
+          "definition": "концерт"
+        },
+        {
+          "term": "film, movie",
+          "definition": "фильм"
+        },
+        {
+          "term": "bad",
+          "definition": "плохой"
+        },
+        {
+          "term": "happy",
+          "definition": "счастливый"
+        },
+        {
+          "term": "slow",
+          "definition": "медленный"
+        },
+        {
+          "term": "interesting",
+          "definition": "интересный"
+        },
+        {
+          "term": "loud",
+          "definition": "громкий"
+        },
+        {
+          "term": "expensive",
+          "definition": "дорогой (о цене)"
+        },
+        {
+          "term": "cheap",
+          "definition": "дешевый"
+        },
+        {
+          "term": "warm",
+          "definition": "теплый"
+        },
+        {
+          "term": "ugly",
+          "definition": "некрасивый, уродливый"
+        },
+        {
+          "term": "new",
+          "definition": "новый"
+        },
+        {
+          "term": "early",
+          "definition": "рано"
+        },
+        {
+          "term": "late",
+          "definition": "поздно"
+        },
+        {
+          "term": "it is interesting",
+          "definition": "интересно"
+        },
+        {
+          "term": "it is dangerous",
+          "definition": "опасно"
+        },
+        {
+          "term": "car",
+          "definition": "машина"
+        },
+        {
+          "term": "nature",
+          "definition": "природа"
+        },
+        {
+          "term": "road",
+          "definition": "дорога"
+        },
+        {
+          "term": "ticket",
+          "definition": "билет"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 13",
+      "cards": [
+        {
+          "term": "lesson - lessons",
+          "definition": "урок - уроки"
+        },
+        {
+          "term": "book - books",
+          "definition": "книга, книги"
+        },
+        {
+          "term": "glass - glasses",
+          "definition": "стакан, стаканы"
+        },
+        {
+          "term": "brush - brushes",
+          "definition": "щетка - щетки"
+        },
+        {
+          "term": "potato, potatoes",
+          "definition": "картошка - картошки"
+        },
+        {
+          "term": "photo - photos",
+          "definition": "фотография - фотографии"
+        },
+        {
+          "term": "radio, radios",
+          "definition": "радио - радио"
+        },
+        {
+          "term": "wolf - wolves",
+          "definition": "волк-волки"
+        },
+        {
+          "term": "roof - roofs",
+          "definition": "крыша - крыши"
+        },
+        {
+          "term": "safe - safes",
+          "definition": "сейф, сейфы"
+        },
+        {
+          "term": "woman women (вИмэн)",
+          "definition": "женщина - женщины"
+        },
+        {
+          "term": "child (чАйлд), children",
+          "definition": "ребенок, дети"
+        },
+        {
+          "term": "foot feet",
+          "definition": "ступня - ступни"
+        },
+        {
+          "term": "mouse mice",
+          "definition": "мышь - мыши"
+        },
+        {
+          "term": "goose geese",
+          "definition": "гусь - гуси"
+        },
+        {
+          "term": "Bison bison",
+          "definition": "бизон, бизоны"
+        },
+        {
+          "term": "moose, moose",
+          "definition": "лось, лоси"
+        },
+        {
+          "term": "fish, fish",
+          "definition": "рыба, рыбы"
+        },
+        {
+          "term": "monkey monkeys",
+          "definition": "обезьяна, обезьяны"
+        },
+        {
+          "term": "body bodies",
+          "definition": "тело, тела"
+        },
+        {
+          "term": "fox, foxes",
+          "definition": "лиса, лисы"
+        },
+        {
+          "term": "tomato tomatoes",
+          "definition": "помидор - помидоры"
+        },
+        {
+          "term": "dog - dogs",
+          "definition": "собака, собаки"
+        },
+        {
+          "term": "bus - buses",
+          "definition": "автобус - автобусы"
+        },
+        {
+          "term": "bench - benches",
+          "definition": "скамейка, скамейки"
+        },
+        {
+          "term": "box, boxes",
+          "definition": "коробка - коробки"
+        },
+        {
+          "term": "country - countries",
+          "definition": "страна, страны"
+        },
+        {
+          "term": "city - cities",
+          "definition": "город, города"
+        },
+        {
+          "term": "knife, knives",
+          "definition": "нож, ножи"
+        },
+        {
+          "term": "belief - beliefs",
+          "definition": "вера, веры"
+        },
+        {
+          "term": "man - men",
+          "definition": "мужчина - мужчины"
+        },
+        {
+          "term": "person people",
+          "definition": "человек - люди"
+        },
+        {
+          "term": "tooth teeth",
+          "definition": "зуб - зубы"
+        },
+        {
+          "term": "louse, lice",
+          "definition": "вошь - вши"
+        },
+        {
+          "term": "sheep sheep",
+          "definition": "овца, овцы"
+        },
+        {
+          "term": "ox oxen",
+          "definition": "бык - быки"
+        },
+        {
+          "term": "deer, deer",
+          "definition": "олень, олени"
+        },
+        {
+          "term": "thief thieves",
+          "definition": "вор, воры"
+        },
+        {
+          "term": "leaf leaves",
+          "definition": "лист (на дереве) - листья"
+        },
+        {
+          "term": "church - churches",
+          "definition": "церковь, церкви"
+        },
+        {
+          "term": "dictionary - dictionaries",
+          "definition": "словарь - словари"
+        },
+        {
+          "term": "hero - heroes",
+          "definition": "герой - герои"
+        },
+        {
+          "term": "wife wives",
+          "definition": "жена - жены"
+        },
+        {
+          "term": "active",
+          "definition": "активный"
+        },
+        {
+          "term": "laptop",
+          "definition": "ноутбук"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 14-15",
+      "cards": [
+        {
+          "term": "entrance (hall)",
+          "definition": "подъезд, парадная"
+        },
+        {
+          "term": "kitchen",
+          "definition": "кухня"
+        },
+        {
+          "term": "open-plan kitchen",
+          "definition": "кухня-гостиная"
+        },
+        {
+          "term": "dining room",
+          "definition": "столовая"
+        },
+        {
+          "term": "living room, lounge",
+          "definition": "гостиная"
+        },
+        {
+          "term": "bathroom",
+          "definition": "ванная комната"
+        },
+        {
+          "term": "swimming pool",
+          "definition": "бассейн"
+        },
+        {
+          "term": "gym (джИм)",
+          "definition": "спортзал"
+        },
+        {
+          "term": "front yard",
+          "definition": "двор перед домом"
+        },
+        {
+          "term": "back yard",
+          "definition": "двор за домом"
+        },
+        {
+          "term": "basement",
+          "definition": "подвал"
+        },
+        {
+          "term": "closet (US), wardrobe (UK)",
+          "definition": "шкаф (для одежды)"
+        },
+        {
+          "term": "laundry, utility room",
+          "definition": "постирочная"
+        },
+        {
+          "term": "floor",
+          "definition": "пол, этаж"
+        },
+        {
+          "term": "second floor",
+          "definition": "второй этаж"
+        },
+        {
+          "term": "third floor",
+          "definition": "третий этаж"
+        },
+        {
+          "term": "chimney",
+          "definition": "дымовая труба"
+        },
+        {
+          "term": "fireplace",
+          "definition": "камин"
+        },
+        {
+          "term": "wall",
+          "definition": "стена"
+        },
+        {
+          "term": "door",
+          "definition": "дверь"
+        },
+        {
+          "term": "next to",
+          "definition": "рядом с (слева или справа)"
+        },
+        {
+          "term": "in front of",
+          "definition": "напротив"
+        },
+        {
+          "term": "on the left",
+          "definition": "слева"
+        },
+        {
+          "term": "house",
+          "definition": "дом"
+        },
+        {
+          "term": "apartment (US), flat (UK)",
+          "definition": "квартира"
+        },
+        {
+          "term": "bedroom",
+          "definition": "спальня"
+        },
+        {
+          "term": "hall (UK), entryway (US)",
+          "definition": "коридор"
+        },
+        {
+          "term": "office (US), study (UK)",
+          "definition": "кабинет"
+        },
+        {
+          "term": "garage",
+          "definition": "гараж"
+        },
+        {
+          "term": "garden",
+          "definition": "сад"
+        },
+        {
+          "term": "yard",
+          "definition": "двор"
+        },
+        {
+          "term": "pantry",
+          "definition": "кладовка"
+        },
+        {
+          "term": "attic",
+          "definition": "чердак"
+        },
+        {
+          "term": "master bedroom",
+          "definition": "главная спальня"
+        },
+        {
+          "term": "dressing room",
+          "definition": "гардеробная"
+        },
+        {
+          "term": "first floor",
+          "definition": "первый этаж"
+        },
+        {
+          "term": "roof",
+          "definition": "крыша"
+        },
+        {
+          "term": "ceiling",
+          "definition": "потолок"
+        },
+        {
+          "term": "balcony",
+          "definition": "балкон"
+        },
+        {
+          "term": "window",
+          "definition": "окно"
+        },
+        {
+          "term": "stairs",
+          "definition": "лестница"
+        },
+        {
+          "term": "on",
+          "definition": "на"
+        },
+        {
+          "term": "in",
+          "definition": "в"
+        },
+        {
+          "term": "at",
+          "definition": "у"
+        },
+        {
+          "term": "near",
+          "definition": "рядом"
+        },
+        {
+          "term": "behind",
+          "definition": "позади, за"
+        },
+        {
+          "term": "under",
+          "definition": "под"
+        },
+        {
+          "term": "above",
+          "definition": "над"
+        },
+        {
+          "term": "on the right",
+          "definition": "справа"
+        },
+        {
+          "term": "place",
+          "definition": "место"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 16",
+      "cards": [
+        {
+          "term": "flour (флАуа)",
+          "definition": "мука"
+        },
+        {
+          "term": "I need",
+          "definition": "мне нужно"
+        },
+        {
+          "term": "do you need?",
+          "definition": "тебе нужно?"
+        },
+        {
+          "term": "first",
+          "definition": "первый"
+        },
+        {
+          "term": "third",
+          "definition": "третий"
+        },
+        {
+          "term": "life (лАйф)",
+          "definition": "жизнь"
+        },
+        {
+          "term": "smell",
+          "definition": "запах, нюхать, пахнуть"
+        },
+        {
+          "term": "word",
+          "definition": "слово"
+        },
+        {
+          "term": "ride a bike",
+          "definition": "кататься на велосипеде"
+        },
+        {
+          "term": "open",
+          "definition": "открывать"
+        },
+        {
+          "term": "cheese",
+          "definition": "сыр"
+        },
+        {
+          "term": "tree",
+          "definition": "дерево"
+        },
+        {
+          "term": "flower",
+          "definition": "цветок"
+        },
+        {
+          "term": "he doesn't need",
+          "definition": "ему не нужно"
+        },
+        {
+          "term": "a little, a bit, a little bit",
+          "definition": "немного"
+        },
+        {
+          "term": "first of all, firstly",
+          "definition": "во-первых"
+        },
+        {
+          "term": "second",
+          "definition": "второй"
+        },
+        {
+          "term": "secondly",
+          "definition": "во-вторых"
+        },
+        {
+          "term": "hard, difficult",
+          "definition": "трудный, сложный"
+        },
+        {
+          "term": "taste",
+          "definition": "вкус, пробовать на вкус"
+        },
+        {
+          "term": "eggs",
+          "definition": "яйца"
+        },
+        {
+          "term": "sugar",
+          "definition": "сахар"
+        },
+        {
+          "term": "gift",
+          "definition": "подарок, дар"
+        },
+        {
+          "term": "perfume",
+          "definition": "парфюм, духи"
+        },
+        {
+          "term": "restaurant",
+          "definition": "ресторан"
+        },
+        {
+          "term": "go snowboarding",
+          "definition": "кататься на сноуборде"
+        },
+        {
+          "term": "well",
+          "definition": "хорошо"
+        },
+        {
+          "term": "close",
+          "definition": "закрывать"
+        },
+        {
+          "term": "any",
+          "definition": "любой, всякий"
+        },
+        {
+          "term": "shop",
+          "definition": "магазин"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 17",
+      "cards": [
+        {
+          "term": "hope",
+          "definition": "надеяться"
+        },
+        {
+          "term": "drop",
+          "definition": "ронять"
+        },
+        {
+          "term": "stop",
+          "definition": "остановиться"
+        },
+        {
+          "term": "give her",
+          "definition": "дай ей"
+        },
+        {
+          "term": "give you",
+          "definition": "даю тебе"
+        },
+        {
+          "term": "give them",
+          "definition": "дай им"
+        },
+        {
+          "term": "let's",
+          "definition": "давай"
+        },
+        {
+          "term": "boot",
+          "definition": "ботинок, сапог"
+        },
+        {
+          "term": "wallpaper",
+          "definition": "обои"
+        },
+        {
+          "term": "let",
+          "definition": "позволять, разрешать"
+        },
+        {
+          "term": "give me",
+          "definition": "дай мне"
+        },
+        {
+          "term": "give him",
+          "definition": "дай ему"
+        },
+        {
+          "term": "give it",
+          "definition": "дай это"
+        },
+        {
+          "term": "give us",
+          "definition": "дай нам"
+        },
+        {
+          "term": "easy",
+          "definition": "1) легкий, простой\n2) спокойно"
+        },
+        {
+          "term": "tired",
+          "definition": "уставший"
+        },
+        {
+          "term": "place",
+          "definition": "место"
+        },
+        {
+          "term": "heart",
+          "definition": "сердце"
+        },
+        {
+          "term": "birthday",
+          "definition": "день рождения"
+        },
+        {
+          "term": "picture",
+          "definition": "картина"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 18",
+      "cards": [
+        {
+          "term": "onion",
+          "definition": "лук"
+        },
+        {
+          "term": "Fried eggs",
+          "definition": "яичница"
+        },
+        {
+          "term": "caviar (кЭвиа)",
+          "definition": "икра"
+        },
+        {
+          "term": "buckwheat",
+          "definition": "гречка"
+        },
+        {
+          "term": "hate, dislike",
+          "definition": "ненавидеть"
+        },
+        {
+          "term": "dish",
+          "definition": "блюдо"
+        },
+        {
+          "term": "food",
+          "definition": "еда"
+        },
+        {
+          "term": "crisps (UK), chips (US)",
+          "definition": "чипсы"
+        },
+        {
+          "term": "melon",
+          "definition": "дыня"
+        },
+        {
+          "term": "chocolate cake",
+          "definition": "шоколадный торт"
+        },
+        {
+          "term": "who",
+          "definition": "кто"
+        },
+        {
+          "term": "tasty, yummy, delicious",
+          "definition": "вкусный"
+        },
+        {
+          "term": "milk",
+          "definition": "молоко"
+        },
+        {
+          "term": "bread",
+          "definition": "хлеб"
+        },
+        {
+          "term": "meat",
+          "definition": "мясо"
+        },
+        {
+          "term": "raspberry",
+          "definition": "малина"
+        },
+        {
+          "term": "cucumber (кьЮкамба)",
+          "definition": "огурец"
+        },
+        {
+          "term": "mushroom",
+          "definition": "гриб"
+        },
+        {
+          "term": "mashed potatoes",
+          "definition": "пюре"
+        },
+        {
+          "term": "supermarket",
+          "definition": "супермаркет"
+        },
+        {
+          "term": "trolley, cart",
+          "definition": "тележка"
+        },
+        {
+          "term": "basket",
+          "definition": "корзина"
+        },
+        {
+          "term": "tomatoes",
+          "definition": "помидоры"
+        },
+        {
+          "term": "fruit",
+          "definition": "фрукты"
+        },
+        {
+          "term": "vegetables",
+          "definition": "овощи"
+        },
+        {
+          "term": "choose",
+          "definition": "выбирать"
+        },
+        {
+          "term": "apples",
+          "definition": "яблоки"
+        },
+        {
+          "term": "oranges",
+          "definition": "апельсины"
+        },
+        {
+          "term": "watermelon",
+          "definition": "арбуз"
+        },
+        {
+          "term": "checkout, cash desk",
+          "definition": "касса"
+        },
+        {
+          "term": "butter",
+          "definition": "масло сливочное"
+        },
+        {
+          "term": "cheese",
+          "definition": "сыр"
+        },
+        {
+          "term": "eggs",
+          "definition": "яйца"
+        },
+        {
+          "term": "biscuits (UK), cookies (US)",
+          "definition": "печенье"
+        },
+        {
+          "term": "beef",
+          "definition": "говядина"
+        },
+        {
+          "term": "lamb",
+          "definition": "баранина"
+        },
+        {
+          "term": "pork",
+          "definition": "свинина"
+        },
+        {
+          "term": "chicken soup",
+          "definition": "куриный суп"
+        },
+        {
+          "term": "salmon",
+          "definition": "лосось"
+        },
+        {
+          "term": "prawns",
+          "definition": "креветки"
+        },
+        {
+          "term": "porridge",
+          "definition": "каша"
+        },
+        {
+          "term": "oatmeal",
+          "definition": "овсянка"
+        },
+        {
+          "term": "Pancakes",
+          "definition": "блины"
+        },
+        {
+          "term": "Cottage cheese, curds",
+          "definition": "творог"
+        },
+        {
+          "term": "berry",
+          "definition": "ягода"
+        },
+        {
+          "term": "nuts",
+          "definition": "орехи"
+        },
+        {
+          "term": "sour cream",
+          "definition": "сметана"
+        },
+        {
+          "term": "cutlets",
+          "definition": "котлеты"
+        },
+        {
+          "term": "Borscht",
+          "definition": "борщ"
+        },
+        {
+          "term": "enjoy",
+          "definition": "=like"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 19",
+      "cards": [
+        {
+          "term": "wait for",
+          "definition": "ждать кого-то/чего-то"
+        },
+        {
+          "term": "thirsty",
+          "definition": "испытывающий жажду"
+        },
+        {
+          "term": "hungry",
+          "definition": "голодный"
+        },
+        {
+          "term": "loud",
+          "definition": "громкий"
+        },
+        {
+          "term": "a glass of juice",
+          "definition": "стакан сока"
+        },
+        {
+          "term": "restaurant",
+          "definition": "ресторан"
+        },
+        {
+          "term": "buffet (буфЭй)",
+          "definition": "шведский стол"
+        },
+        {
+          "term": "plate",
+          "definition": "тарелка"
+        },
+        {
+          "term": "different",
+          "definition": "различный"
+        },
+        {
+          "term": "juice",
+          "definition": "сок"
+        },
+        {
+          "term": "a cup of tea",
+          "definition": "чашка чая"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 20",
+      "cards": [
+        {
+          "term": "tissue",
+          "definition": "бумажная салфетка"
+        },
+        {
+          "term": "same again",
+          "definition": "тоже самое"
+        },
+        {
+          "term": "umbrella",
+          "definition": "зонт"
+        },
+        {
+          "term": "some",
+          "definition": "некоторое количество"
+        },
+        {
+          "term": "something",
+          "definition": "что-то, что-нибудь"
+        },
+        {
+          "term": "kind",
+          "definition": "тип, род, вид, добрый"
+        },
+        {
+          "term": "clothes",
+          "definition": "одежда"
+        },
+        {
+          "term": "arrive in",
+          "definition": "приехать, прибыть (в город, страну)"
+        },
+        {
+          "term": "follow me",
+          "definition": "Следуйте за мной"
+        },
+        {
+          "term": "hats",
+          "definition": "шляпы, шляпки"
+        },
+        {
+          "term": "ready",
+          "definition": "готовый"
+        },
+        {
+          "term": "balloons",
+          "definition": "воздушные шарики"
+        },
+        {
+          "term": "blow out",
+          "definition": "задувать"
+        },
+        {
+          "term": "borrow",
+          "definition": "брать взаймы, одалживать (у кого-то)"
+        },
+        {
+          "term": "Would you like",
+          "definition": "Вы бы хотели?"
+        },
+        {
+          "term": "I'd like (I would like)",
+          "definition": "мне бы хотелось"
+        },
+        {
+          "term": "what kind",
+          "definition": "какой вид?"
+        },
+        {
+          "term": "be dressed in",
+          "definition": "быть одетым во что-то"
+        },
+        {
+          "term": "meal",
+          "definition": "еда, прием пищи (завтрак, обед, ужин)"
+        },
+        {
+          "term": "arrive at",
+          "definition": "приехать, прибыть (в небольшое место)"
+        },
+        {
+          "term": "waiter",
+          "definition": "официант"
+        },
+        {
+          "term": "book a table",
+          "definition": "забронировать столик"
+        },
+        {
+          "term": "napkin",
+          "definition": "салфетка из ткани"
+        },
+        {
+          "term": "a bottle of water",
+          "definition": "бутылка воды"
+        },
+        {
+          "term": "Are you ready to order?",
+          "definition": "Вы готовы заказать?"
+        },
+        {
+          "term": "order",
+          "definition": "заказывать"
+        },
+        {
+          "term": "on the menu",
+          "definition": "в меню"
+        },
+        {
+          "term": "Could I have the spaghetti too, please?",
+          "definition": "Можно мне спагетти тоже, пожалуйста?"
+        },
+        {
+          "term": "everybody, everyone",
+          "definition": "все, каждый человек"
+        },
+        {
+          "term": "blow",
+          "definition": "дуть"
+        },
+        {
+          "term": "candle",
+          "definition": "свеча"
+        },
+        {
+          "term": "blow out the candles",
+          "definition": "задувать свечи"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 21",
+      "cards": [
+        {
+          "term": "sleigh (слЭй)",
+          "definition": "сани"
+        },
+        {
+          "term": "reindeer",
+          "definition": "северный олень"
+        },
+        {
+          "term": "hop in",
+          "definition": "запрыгивать"
+        },
+        {
+          "term": "hop out",
+          "definition": "выпрыгивать"
+        },
+        {
+          "term": "Christmas",
+          "definition": "Рождество"
+        },
+        {
+          "term": "nurse",
+          "definition": "медсестра"
+        },
+        {
+          "term": "good point",
+          "definition": "хороший аргумент"
+        },
+        {
+          "term": "snowflake",
+          "definition": "снежинка"
+        },
+        {
+          "term": "do my best",
+          "definition": "сделать все, что в моих силах"
+        },
+        {
+          "term": "put up a New Year tree (Christmas tree)",
+          "definition": "ставить елку"
+        },
+        {
+          "term": "put up New Year (Christmas) decorations",
+          "definition": "украшать к новому году (рождеству)"
+        },
+        {
+          "term": "decorate",
+          "definition": "украшать"
+        },
+        {
+          "term": "decoration",
+          "definition": "украшение"
+        },
+        {
+          "term": "the show must go on",
+          "definition": "Шоу должно продолжаться"
+        },
+        {
+          "term": "must",
+          "definition": "должен"
+        },
+        {
+          "term": "world",
+          "definition": "мир"
+        },
+        {
+          "term": "outside",
+          "definition": "на улице, снаружи"
+        },
+        {
+          "term": "ride",
+          "definition": "ездить верхом"
+        },
+        {
+          "term": "ride a bike",
+          "definition": "кататься на велосипеде"
+        },
+        {
+          "term": "ride a horse",
+          "definition": "кататься на лошади"
+        },
+        {
+          "term": "Ready, steady, go!",
+          "definition": "на старт, внимание, марш"
+        },
+        {
+          "term": "almost (Олмаст), nearly(нИали)",
+          "definition": "почти"
+        },
+        {
+          "term": "play",
+          "definition": "пьеса, спектакль"
+        },
+        {
+          "term": "Father Christmas (UK), Santa Claus (US)",
+          "definition": "Дед Мороз"
+        },
+        {
+          "term": "fairy",
+          "definition": "фея"
+        },
+        {
+          "term": "fairy tale",
+          "definition": "сказка"
+        },
+        {
+          "term": "be ill, be sick",
+          "definition": "болеть"
+        },
+        {
+          "term": "say hello",
+          "definition": "поздороваться"
+        },
+        {
+          "term": "look forward to (doing)",
+          "definition": "ждать с нетерпением чего-то"
+        },
+        {
+          "term": "forward",
+          "definition": "вперед"
+        },
+        {
+          "term": "be busy (бИзи)",
+          "definition": "быть занятым"
+        },
+        {
+          "term": "at this time of the year",
+          "definition": "в это время года"
+        },
+        {
+          "term": "parents",
+          "definition": "родители"
+        },
+        {
+          "term": "tonight",
+          "definition": "сегодня вечером"
+        },
+        {
+          "term": "continue, go on, keep (on), carry on",
+          "definition": "продолжать(ся)"
+        },
+        {
+          "term": "check",
+          "definition": "проверять"
+        },
+        {
+          "term": "true",
+          "definition": "правда"
+        },
+        {
+          "term": "false (фОлс)",
+          "definition": "ложь"
+        },
+        {
+          "term": "amazing",
+          "definition": "изумительный, удивительный"
+        },
+        {
+          "term": "my goodness",
+          "definition": "Боже мой!"
+        },
+        {
+          "term": "loop-the-loop",
+          "definition": "мертвая петля"
+        },
+        {
+          "term": "everybody, everyone",
+          "definition": "все"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 22",
+      "cards": [
+        {
+          "term": "see you later",
+          "definition": "Увидимся позже"
+        },
+        {
+          "term": "tomorrow",
+          "definition": "завтра"
+        },
+        {
+          "term": "scarf - scarves",
+          "definition": "шарф - шарфы"
+        },
+        {
+          "term": "hat",
+          "definition": "шапка"
+        },
+        {
+          "term": "postman",
+          "definition": "почтальон"
+        },
+        {
+          "term": "guitar",
+          "definition": "гитара"
+        },
+        {
+          "term": "skipping rope",
+          "definition": "скакалка"
+        },
+        {
+          "term": "ball",
+          "definition": "мяч"
+        },
+        {
+          "term": "north",
+          "definition": "север"
+        },
+        {
+          "term": "south",
+          "definition": "юг"
+        },
+        {
+          "term": "west",
+          "definition": "запад"
+        },
+        {
+          "term": "Well,",
+          "definition": "ну"
+        },
+        {
+          "term": "perfect",
+          "definition": "великолепно"
+        },
+        {
+          "term": "worry",
+          "definition": "беспокоиться, волноваться"
+        },
+        {
+          "term": "in summer",
+          "definition": "летом"
+        },
+        {
+          "term": "in winter",
+          "definition": "зимой"
+        },
+        {
+          "term": "in spring",
+          "definition": "весной"
+        },
+        {
+          "term": "in autumn (UK), in fall (US)",
+          "definition": "осенью"
+        },
+        {
+          "term": "eve (ив)",
+          "definition": "канун"
+        },
+        {
+          "term": "New Year eve",
+          "definition": "канун Нового года"
+        },
+        {
+          "term": "post",
+          "definition": "почта, отправлять (по почте)"
+        },
+        {
+          "term": "post office",
+          "definition": "почта"
+        },
+        {
+          "term": "letter",
+          "definition": "письмо, буква"
+        },
+        {
+          "term": "scooter",
+          "definition": "самокат"
+        },
+        {
+          "term": "spaceship",
+          "definition": "космический корабль"
+        },
+        {
+          "term": "space",
+          "definition": "космос, пространство"
+        },
+        {
+          "term": "ship",
+          "definition": "корабль"
+        },
+        {
+          "term": "skip",
+          "definition": "1) прыгать на скакалке\n2) пропускать (урок)"
+        },
+        {
+          "term": "rope",
+          "definition": "веревка"
+        },
+        {
+          "term": "trumpet",
+          "definition": "труба (музыкальный инструмент)"
+        },
+        {
+          "term": "bat",
+          "definition": "бита"
+        },
+        {
+          "term": "My goodness",
+          "definition": "Боже мой!"
+        },
+        {
+          "term": "important",
+          "definition": "важный"
+        },
+        {
+          "term": "North Pole",
+          "definition": "Северный полюс"
+        },
+        {
+          "term": "east",
+          "definition": "восток"
+        },
+        {
+          "term": "if",
+          "definition": "если"
+        },
+        {
+          "term": "everybody, everyone",
+          "definition": "все"
+        },
+        {
+          "term": "look for",
+          "definition": "искать"
+        },
+        {
+          "term": "hundred",
+          "definition": "сотня"
+        },
+        {
+          "term": "be sure",
+          "definition": "быть уверенным"
+        },
+        {
+          "term": "Are you sure?",
+          "definition": "Ты уверен?"
+        },
+        {
+          "term": "carry",
+          "definition": "нести"
+        },
+        {
+          "term": "choose",
+          "definition": "выбирать"
+        },
+        {
+          "term": "noise",
+          "definition": "шум"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 23",
+      "cards": [
+        {
+          "term": "thin - thinner - (the) thinnest",
+          "definition": "тонкий, тоньше, самый тонкий"
+        },
+        {
+          "term": "hang",
+          "definition": "вешать"
+        },
+        {
+          "term": "bauble (бОбл)",
+          "definition": "ёлочный шар"
+        },
+        {
+          "term": "fairy lights",
+          "definition": "гирлянда"
+        },
+        {
+          "term": "wide awake",
+          "definition": "бодрствующий, проснувшийся"
+        },
+        {
+          "term": "big - bigger - (the) biggest",
+          "definition": "большой - больше - самый большой"
+        },
+        {
+          "term": "fast, faster, (the) fastest",
+          "definition": "быстрый - быстрее - самый быстрый"
+        },
+        {
+          "term": "strong - stronger - (the) strongest",
+          "definition": "сильный-сильнее-самый сильный"
+        },
+        {
+          "term": "lovely",
+          "definition": "красивый, прекрасный"
+        },
+        {
+          "term": "good night",
+          "definition": "Спокойной ночи"
+        },
+        {
+          "term": "place",
+          "definition": "место"
+        },
+        {
+          "term": "present",
+          "definition": "подарок"
+        },
+        {
+          "term": "easy, easier, the easiest",
+          "definition": "легкий - легче - самый легкий"
+        },
+        {
+          "term": "dirty - dirtier - (the) dirtiest",
+          "definition": "грязный, грязнее, самый грязный"
+        },
+        {
+          "term": "quick",
+          "definition": "= fast"
+        },
+        {
+          "term": "tall",
+          "definition": "высокий (о человеке, башня)"
+        },
+        {
+          "term": "high",
+          "definition": "высокий (про качество, стену)"
+        },
+        {
+          "term": "weak - weaker - (the) weakest",
+          "definition": "слабый, слабее, самый слабый"
+        },
+        {
+          "term": "kind - kinder (the) kindest",
+          "definition": "добрый, добрее, самый добрый"
+        },
+        {
+          "term": "glitter",
+          "definition": "мишура"
+        },
+        {
+          "term": "star",
+          "definition": "звезда"
+        },
+        {
+          "term": "maybe",
+          "definition": "может быть"
+        },
+        {
+          "term": "enough (инаф)",
+          "definition": "достаточно"
+        },
+        {
+          "term": "sing",
+          "definition": "петь"
+        },
+        {
+          "term": "snack",
+          "definition": "перекус"
+        },
+        {
+          "term": "stay up",
+          "definition": "не ложиться спать"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 24",
+      "cards": [
+        {
+          "term": "than",
+          "definition": "чем"
+        },
+        {
+          "term": "town",
+          "definition": "город"
+        },
+        {
+          "term": "famous",
+          "definition": "известный"
+        },
+        {
+          "term": "climb",
+          "definition": "лезть, карабкаться"
+        },
+        {
+          "term": "bad, worse, (the) worst",
+          "definition": "плохой - хуже - самый плохой"
+        },
+        {
+          "term": "many (much), more, (the) most",
+          "definition": "много - больше - больше всего"
+        },
+        {
+          "term": "little, less, (the) least",
+          "definition": "маленький, меньше, самый маленький"
+        },
+        {
+          "term": "January (джЭньюари)",
+          "definition": "январь"
+        },
+        {
+          "term": "February (фЭбрари)",
+          "definition": "февраль"
+        },
+        {
+          "term": "April (Эйприл)",
+          "definition": "апрель"
+        },
+        {
+          "term": "May (мЭй)",
+          "definition": "май"
+        },
+        {
+          "term": "June (джУн)",
+          "definition": "июнь"
+        },
+        {
+          "term": "July (джулАй)",
+          "definition": "июль"
+        },
+        {
+          "term": "October (октОба)",
+          "definition": "октябрь"
+        },
+        {
+          "term": "November (навЭмба)",
+          "definition": "ноябрь"
+        },
+        {
+          "term": "December (дисЭмба)",
+          "definition": "декабрь"
+        },
+        {
+          "term": "wonderful",
+          "definition": "чудесный"
+        },
+        {
+          "term": "convenient",
+          "definition": "удобный, подходящий (про время и местоположение)"
+        },
+        {
+          "term": "serious",
+          "definition": "серьезный"
+        },
+        {
+          "term": "successful",
+          "definition": "успешный"
+        },
+        {
+          "term": "beautiful",
+          "definition": "красивый"
+        },
+        {
+          "term": "boring",
+          "definition": "скучный"
+        },
+        {
+          "term": "interesting",
+          "definition": "интересный"
+        },
+        {
+          "term": "dangerous",
+          "definition": "опасный"
+        },
+        {
+          "term": "roof",
+          "definition": "крыша"
+        },
+        {
+          "term": "smart, clever",
+          "definition": "умный"
+        },
+        {
+          "term": "by car",
+          "definition": "на машине"
+        },
+        {
+          "term": "by public transport",
+          "definition": "на общественном транспорте"
+        },
+        {
+          "term": "beautiful, more beautiful, the most beautiful",
+          "definition": "красивый, красивее, самый красивый"
+        },
+        {
+          "term": "good, better, (the) best",
+          "definition": "хороший - лучше - самый лучший"
+        },
+        {
+          "term": "far, further, (the) furthest",
+          "definition": "далекий-дальше-самый дальний"
+        },
+        {
+          "term": "build",
+          "definition": "строить"
+        },
+        {
+          "term": "building",
+          "definition": "здание"
+        },
+        {
+          "term": "March (мАтч)",
+          "definition": "март"
+        },
+        {
+          "term": "August (Огаст)",
+          "definition": "август"
+        },
+        {
+          "term": "September (сэптЭмба)",
+          "definition": "сентябрь"
+        },
+        {
+          "term": "city",
+          "definition": "большой город"
+        },
+        {
+          "term": "lake",
+          "definition": "озеро"
+        },
+        {
+          "term": "river",
+          "definition": "река"
+        },
+        {
+          "term": "comfortable",
+          "definition": "удобный (про комфорт)"
+        },
+        {
+          "term": "pleasant",
+          "definition": "приятный"
+        },
+        {
+          "term": "expensive",
+          "definition": "дорогой"
+        },
+        {
+          "term": "important",
+          "definition": "важный"
+        },
+        {
+          "term": "difficult",
+          "definition": "трудный, сложный"
+        },
+        {
+          "term": "popular",
+          "definition": "популярный"
+        },
+        {
+          "term": "deliver",
+          "definition": "доставлять"
+        },
+        {
+          "term": "delivery",
+          "definition": "доставка"
+        },
+        {
+          "term": "chimney",
+          "definition": "дымоход"
+        },
+        {
+          "term": "noise",
+          "definition": "шум"
+        },
+        {
+          "term": "noisy",
+          "definition": "шумный"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 25",
+      "cards": [
+        {
+          "term": "silly",
+          "definition": "глупый"
+        },
+        {
+          "term": "tights, (UK) pantyhose (US)",
+          "definition": "колготки"
+        },
+        {
+          "term": "mittens",
+          "definition": "варежки"
+        },
+        {
+          "term": "pale blue, light blue",
+          "definition": "голубой (2)"
+        },
+        {
+          "term": "clever, smart",
+          "definition": "умный"
+        },
+        {
+          "term": "the same (сЭйм)",
+          "definition": "тот же самый, одинаковый"
+        },
+        {
+          "term": "raincoat",
+          "definition": "плащ"
+        },
+        {
+          "term": "scarf (скАаф), scarves",
+          "definition": "шарф, шарфы"
+        },
+        {
+          "term": "umbrella",
+          "definition": "зонт"
+        },
+        {
+          "term": "trainers (UK), sneakers (US)",
+          "definition": "кроссовки"
+        },
+        {
+          "term": "sandals",
+          "definition": "сандалии, босоножки"
+        },
+        {
+          "term": "gloves (глАвс)",
+          "definition": "перчатки"
+        },
+        {
+          "term": "red",
+          "definition": "красный"
+        },
+        {
+          "term": "yellow",
+          "definition": "жёлтый"
+        },
+        {
+          "term": "orange",
+          "definition": "оранжевый"
+        },
+        {
+          "term": "grey",
+          "definition": "серый"
+        },
+        {
+          "term": "blue",
+          "definition": "синий"
+        },
+        {
+          "term": "everyone, everybody",
+          "definition": "все"
+        },
+        {
+          "term": "boots",
+          "definition": "ботинки, сапоги"
+        },
+        {
+          "term": "catch (кЭтч)",
+          "definition": "ловить, поймать"
+        },
+        {
+          "term": "shirt",
+          "definition": "рубашка"
+        },
+        {
+          "term": "T-shirt",
+          "definition": "футболка"
+        },
+        {
+          "term": "top",
+          "definition": "майка, топ"
+        },
+        {
+          "term": "jumper (джАмпа), sweater (свЭта)",
+          "definition": "джемпер, свитер"
+        },
+        {
+          "term": "pants (US), trousers (UK)",
+          "definition": "брюки, штаны"
+        },
+        {
+          "term": "jeans",
+          "definition": "джинсы"
+        },
+        {
+          "term": "skirt",
+          "definition": "юбка"
+        },
+        {
+          "term": "dress",
+          "definition": "платье"
+        },
+        {
+          "term": "jacket",
+          "definition": "куртка, пиджак"
+        },
+        {
+          "term": "suit",
+          "definition": "костюм"
+        },
+        {
+          "term": "coat",
+          "definition": "пальто"
+        },
+        {
+          "term": "hat",
+          "definition": "шляпа, шапка"
+        },
+        {
+          "term": "belt",
+          "definition": "ремень"
+        },
+        {
+          "term": "handbag (UK), purse (US)",
+          "definition": "сумочка"
+        },
+        {
+          "term": "watch",
+          "definition": "часы"
+        },
+        {
+          "term": "shoes",
+          "definition": "туфли, обувь"
+        },
+        {
+          "term": "socks",
+          "definition": "носки"
+        },
+        {
+          "term": "glasses",
+          "definition": "очки"
+        },
+        {
+          "term": "sunglasses",
+          "definition": "солнечные очки"
+        },
+        {
+          "term": "white",
+          "definition": "белый"
+        },
+        {
+          "term": "brown",
+          "definition": "коричневый"
+        },
+        {
+          "term": "green",
+          "definition": "зеленый"
+        },
+        {
+          "term": "black",
+          "definition": "черный"
+        },
+        {
+          "term": "purple",
+          "definition": "фиолетовый (пурпурный)"
+        },
+        {
+          "term": "pink",
+          "definition": "розовый"
+        },
+        {
+          "term": "dark blue",
+          "definition": "темно-синий"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 26",
+      "cards": [
+        {
+          "term": "at least",
+          "definition": "по крайней мере"
+        },
+        {
+          "term": "imaginary",
+          "definition": "воображаемый"
+        },
+        {
+          "term": "loser",
+          "definition": "неудачник"
+        },
+        {
+          "term": "harmless",
+          "definition": "безвредный, безобидный"
+        },
+        {
+          "term": "harm",
+          "definition": "вред"
+        },
+        {
+          "term": "first",
+          "definition": "первый"
+        },
+        {
+          "term": "third",
+          "definition": "третий"
+        },
+        {
+          "term": "everything",
+          "definition": "всё"
+        },
+        {
+          "term": "nothing",
+          "definition": "ничего"
+        },
+        {
+          "term": "little - less - (the) least",
+          "definition": "маленький, меньше, самый маленький"
+        },
+        {
+          "term": "imagine",
+          "definition": "представлять, воображать"
+        },
+        {
+          "term": "anyone, anybody",
+          "definition": "кто угодно"
+        },
+        {
+          "term": "everyone, everybody",
+          "definition": "все, каждый"
+        },
+        {
+          "term": "possible",
+          "definition": "возможный"
+        },
+        {
+          "term": "lose",
+          "definition": "терять, проигрывать"
+        },
+        {
+          "term": "wanna",
+          "definition": "= want to"
+        },
+        {
+          "term": "believe",
+          "definition": "верить"
+        },
+        {
+          "term": "weird (вИад)",
+          "definition": "странный"
+        },
+        {
+          "term": "yesterday",
+          "definition": "вчера"
+        },
+        {
+          "term": "last month",
+          "definition": "в прошлом месяце"
+        },
+        {
+          "term": "last year",
+          "definition": "в прошлом году"
+        },
+        {
+          "term": "decision",
+          "definition": "решение"
+        },
+        {
+          "term": "second",
+          "definition": "второй"
+        },
+        {
+          "term": "grade (US), form (UK)",
+          "definition": "класс (2А)"
+        },
+        {
+          "term": "second grade, second form",
+          "definition": "второй класс"
+        },
+        {
+          "term": "something",
+          "definition": "что-то"
+        },
+        {
+          "term": "anything",
+          "definition": "что угодно"
+        },
+        {
+          "term": "imagination",
+          "definition": "воображение"
+        },
+        {
+          "term": "if",
+          "definition": "если"
+        },
+        {
+          "term": "happen",
+          "definition": "происходить, случаться"
+        },
+        {
+          "term": "someone, somebody",
+          "definition": "кто-то"
+        },
+        {
+          "term": "no-one, nobody",
+          "definition": "никто"
+        },
+        {
+          "term": "again",
+          "definition": "снова"
+        },
+        {
+          "term": "impossible",
+          "definition": "невозможный"
+        },
+        {
+          "term": "possibility",
+          "definition": "возможность"
+        },
+        {
+          "term": "story - stories",
+          "definition": "история, истории (из жизни)"
+        },
+        {
+          "term": "fellas",
+          "definition": "парни, ребята, чуваки"
+        },
+        {
+          "term": "thing, stuff",
+          "definition": "вещь"
+        },
+        {
+          "term": "have a lot in common",
+          "definition": "иметь много общего"
+        },
+        {
+          "term": "almost, nearly",
+          "definition": "почти"
+        },
+        {
+          "term": "harmful",
+          "definition": "вредный"
+        },
+        {
+          "term": "until",
+          "definition": "до тех пор пока"
+        },
+        {
+          "term": "somewhere",
+          "definition": "где-то"
+        },
+        {
+          "term": "anywhere",
+          "definition": "где угодно"
+        },
+        {
+          "term": "everywhere",
+          "definition": "везде"
+        },
+        {
+          "term": "nowhere",
+          "definition": "нигде"
+        },
+        {
+          "term": "last week",
+          "definition": "на прошлой неделе"
+        },
+        {
+          "term": "ago",
+          "definition": "тому назад"
+        },
+        {
+          "term": "three years ago",
+          "definition": "три года назад"
+        },
+        {
+          "term": "decide",
+          "definition": "решать"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 27",
+      "cards": [
+        {
+          "term": "three days ago",
+          "definition": "три дня назад"
+        },
+        {
+          "term": "last year",
+          "definition": "в прошлом году"
+        },
+        {
+          "term": "yesterday",
+          "definition": "вчера"
+        },
+        {
+          "term": "the day before yesterday",
+          "definition": "позавчера"
+        },
+        {
+          "term": "at the library",
+          "definition": "в библиотеке"
+        },
+        {
+          "term": "king",
+          "definition": "король"
+        },
+        {
+          "term": "goose geese",
+          "definition": "гусь - гуси"
+        },
+        {
+          "term": "upset stomach",
+          "definition": "расстройство желудка"
+        },
+        {
+          "term": "believe",
+          "definition": "верить"
+        },
+        {
+          "term": "look",
+          "definition": "смотреть (когда привлекаем внимание к чему-то)"
+        },
+        {
+          "term": "look after",
+          "definition": "присматривать за"
+        },
+        {
+          "term": "of course",
+          "definition": "конечно"
+        },
+        {
+          "term": "fairy",
+          "definition": "фея"
+        },
+        {
+          "term": "return",
+          "definition": "возвращаться"
+        },
+        {
+          "term": "foot feet",
+          "definition": "ступня - ступни"
+        },
+        {
+          "term": "last week",
+          "definition": "на прошлой неделе"
+        },
+        {
+          "term": "last month",
+          "definition": "в прошлом месяце"
+        },
+        {
+          "term": "in the city centre",
+          "definition": "в центре города"
+        },
+        {
+          "term": "once upon a time",
+          "definition": "однажды, давным давно"
+        },
+        {
+          "term": "perhaps",
+          "definition": "возможно"
+        },
+        {
+          "term": "a little bit, a bit, a little",
+          "definition": "немного"
+        },
+        {
+          "term": "kingdom",
+          "definition": "королевство"
+        },
+        {
+          "term": "mouse - mice",
+          "definition": "мышь - мыши"
+        },
+        {
+          "term": "stomach (стамак)",
+          "definition": "желудок, живот"
+        },
+        {
+          "term": "upset",
+          "definition": "расстроенный, огорченный"
+        },
+        {
+          "term": "share",
+          "definition": "делить, разделять"
+        },
+        {
+          "term": "look for",
+          "definition": "искать"
+        },
+        {
+          "term": "everything",
+          "definition": "всё"
+        },
+        {
+          "term": "something",
+          "definition": "что-то"
+        },
+        {
+          "term": "inside",
+          "definition": "внутри"
+        },
+        {
+          "term": "outside",
+          "definition": "снаружи"
+        },
+        {
+          "term": "suitcase",
+          "definition": "чемодан"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 28",
+      "cards": [
+        {
+          "term": "be (am, is, are) - was/were - been",
+          "definition": "быть, являться, находиться"
+        },
+        {
+          "term": "beep",
+          "definition": "пищать"
+        },
+        {
+          "term": "concrete",
+          "definition": "бетон, бетонный"
+        },
+        {
+          "term": "have - had - had",
+          "definition": "иметь, обладать"
+        },
+        {
+          "term": "choose - chose - chosen",
+          "definition": "выбирать"
+        },
+        {
+          "term": "take took taken",
+          "definition": "брать, взять"
+        },
+        {
+          "term": "make made made",
+          "definition": "делать (своими руками), создавать"
+        },
+        {
+          "term": "jump",
+          "definition": "прыгать"
+        },
+        {
+          "term": "clean",
+          "definition": "чистить, чистый"
+        },
+        {
+          "term": "worry",
+          "definition": "волноваться, беспокоиться"
+        },
+        {
+          "term": "check",
+          "definition": "проверять"
+        },
+        {
+          "term": "borrow",
+          "definition": "одалживать у кого-то, брать с возвратом"
+        },
+        {
+          "term": "return",
+          "definition": "возвращаться, возвращать"
+        },
+        {
+          "term": "story",
+          "definition": "история"
+        },
+        {
+          "term": "librarian (лайбрЭриан)",
+          "definition": "библиотекарь"
+        },
+        {
+          "term": "another",
+          "definition": "другой"
+        },
+        {
+          "term": "nurse (нёс)",
+          "definition": "медсестра"
+        },
+        {
+          "term": "far - further - (the) furthest",
+          "definition": "далекий-дальше-самый дальний"
+        },
+        {
+          "term": "monkey",
+          "definition": "обезьяна"
+        },
+        {
+          "term": "mountain (мАунтин)",
+          "definition": "гора"
+        },
+        {
+          "term": "busy (бИзи)",
+          "definition": "занятой"
+        },
+        {
+          "term": "read - read (рЭд) - read (рЭд)",
+          "definition": "читать"
+        },
+        {
+          "term": "forget forgot forgotten",
+          "definition": "забывать"
+        },
+        {
+          "term": "fall - fell - fallen",
+          "definition": "падать"
+        },
+        {
+          "term": "come came come",
+          "definition": "приходить, приезжать"
+        },
+        {
+          "term": "bet bet bet",
+          "definition": "держать пари, спорить"
+        },
+        {
+          "term": "go went gone",
+          "definition": "идти, ехать"
+        },
+        {
+          "term": "swim swam swum",
+          "definition": "плавать, плыть"
+        },
+        {
+          "term": "bring brought (брОт) brought (брОт)",
+          "definition": "приносить, приводить"
+        },
+        {
+          "term": "remember",
+          "definition": "помнить"
+        },
+        {
+          "term": "climb",
+          "definition": "лезть, карабкаться"
+        },
+        {
+          "term": "happen",
+          "definition": "происходить, слусаться"
+        },
+        {
+          "term": "look for",
+          "definition": "искать"
+        },
+        {
+          "term": "finish",
+          "definition": "заканчивать"
+        },
+        {
+          "term": "good night",
+          "definition": "Спокойной ночи"
+        },
+        {
+          "term": "tiger",
+          "definition": "тигр"
+        },
+        {
+          "term": "spider",
+          "definition": "паук"
+        },
+        {
+          "term": "penguin (пИнгвин)",
+          "definition": "пингвин"
+        },
+        {
+          "term": "library (лАйбрариё0",
+          "definition": "библиотека"
+        },
+        {
+          "term": "chapter",
+          "definition": "глава"
+        },
+        {
+          "term": "sand",
+          "definition": "песок"
+        },
+        {
+          "term": "must",
+          "definition": "должен"
+        },
+        {
+          "term": "naughty (нОти)",
+          "definition": "непослушный"
+        },
+        {
+          "term": "pretty",
+          "definition": "хорошенький"
+        },
+        {
+          "term": "pretty dresses",
+          "definition": "хорошенькие платья"
+        },
+        {
+          "term": "different",
+          "definition": "разный, различный"
+        },
+        {
+          "term": "It is fun",
+          "definition": "весело"
+        },
+        {
+          "term": "It was fun",
+          "definition": "было весело"
+        },
+        {
+          "term": "fun - more fun - (the) most fun",
+          "definition": "весёлый - веселее - самый весёлый"
+        },
+        {
+          "term": "make sure",
+          "definition": "убедиться, удостовериться"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 29",
+      "cards": [
+        {
+          "term": "oversleep, overslept, overslept",
+          "definition": "проспать"
+        },
+        {
+          "term": "leave left left",
+          "definition": "уходить, покидать, оставлять, уезжать"
+        },
+        {
+          "term": "keep, kept, kept",
+          "definition": "Держать (долго), сохранять, продолжать"
+        },
+        {
+          "term": "lead led led",
+          "definition": "приводить (к), вести"
+        },
+        {
+          "term": "hang, hung, hung",
+          "definition": "висеть, вешать"
+        },
+        {
+          "term": "overcome overcame overcome",
+          "definition": "преодолевать, обгонять"
+        },
+        {
+          "term": "sleep slept slept",
+          "definition": "спать"
+        },
+        {
+          "term": "spend, spent, spent",
+          "definition": "проводить, тратить"
+        },
+        {
+          "term": "feed, fed, fed",
+          "definition": "кормить"
+        },
+        {
+          "term": "send, sent, sent",
+          "definition": "посылать, отправлять"
+        },
+        {
+          "term": "tell told told",
+          "definition": "рассказывать"
+        },
+        {
+          "term": "meet, met, met",
+          "definition": "встречаться, знакомиться"
+        },
+        {
+          "term": "win won won",
+          "definition": "победить, выиграть (в соревнованиях)"
+        },
+        {
+          "term": "sell sold sold",
+          "definition": "продавать"
+        },
+        {
+          "term": "pay, paid, paid",
+          "definition": "платить"
+        },
+        {
+          "term": "sit sat sat",
+          "definition": "сидеть, садиться"
+        },
+        {
+          "term": "stand stood stood",
+          "definition": "стоять"
+        },
+        {
+          "term": "dig, dug, dug",
+          "definition": "копать, рыть"
+        },
+        {
+          "term": "stick stuck stuck",
+          "definition": "застревать, приклеивать"
+        },
+        {
+          "term": "read read (рэд) read (рэд)",
+          "definition": "читать"
+        },
+        {
+          "term": "put (пут) put (пут) put (пут)",
+          "definition": "ставить, класть"
+        },
+        {
+          "term": "hurt (хёт), hurt (хёт), hurt (хёт)",
+          "definition": "ранить, повреждать, причинять боль"
+        },
+        {
+          "term": "set set set",
+          "definition": "устанавливать, настраивать"
+        },
+        {
+          "term": "hit hit hit",
+          "definition": "ударять"
+        },
+        {
+          "term": "split split split",
+          "definition": "раскалывать, разделять (на части)"
+        },
+        {
+          "term": "come came come",
+          "definition": "приходить, приезжать"
+        },
+        {
+          "term": "have had had",
+          "definition": "иметь, обладать"
+        },
+        {
+          "term": "make made made",
+          "definition": "делать (своими руками), создавать, заставлять"
+        },
+        {
+          "term": "feel, felt, felt",
+          "definition": "чувствовать"
+        },
+        {
+          "term": "hear, heard, heard",
+          "definition": "слышать"
+        },
+        {
+          "term": "find, found, found",
+          "definition": "находить"
+        },
+        {
+          "term": "build (билд), built (билт), built (билт)",
+          "definition": "строить"
+        },
+        {
+          "term": "say, said, said",
+          "definition": "сказать (быстро)"
+        },
+        {
+          "term": "lose lost lost",
+          "definition": "терять, проигрывать"
+        },
+        {
+          "term": "hold held held",
+          "definition": "держать (короткое время)"
+        },
+        {
+          "term": "mean meant meant",
+          "definition": "значить, иметь в виду"
+        },
+        {
+          "term": "understand understood understood",
+          "definition": "понимать"
+        },
+        {
+          "term": "withstand, withstood, withstood",
+          "definition": "выдерживать, противостоять"
+        },
+        {
+          "term": "lend lent lent",
+          "definition": "Одалживать кому-то свою вещь"
+        },
+        {
+          "term": "shine, shone, shone",
+          "definition": "светить, сиять"
+        },
+        {
+          "term": "shoot shot shot",
+          "definition": "стрелять, снимать (фотосъёмка, фильм)"
+        },
+        {
+          "term": "light lit lit",
+          "definition": "зажигать, освещать"
+        },
+        {
+          "term": "cut (кат) cut (кат) cut (кат)",
+          "definition": "резать"
+        },
+        {
+          "term": "cost, cost, cost",
+          "definition": "стоить (про цену)"
+        },
+        {
+          "term": "let let let",
+          "definition": "позволять, разрешать"
+        },
+        {
+          "term": "spread, spread, spread",
+          "definition": "распространять"
+        },
+        {
+          "term": "bet bet bet",
+          "definition": "держать пари, быть готовым поспорить"
+        },
+        {
+          "term": "shut (шат) shut shut",
+          "definition": "закрывать, захлопывать"
+        },
+        {
+          "term": "become became become",
+          "definition": "становиться"
+        },
+        {
+          "term": "run ran run",
+          "definition": "бегать"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 30",
+      "cards": [
+        {
+          "term": "ride rode ridden",
+          "definition": "ездить верхом, кататься"
+        },
+        {
+          "term": "lie lay lain",
+          "definition": "лежать"
+        },
+        {
+          "term": "be, was/were, been",
+          "definition": "быть, являться, находиться"
+        },
+        {
+          "term": "give gave given",
+          "definition": "давать"
+        },
+        {
+          "term": "take took taken",
+          "definition": "брать, взять"
+        },
+        {
+          "term": "fall fell fallen",
+          "definition": "падать"
+        },
+        {
+          "term": "drive drove driven",
+          "definition": "водить машину"
+        },
+        {
+          "term": "forget forgot forgotten",
+          "definition": "забывать"
+        },
+        {
+          "term": "hide hid hidden",
+          "definition": "прятать, прятаться"
+        },
+        {
+          "term": "wake woke woken",
+          "definition": "просыпаться, будить"
+        },
+        {
+          "term": "freeze froze frozen",
+          "definition": "замерзать"
+        },
+        {
+          "term": "shake, shook, shaken",
+          "definition": "трясти"
+        },
+        {
+          "term": "get got got (gotten)",
+          "definition": "получать, добираться"
+        },
+        {
+          "term": "beat, beat, beat(en)",
+          "definition": "бить, победить соперника"
+        },
+        {
+          "term": "teach, taught (тот), taught (тот)",
+          "definition": "преподавать, обучать"
+        },
+        {
+          "term": "fly flew flown",
+          "definition": "летать"
+        },
+        {
+          "term": "swim swam swum",
+          "definition": "плавать"
+        },
+        {
+          "term": "drink, drank, drunk",
+          "definition": "пить"
+        },
+        {
+          "term": "ring rang rung",
+          "definition": "звонить, звенеть"
+        },
+        {
+          "term": "grow grew grown",
+          "definition": "расти, выращивать"
+        },
+        {
+          "term": "throw threw thrown",
+          "definition": "бросать, кидать"
+        },
+        {
+          "term": "see, saw, seen",
+          "definition": "видеть"
+        },
+        {
+          "term": "eat, ate, eaten",
+          "definition": "есть, кушать"
+        },
+        {
+          "term": "write, wrote, written",
+          "definition": "писать"
+        },
+        {
+          "term": "speak spoke spoken",
+          "definition": "говорить (на языке), разговаривать (с кем-то)"
+        },
+        {
+          "term": "forgive, forgave, forgiven",
+          "definition": "прощать"
+        },
+        {
+          "term": "break, broke, broken",
+          "definition": "ломать"
+        },
+        {
+          "term": "choose chose chosen",
+          "definition": "выбирать"
+        },
+        {
+          "term": "forbid forbade forbidden",
+          "definition": "запрещать"
+        },
+        {
+          "term": "bite, bit, bitten",
+          "definition": "кусать"
+        },
+        {
+          "term": "steal stole stolen",
+          "definition": "красть, воровать"
+        },
+        {
+          "term": "rise, rose, risen",
+          "definition": "подниматься (про солнце), расти (про цены)"
+        },
+        {
+          "term": "learn learnt (learned) learnt (learned)",
+          "definition": "учить, приобретать знания"
+        },
+        {
+          "term": "show, showed, shown (showed)",
+          "definition": "показывать"
+        },
+        {
+          "term": "dream, dreamt (dreamed), dreamt (dreamed)",
+          "definition": "мечтать, видеть сны"
+        },
+        {
+          "term": "burn, burnt (burned), burnt (burned)",
+          "definition": "гореть"
+        },
+        {
+          "term": "think, thought, thought",
+          "definition": "думать"
+        },
+        {
+          "term": "buy, bought, bought",
+          "definition": "покупать"
+        },
+        {
+          "term": "bring brought brought",
+          "definition": "приносить, приводить"
+        },
+        {
+          "term": "catch, caught (кот), caught (кот)",
+          "definition": "ловить"
+        },
+        {
+          "term": "fight (файт) fought (фот) fought (фот)",
+          "definition": "бороться, сражаться, ссориться"
+        },
+        {
+          "term": "go went gone",
+          "definition": "идти, ехать"
+        },
+        {
+          "term": "begin began begun",
+          "definition": "начинать (=start)"
+        },
+        {
+          "term": "wear (вЭа) wore (воо) worn (вОн)",
+          "definition": "носить (одежду)"
+        },
+        {
+          "term": "sing sang sung",
+          "definition": "петь"
+        },
+        {
+          "term": "shrink shrank shrunk",
+          "definition": "сжиматься, сокращаться"
+        },
+        {
+          "term": "sink sank sunk",
+          "definition": "тонуть"
+        },
+        {
+          "term": "know knew known",
+          "definition": "знать"
+        },
+        {
+          "term": "draw drew drawn",
+          "definition": "рисовать (карандашом)"
+        },
+        {
+          "term": "blow blew blown",
+          "definition": "дуть"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 32",
+      "cards": [
+        {
+          "term": "by the beach",
+          "definition": "возле пляжа"
+        },
+        {
+          "term": "You're late",
+          "definition": "ты опоздал"
+        },
+        {
+          "term": "I could",
+          "definition": "я мог"
+        },
+        {
+          "term": "train",
+          "definition": "поезд"
+        },
+        {
+          "term": "by train",
+          "definition": "(передвигаться) на поезде"
+        },
+        {
+          "term": "bus",
+          "definition": "автобус"
+        },
+        {
+          "term": "garage",
+          "definition": "сервис (машинный), станция технического обслуживания"
+        },
+        {
+          "term": "another",
+          "definition": "другой (всякий)"
+        },
+        {
+          "term": "holiday",
+          "definition": "отпуск"
+        },
+        {
+          "term": "beach",
+          "definition": "пляж"
+        },
+        {
+          "term": "amazing",
+          "definition": "потрясающий"
+        },
+        {
+          "term": "amazing view",
+          "definition": "потрясающий вид"
+        },
+        {
+          "term": "be late for",
+          "definition": "опаздывать куда-то"
+        },
+        {
+          "term": "Are you late?",
+          "definition": "ты опаздываешь?"
+        },
+        {
+          "term": "You aren't late",
+          "definition": "Ты не опоздал"
+        },
+        {
+          "term": "can",
+          "definition": "мочь, уметь"
+        },
+        {
+          "term": "could",
+          "definition": "мог, могла"
+        },
+        {
+          "term": "I couldn't",
+          "definition": "Я не мог"
+        },
+        {
+          "term": "Could you?",
+          "definition": "мог ты?"
+        },
+        {
+          "term": "on the train",
+          "definition": "в поезде"
+        },
+        {
+          "term": "ship",
+          "definition": "корабль"
+        },
+        {
+          "term": "plane",
+          "definition": "самолет"
+        },
+        {
+          "term": "instead (of)",
+          "definition": "вместо"
+        },
+        {
+          "term": "notice",
+          "definition": "замечать"
+        },
+        {
+          "term": "have to (has to, had to)",
+          "definition": "должен, вынужден, приходится, нужно"
+        },
+        {
+          "term": "other",
+          "definition": "другой (конкретный), другие"
+        },
+        {
+          "term": "view",
+          "definition": "вид"
+        },
+        {
+          "term": "side",
+          "definition": "сторона"
+        },
+        {
+          "term": "opposite",
+          "definition": "напротив"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 34",
+      "cards": [
+        {
+          "term": "seek, sought, sought",
+          "definition": "искать (нефизический объект)"
+        },
+        {
+          "term": "count",
+          "definition": "считать"
+        },
+        {
+          "term": "behind the curtains",
+          "definition": "за занавесками, за шторами"
+        },
+        {
+          "term": "be good at",
+          "definition": "преуспевать в чем-то"
+        },
+        {
+          "term": "hide and seek",
+          "definition": "прятки"
+        },
+        {
+          "term": "it's my turn",
+          "definition": "моя очередь"
+        },
+        {
+          "term": "think thought thought",
+          "definition": "думать"
+        },
+        {
+          "term": "close",
+          "definition": "закрывать"
+        },
+        {
+          "term": "look",
+          "definition": "смотреть"
+        },
+        {
+          "term": "quick(ly)",
+          "definition": "= fast"
+        },
+        {
+          "term": "after",
+          "definition": "после"
+        },
+        {
+          "term": "just in time",
+          "definition": "как раз вовремя"
+        },
+        {
+          "term": "Ready or not, here I come!",
+          "definition": "кто не спрятался, я не виноват"
+        },
+        {
+          "term": "upstairs",
+          "definition": "наверху"
+        },
+        {
+          "term": "be sure (of)",
+          "definition": "быть уверенным в"
+        },
+        {
+          "term": "toy basket",
+          "definition": "корзина для игрушек"
+        },
+        {
+          "term": "hide, hid, hidden",
+          "definition": "прятать(ся)"
+        },
+        {
+          "term": "look for",
+          "definition": "искать (физический объект)"
+        },
+        {
+          "term": "turn",
+          "definition": "поворачивать"
+        },
+        {
+          "term": "find, found, found",
+          "definition": "находить"
+        },
+        {
+          "term": "open",
+          "definition": "открывать"
+        },
+        {
+          "term": "start",
+          "definition": "начинать"
+        },
+        {
+          "term": "know",
+          "definition": "знать"
+        },
+        {
+          "term": "before",
+          "definition": "до"
+        },
+        {
+          "term": "have to",
+          "definition": "должен, вынужден, приходится, нужно"
+        },
+        {
+          "term": "should",
+          "definition": "следует (для совета)"
+        },
+        {
+          "term": "downstairs",
+          "definition": "внизу"
+        },
+        {
+          "term": "behind",
+          "definition": "позади"
+        },
+        {
+          "term": "curtains",
+          "definition": "занавески, шторы"
+        },
+        {
+          "term": "another",
+          "definition": "другой, еще один"
+        },
+        {
+          "term": "newspaper",
+          "definition": "газета"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 35",
+      "cards": [
+        {
+          "term": "She is not tying",
+          "definition": "Она не завязывает"
+        },
+        {
+          "term": "dying swan",
+          "definition": "умирающий лебедь"
+        },
+        {
+          "term": "spell spelt spelt",
+          "definition": "произносить по буквам"
+        },
+        {
+          "term": "hyphen",
+          "definition": "дефис"
+        },
+        {
+          "term": "underscore",
+          "definition": "нижнее подчеркивание"
+        },
+        {
+          "term": "They are playing football now",
+          "definition": "Они играют в футбол сейчас"
+        },
+        {
+          "term": "Are they going to play football?",
+          "definition": "они собираются играть в футбол?"
+        },
+        {
+          "term": "I'm coming",
+          "definition": "я иду, подхожу, подъезжаю"
+        },
+        {
+          "term": "She is driving",
+          "definition": "Она водит машину (в данный момент)"
+        },
+        {
+          "term": "Are they running?",
+          "definition": "они бегают?"
+        },
+        {
+          "term": "surname (UK), family (last) name (US)",
+          "definition": "фамилия"
+        },
+        {
+          "term": "thirteen",
+          "definition": "тринадцать"
+        },
+        {
+          "term": "seventeen",
+          "definition": "семнадцать"
+        },
+        {
+          "term": "eighteen",
+          "definition": "восемнадцать"
+        },
+        {
+          "term": "nineteen",
+          "definition": "девятнадцать"
+        },
+        {
+          "term": "country - countries",
+          "definition": "страна, страны"
+        },
+        {
+          "term": "address",
+          "definition": "адрес"
+        },
+        {
+          "term": "Are they playing football now?",
+          "definition": "Они играют в футбол сейчас?"
+        },
+        {
+          "term": "They aren't playing foootball now",
+          "definition": "Они не играют в футбол сейчас"
+        },
+        {
+          "term": "soccer (US)",
+          "definition": "= football"
+        },
+        {
+          "term": "They're going to play football",
+          "definition": "они собираются играть в футбол"
+        },
+        {
+          "term": "They aren't going to play football",
+          "definition": "они не собираются играть в футбол"
+        },
+        {
+          "term": "We are writing",
+          "definition": "мы пишем (сейчас)"
+        },
+        {
+          "term": "Where are you sitting?",
+          "definition": "где ты сидишь?"
+        },
+        {
+          "term": "Is he swimming?",
+          "definition": "он плавает (сейчас)?"
+        },
+        {
+          "term": "He is not lying",
+          "definition": "1) он не лежит\n2) он не врёт"
+        },
+        {
+          "term": "at, at sign",
+          "definition": "@, собака"
+        },
+        {
+          "term": "dot",
+          "definition": "точка (в эл. адресе)"
+        },
+        {
+          "term": "fourteen",
+          "definition": "четырнадцать"
+        },
+        {
+          "term": "fifteen",
+          "definition": "пятнадцать"
+        },
+        {
+          "term": "sixteen",
+          "definition": "шестнадцать"
+        },
+        {
+          "term": "twenty",
+          "definition": "двадцать"
+        },
+        {
+          "term": "first name",
+          "definition": "имя"
+        },
+        {
+          "term": "city - cities",
+          "definition": "город, города"
+        },
+        {
+          "term": "town",
+          "definition": "небольшой город"
+        },
+        {
+          "term": "age",
+          "definition": "возраст"
+        },
+        {
+          "term": "postcode (UK), zip code (US)",
+          "definition": "почтовый индекс"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 36",
+      "cards": [
+        {
+          "term": "That's the spirit",
+          "definition": "Так держать, вот это настрой"
+        },
+        {
+          "term": "I suppose",
+          "definition": "Я полагаю"
+        },
+        {
+          "term": "take off",
+          "definition": "1) снимать (одежду)\n2) взлетать"
+        },
+        {
+          "term": "everyone, everybody",
+          "definition": "все"
+        },
+        {
+          "term": "another",
+          "definition": "другой"
+        },
+        {
+          "term": "fun",
+          "definition": "весело"
+        },
+        {
+          "term": "grumpy",
+          "definition": "ворчливый"
+        },
+        {
+          "term": "even",
+          "definition": "даже"
+        },
+        {
+          "term": "have a good time",
+          "definition": "хорошо проводить время"
+        },
+        {
+          "term": "hand over",
+          "definition": "передавать из рук в руки"
+        },
+        {
+          "term": "have to",
+          "definition": "должен, вынужден, приходится, нужно"
+        },
+        {
+          "term": "lane",
+          "definition": "полоса дороги, дорожка"
+        },
+        {
+          "term": "pins, skittles",
+          "definition": "кегли"
+        },
+        {
+          "term": "knock (нок)",
+          "definition": "стучать (напр. в дверь)"
+        },
+        {
+          "term": "quite fun",
+          "definition": "довольно весело"
+        },
+        {
+          "term": "It's my go/turn",
+          "definition": "моя очередь"
+        },
+        {
+          "term": "my goodness",
+          "definition": "Боже мой! Вот те на! Вот так так! Ну и дела!"
+        },
+        {
+          "term": "heavy",
+          "definition": "тяжелый (по весу)"
+        },
+        {
+          "term": "well done",
+          "definition": "молодец"
+        },
+        {
+          "term": "apart from, except",
+          "definition": "кроме"
+        },
+        {
+          "term": "what matters",
+          "definition": "что важно, что имеет значение"
+        },
+        {
+          "term": "take part, participate (in)",
+          "definition": "принимать участие"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 37",
+      "cards": [
+        {
+          "term": "go cycling",
+          "definition": "кататься на велосипеде"
+        },
+        {
+          "term": "you don't have to",
+          "definition": "тебе можно не делать"
+        },
+        {
+          "term": "go camping",
+          "definition": "ходить в поход (с палатками)"
+        },
+        {
+          "term": "indoor swimming pool",
+          "definition": "крытый бассейн"
+        },
+        {
+          "term": "view (вьЮ)",
+          "definition": "вид"
+        },
+        {
+          "term": "tent",
+          "definition": "палатка"
+        },
+        {
+          "term": "borrow",
+          "definition": "брать взаймы c возвратом"
+        },
+        {
+          "term": "go sailing",
+          "definition": "заниматься парусным спортом,\nходить под парусом"
+        },
+        {
+          "term": "wide",
+          "definition": "широкий"
+        },
+        {
+          "term": "It doesn't matter",
+          "definition": "это не имеет значения"
+        },
+        {
+          "term": "neighbour",
+          "definition": "сосед"
+        },
+        {
+          "term": "go fishing",
+          "definition": "ходить на рыбалку, рыбачить"
+        },
+        {
+          "term": "modern",
+          "definition": "современный"
+        },
+        {
+          "term": "under the stars",
+          "definition": "под звездами"
+        },
+        {
+          "term": "already",
+          "definition": "уже"
+        },
+        {
+          "term": "campfire",
+          "definition": "костёр"
+        },
+        {
+          "term": "matches",
+          "definition": "спички"
+        },
+        {
+          "term": "without",
+          "definition": "без"
+        },
+        {
+          "term": "nearly, almost",
+          "definition": "почти"
+        },
+        {
+          "term": "sound",
+          "definition": "звук"
+        },
+        {
+          "term": "nature",
+          "definition": "природа"
+        },
+        {
+          "term": "cozy",
+          "definition": "уютно"
+        },
+        {
+          "term": "campsite (кЭмпсайт)",
+          "definition": "кемпинг, палаточный лагерь"
+        },
+        {
+          "term": "offer",
+          "definition": "предлагать"
+        },
+        {
+          "term": "space",
+          "definition": "пространство, космос"
+        },
+        {
+          "term": "put up a tent",
+          "definition": "ставить палатку"
+        },
+        {
+          "term": "lend lent lent",
+          "definition": "одалживать (с возвратом)"
+        },
+        {
+          "term": "own",
+          "definition": "собственный, владеть"
+        },
+        {
+          "term": "price",
+          "definition": "цена, стоимость"
+        },
+        {
+          "term": "area",
+          "definition": "местность, область"
+        },
+        {
+          "term": "grass",
+          "definition": "трава"
+        },
+        {
+          "term": "size",
+          "definition": "размер"
+        },
+        {
+          "term": "bring brought brought",
+          "definition": "приносить, приводить"
+        },
+        {
+          "term": "equipment",
+          "definition": "оборудование, снаряжение"
+        },
+        {
+          "term": "band",
+          "definition": "музыкальная группа"
+        },
+        {
+          "term": "village",
+          "definition": "деревня"
+        },
+        {
+          "term": "near, by, nearby",
+          "definition": "рядом"
+        },
+        {
+          "term": "mountains",
+          "definition": "горы"
+        },
+        {
+          "term": "lake",
+          "definition": "озеро"
+        },
+        {
+          "term": "forest",
+          "definition": "лес"
+        },
+        {
+          "term": "variety",
+          "definition": "разнообразие"
+        },
+        {
+          "term": "food",
+          "definition": "еда, пища"
+        },
+        {
+          "term": "easy as pie",
+          "definition": "проще простого"
+        },
+        {
+          "term": "should",
+          "definition": "следует"
+        },
+        {
+          "term": "collect, pick up",
+          "definition": "собирать, забирать"
+        },
+        {
+          "term": "make fire",
+          "definition": "развести огонь"
+        },
+        {
+          "term": "sticks",
+          "definition": "палки"
+        },
+        {
+          "term": "carry",
+          "definition": "нести"
+        },
+        {
+          "term": "enough",
+          "definition": "достаточно"
+        },
+        {
+          "term": "heat up",
+          "definition": "разогревать"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 38",
+      "cards": [
+        {
+          "term": "composition",
+          "definition": "сочинение"
+        },
+        {
+          "term": "scratch",
+          "definition": "царапать, чесать"
+        },
+        {
+          "term": "fair hair",
+          "definition": "светлые волосы"
+        },
+        {
+          "term": "brown eyes",
+          "definition": "карие глаза"
+        },
+        {
+          "term": "forehead",
+          "definition": "лоб"
+        },
+        {
+          "term": "chapter",
+          "definition": "глава"
+        },
+        {
+          "term": "teddy bear",
+          "definition": "плюшевый мишка"
+        },
+        {
+          "term": "under",
+          "definition": "под"
+        },
+        {
+          "term": "forest",
+          "definition": "лес"
+        },
+        {
+          "term": "I'm ready",
+          "definition": "я готов"
+        },
+        {
+          "term": "They aren't ready",
+          "definition": "Они не готовы"
+        },
+        {
+          "term": "on time",
+          "definition": "вовремя"
+        },
+        {
+          "term": "noise",
+          "definition": "шум"
+        },
+        {
+          "term": "reason",
+          "definition": "причина"
+        },
+        {
+          "term": "cheek",
+          "definition": "щека"
+        },
+        {
+          "term": "mouth",
+          "definition": "рот"
+        },
+        {
+          "term": "eyelashes",
+          "definition": "ресницы"
+        },
+        {
+          "term": "introduce",
+          "definition": "представлять, знакомить"
+        },
+        {
+          "term": "Let me introduce myself",
+          "definition": "Позвольте представиться"
+        },
+        {
+          "term": "introduction",
+          "definition": "введение, вступление"
+        },
+        {
+          "term": "bees",
+          "definition": "пчелы"
+        },
+        {
+          "term": "over",
+          "definition": "над"
+        },
+        {
+          "term": "snack",
+          "definition": "перекус"
+        },
+        {
+          "term": "ready",
+          "definition": "готовый"
+        },
+        {
+          "term": "Are you ready?",
+          "definition": "Вы готовы?"
+        },
+        {
+          "term": "compose songs",
+          "definition": "сочинять песни"
+        },
+        {
+          "term": "composer",
+          "definition": "композитор"
+        },
+        {
+          "term": "even",
+          "definition": "даже"
+        },
+        {
+          "term": "loud",
+          "definition": "громкий"
+        },
+        {
+          "term": "slim",
+          "definition": "1) стройный, худой\n2) худеть"
+        },
+        {
+          "term": "tall",
+          "definition": "высокий (о человеке)"
+        },
+        {
+          "term": "honey",
+          "definition": "мёд"
+        },
+        {
+          "term": "indeed",
+          "definition": "в самом деле, действительно"
+        },
+        {
+          "term": "head",
+          "definition": "голова"
+        },
+        {
+          "term": "face",
+          "definition": "лицо"
+        },
+        {
+          "term": "dark hair",
+          "definition": "темные волосы"
+        },
+        {
+          "term": "long straight hair",
+          "definition": "длинные прямые волосы"
+        },
+        {
+          "term": "short curly hair",
+          "definition": "короткие кудрявые волосы"
+        },
+        {
+          "term": "wavy hair",
+          "definition": "волнистые волосы"
+        },
+        {
+          "term": "blue eyes",
+          "definition": "голубые глаза"
+        },
+        {
+          "term": "beard",
+          "definition": "борода"
+        },
+        {
+          "term": "moustache",
+          "definition": "усы"
+        },
+        {
+          "term": "nose",
+          "definition": "нос"
+        },
+        {
+          "term": "chin",
+          "definition": "подбородок"
+        },
+        {
+          "term": "neck",
+          "definition": "шея"
+        },
+        {
+          "term": "shoulder",
+          "definition": "плечо"
+        },
+        {
+          "term": "lips",
+          "definition": "губы"
+        },
+        {
+          "term": "tooth - teeth",
+          "definition": "зуб - зубы"
+        },
+        {
+          "term": "eyebrows",
+          "definition": "брови"
+        },
+        {
+          "term": "temples",
+          "definition": "виски"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 39",
+      "cards": [
+        {
+          "term": "wood",
+          "definition": "дерево, древесина"
+        },
+        {
+          "term": "trespassers",
+          "definition": "нарушители, проникающие на частную собственность, посторонние"
+        },
+        {
+          "term": "wonder",
+          "definition": "интересоваться, задаваться вопросом"
+        },
+        {
+          "term": "happen",
+          "definition": "происходить случаться"
+        },
+        {
+          "term": "let let let",
+          "definition": "позволять, разрешать"
+        },
+        {
+          "term": "leaf, leaves",
+          "definition": "лист - листья"
+        },
+        {
+          "term": "notice",
+          "definition": "замечать"
+        },
+        {
+          "term": "part",
+          "definition": "часть"
+        },
+        {
+          "term": "(the) sky",
+          "definition": "небо"
+        },
+        {
+          "term": "sure",
+          "definition": "уверенный"
+        },
+        {
+          "term": "deceive",
+          "definition": "обманывать, вводить в заблуждение"
+        },
+        {
+          "term": "keep kept kept",
+          "definition": "держать (долго), хранить"
+        },
+        {
+          "term": "keep a secret",
+          "definition": "хранить секрет"
+        },
+        {
+          "term": "hold held held",
+          "definition": "держать (непродолжительное время)"
+        },
+        {
+          "term": "each other",
+          "definition": "друг друга"
+        },
+        {
+          "term": "get on, get along",
+          "definition": "ладить с кем-то"
+        },
+        {
+          "term": "meet, met, met",
+          "definition": "встречаться, знакомиться"
+        },
+        {
+          "term": "become, became, become",
+          "definition": "становиться"
+        },
+        {
+          "term": "know knew known",
+          "definition": "знать"
+        },
+        {
+          "term": "close friend",
+          "definition": "близкий друг"
+        },
+        {
+          "term": "hut",
+          "definition": "хижина"
+        },
+        {
+          "term": "balloon",
+          "definition": "воздушный шарик"
+        },
+        {
+          "term": "cloud",
+          "definition": "облако, туча"
+        },
+        {
+          "term": "soul",
+          "definition": "душа"
+        },
+        {
+          "term": "umbrella",
+          "definition": "зонт, зонтик"
+        },
+        {
+          "term": "flatmate",
+          "definition": "сосед по квартире"
+        },
+        {
+          "term": "advice",
+          "definition": "совет, советы (неисчисл.)"
+        },
+        {
+          "term": "some pieces of advice",
+          "definition": "несколько советов"
+        },
+        {
+          "term": "(the) closest friend",
+          "definition": "самый близкий друг"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 40",
+      "cards": [
+        {
+          "term": "care",
+          "definition": "забота, заботиться"
+        },
+        {
+          "term": "meanwhile",
+          "definition": "тем временем"
+        },
+        {
+          "term": "stomachache, tummyache",
+          "definition": "боль в животе"
+        },
+        {
+          "term": "toes",
+          "definition": "пальцы ног"
+        },
+        {
+          "term": "tail",
+          "definition": "хвост"
+        },
+        {
+          "term": "sock",
+          "definition": "носок"
+        },
+        {
+          "term": "react",
+          "definition": "реагировать"
+        },
+        {
+          "term": "guys",
+          "definition": "ребята"
+        },
+        {
+          "term": "happen",
+          "definition": "происходить, случаться"
+        },
+        {
+          "term": "treats",
+          "definition": "угощения, вкусняшки"
+        },
+        {
+          "term": "face",
+          "definition": "лицо"
+        },
+        {
+          "term": "touch",
+          "definition": "касаться"
+        },
+        {
+          "term": "chest",
+          "definition": "грудная клетка"
+        },
+        {
+          "term": "back",
+          "definition": "спина"
+        },
+        {
+          "term": "arm",
+          "definition": "рука (полностью)"
+        },
+        {
+          "term": "bottom, buttocks, butt",
+          "definition": "попа"
+        },
+        {
+          "term": "thumb",
+          "definition": "большой палец"
+        },
+        {
+          "term": "ears",
+          "definition": "уши"
+        },
+        {
+          "term": "fake",
+          "definition": "фальшивый"
+        },
+        {
+          "term": "throw threw thrown",
+          "definition": "кидать, бросать"
+        },
+        {
+          "term": "fetch",
+          "definition": "приносить"
+        },
+        {
+          "term": "above",
+          "definition": "выше, над"
+        },
+        {
+          "term": "land",
+          "definition": "приземляться, земля"
+        },
+        {
+          "term": "clumsy",
+          "definition": "неуклюжий"
+        },
+        {
+          "term": "birds",
+          "definition": "птицы"
+        },
+        {
+          "term": "nature",
+          "definition": "природа"
+        },
+        {
+          "term": "litter box",
+          "definition": "лоток"
+        },
+        {
+          "term": "make made made sb do sth",
+          "definition": "заставлять кого-то сделать что-то"
+        },
+        {
+          "term": "keyboard",
+          "definition": "клавиатура"
+        },
+        {
+          "term": "close",
+          "definition": "близкий"
+        },
+        {
+          "term": "turn",
+          "definition": "поворачивать"
+        },
+        {
+          "term": "turn left",
+          "definition": "поверните налево"
+        },
+        {
+          "term": "turn right",
+          "definition": "повернуть направо"
+        },
+        {
+          "term": "turn into",
+          "definition": "превратиться в"
+        },
+        {
+          "term": "shoulders",
+          "definition": "плечи"
+        },
+        {
+          "term": "breast",
+          "definition": "женская грудь"
+        },
+        {
+          "term": "stomach, tummy",
+          "definition": "живот, желудок"
+        },
+        {
+          "term": "waist",
+          "definition": "талия"
+        },
+        {
+          "term": "wrist",
+          "definition": "запястье"
+        },
+        {
+          "term": "hand",
+          "definition": "рука (кисть)"
+        },
+        {
+          "term": "backache",
+          "definition": "боль в спине"
+        },
+        {
+          "term": "fingers",
+          "definition": "пальцы рук"
+        },
+        {
+          "term": "knee",
+          "definition": "колено"
+        },
+        {
+          "term": "leg",
+          "definition": "нога (вся)"
+        },
+        {
+          "term": "foot - feet",
+          "definition": "ступня - ступни"
+        },
+        {
+          "term": "ankle",
+          "definition": "лодыжка"
+        },
+        {
+          "term": "toad",
+          "definition": "жаба"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 41",
+      "cards": [
+        {
+          "term": "let (it) go",
+          "definition": "отпустить"
+        },
+        {
+          "term": "every now and then",
+          "definition": "время от времени"
+        },
+        {
+          "term": "aloud",
+          "definition": "вслух"
+        },
+        {
+          "term": "blow, blew, blown",
+          "definition": "дуть"
+        },
+        {
+          "term": "perhaps",
+          "definition": "возможно, может быть (=maybe, probably)"
+        },
+        {
+          "term": "believe",
+          "definition": "верить"
+        },
+        {
+          "term": "umbrella",
+          "definition": "зонт, зонтик"
+        },
+        {
+          "term": "decision",
+          "definition": "решение"
+        },
+        {
+          "term": "shoot",
+          "definition": "стрелять"
+        },
+        {
+          "term": "ruin (рУин)",
+          "definition": "разрушать, портить"
+        },
+        {
+          "term": "be sure",
+          "definition": "быть уверенным"
+        },
+        {
+          "term": "blow out candles",
+          "definition": "задувать свечи"
+        },
+        {
+          "term": "balloon",
+          "definition": "воздушный шар"
+        },
+        {
+          "term": "hurray",
+          "definition": "ура"
+        },
+        {
+          "term": "look like",
+          "definition": "быть похожим"
+        },
+        {
+          "term": "suspect (саспЭкт)",
+          "definition": "подозревать"
+        },
+        {
+          "term": "suspect (сАспэкт)",
+          "definition": "подозреваемый"
+        },
+        {
+          "term": "suspicious",
+          "definition": "подозревающий, недоверчивый"
+        },
+        {
+          "term": "what kind",
+          "definition": "какой вид"
+        },
+        {
+          "term": "kind",
+          "definition": "тип, род, вид; добрый"
+        },
+        {
+          "term": "song",
+          "definition": "песня"
+        },
+        {
+          "term": "decide",
+          "definition": "решать"
+        },
+        {
+          "term": "wrong",
+          "definition": "неправильный"
+        },
+        {
+          "term": "should",
+          "definition": "следует (для показания совета)"
+        },
+        {
+          "term": "aim (at)",
+          "definition": "целиться (в)"
+        },
+        {
+          "term": "miss",
+          "definition": "не попасть, пропустить, скучать"
+        },
+        {
+          "term": "I'm sure",
+          "definition": "я уверен"
+        },
+        {
+          "term": "Are you sure?",
+          "definition": "Ты уверен?"
+        },
+        {
+          "term": "I'm not sure",
+          "definition": "Я не уверен"
+        },
+        {
+          "term": "snack",
+          "definition": "перекус"
+        },
+        {
+          "term": "mean meant meant",
+          "definition": "иметь в виду, значить"
+        },
+        {
+          "term": "others",
+          "definition": "другие (без существительного на конце)"
+        },
+        {
+          "term": "donkey",
+          "definition": "ослик"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 42",
+      "cards": [
+        {
+          "term": "go on holiday (UK), vacation (US)",
+          "definition": "поехать в отпуск"
+        },
+        {
+          "term": "pack bags",
+          "definition": "собирать вещи (чемоданы)"
+        },
+        {
+          "term": "toys",
+          "definition": "игрушки"
+        },
+        {
+          "term": "important",
+          "definition": "важный"
+        },
+        {
+          "term": "dinosaur",
+          "definition": "динозавр"
+        },
+        {
+          "term": "stuff",
+          "definition": "вещи"
+        },
+        {
+          "term": "sure",
+          "definition": "уверенный"
+        },
+        {
+          "term": "somewhere",
+          "definition": "где-то"
+        },
+        {
+          "term": "look after",
+          "definition": "присматривать за"
+        },
+        {
+          "term": "feed fed fed",
+          "definition": "кормить"
+        },
+        {
+          "term": "let let let",
+          "definition": "позволять, разрешать"
+        },
+        {
+          "term": "heavy",
+          "definition": "тяжелый"
+        },
+        {
+          "term": "tickets",
+          "definition": "билеты"
+        },
+        {
+          "term": "here they are",
+          "definition": "Вот они. Вот, пожалуйста."
+        },
+        {
+          "term": "scales (скЭйлс)",
+          "definition": "1) весы\n2) чешуя"
+        },
+        {
+          "term": "valuable",
+          "definition": "ценный"
+        },
+        {
+          "term": "plane, airplane",
+          "definition": "самолет"
+        },
+        {
+          "term": "queue (кью) (UK), line (US)",
+          "definition": "очередь"
+        },
+        {
+          "term": "aboard",
+          "definition": "на борту"
+        },
+        {
+          "term": "flight (флАйт)",
+          "definition": "полет, рейс"
+        },
+        {
+          "term": "next to the window",
+          "definition": "рядом с окном"
+        },
+        {
+          "term": "everybody, everyone",
+          "definition": "все"
+        },
+        {
+          "term": "cloudy",
+          "definition": "облачно"
+        },
+        {
+          "term": "rainy",
+          "definition": "дождливо"
+        },
+        {
+          "term": "sunny",
+          "definition": "солнечно"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 43",
+      "cards": [
+        {
+          "term": "handle",
+          "definition": "справляться"
+        },
+        {
+          "term": "get lost",
+          "definition": "потеряться, заблудиться"
+        },
+        {
+          "term": "beep horns",
+          "definition": "сигналить"
+        },
+        {
+          "term": "another",
+          "definition": "другой"
+        },
+        {
+          "term": "heavy",
+          "definition": "тяжелый (по весу)"
+        },
+        {
+          "term": "everything",
+          "definition": "всё"
+        },
+        {
+          "term": "say hello",
+          "definition": "поздороваться"
+        },
+        {
+          "term": "everybody, everyone",
+          "definition": "все"
+        },
+        {
+          "term": "promise",
+          "definition": "обещать"
+        },
+        {
+          "term": "arrive in",
+          "definition": "приезжать, прибывать в (большой пункт)"
+        },
+        {
+          "term": "plant",
+          "definition": "растение"
+        },
+        {
+          "term": "look after",
+          "definition": "присматривать за"
+        },
+        {
+          "term": "enough",
+          "definition": "достаточно"
+        },
+        {
+          "term": "holiday",
+          "definition": "отпуск"
+        },
+        {
+          "term": "flight",
+          "definition": "полёт, рейс"
+        },
+        {
+          "term": "fasten your seatbelts",
+          "definition": "пристегните ремни"
+        },
+        {
+          "term": "land",
+          "definition": "приземляться"
+        },
+        {
+          "term": "borrow",
+          "definition": "заимствовать, брать с возвратом"
+        },
+        {
+          "term": "speak Italian",
+          "definition": "говорить по-итальянски"
+        },
+        {
+          "term": "eggs",
+          "definition": "яйца"
+        },
+        {
+          "term": "important",
+          "definition": "важный"
+        },
+        {
+          "term": "differently",
+          "definition": "по-другому"
+        },
+        {
+          "term": "friendly",
+          "definition": "дружелюбный"
+        },
+        {
+          "term": "almost, nearly",
+          "definition": "почти"
+        },
+        {
+          "term": "leave, left, left",
+          "definition": "уходить, покидать, оставлять, уезжать"
+        },
+        {
+          "term": "arrive at",
+          "definition": "приезжать, прибывать в (небольшой пункт)"
+        },
+        {
+          "term": "chilly",
+          "definition": "прохладный, прохладно"
+        },
+        {
+          "term": "while",
+          "definition": "пока, в то время как"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 44",
+      "cards": [
+        {
+          "term": "do sightseeing",
+          "definition": "осматривать достопримечательности"
+        },
+        {
+          "term": "rubbish",
+          "definition": "мусор"
+        },
+        {
+          "term": "arrive",
+          "definition": "прибывать, приезжать"
+        },
+        {
+          "term": "bright and early",
+          "definition": "ни свет ни заря"
+        },
+        {
+          "term": "swimming pool",
+          "definition": "бассейн"
+        },
+        {
+          "term": "goat",
+          "definition": "козел, коза"
+        },
+        {
+          "term": "look after",
+          "definition": "присматривать за"
+        },
+        {
+          "term": "wet",
+          "definition": "влажный, мокрый"
+        },
+        {
+          "term": "carpet",
+          "definition": "ковер"
+        },
+        {
+          "term": "suitcase",
+          "definition": "чемодан"
+        },
+        {
+          "term": "sell sold sold",
+          "definition": "продавать"
+        },
+        {
+          "term": "tomato",
+          "definition": "помидор"
+        },
+        {
+          "term": "cheese",
+          "definition": "сыр"
+        },
+        {
+          "term": "miss",
+          "definition": "скучать, пропускать"
+        },
+        {
+          "term": "quickly",
+          "definition": "быстро"
+        },
+        {
+          "term": "delicious",
+          "definition": "очень вкусный"
+        },
+        {
+          "term": "fall fell fallen",
+          "definition": "падать"
+        },
+        {
+          "term": "quite funny",
+          "definition": "довольно смешно, забавно"
+        },
+        {
+          "term": "village",
+          "definition": "деревня"
+        },
+        {
+          "term": "postcard",
+          "definition": "открытка"
+        },
+        {
+          "term": "worry",
+          "definition": "беспокоиться, волноваться"
+        },
+        {
+          "term": "uncle",
+          "definition": "дядя"
+        },
+        {
+          "term": "Italian",
+          "definition": "итальянский, итальянец"
+        },
+        {
+          "term": "oven",
+          "definition": "духовка"
+        },
+        {
+          "term": "relaxing",
+          "definition": "расслабляющий"
+        },
+        {
+          "term": "look after",
+          "definition": "присматривать за"
+        },
+        {
+          "term": "enough",
+          "definition": "достаточно, довольно"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 45",
+      "cards": [
+        {
+          "term": "coffee table",
+          "definition": "кофейный столик, журнальный столик"
+        },
+        {
+          "term": "acquaintance (эквЭйнтанс)",
+          "definition": "знакомый"
+        },
+        {
+          "term": "authorities",
+          "definition": "власти"
+        },
+        {
+          "term": "poke",
+          "definition": "тыкать"
+        },
+        {
+          "term": "offer, propose, suggest",
+          "definition": "предлагать"
+        },
+        {
+          "term": "seem",
+          "definition": "выглядеть, казаться"
+        },
+        {
+          "term": "windowsill",
+          "definition": "подоконник"
+        },
+        {
+          "term": "rug",
+          "definition": "коврик"
+        },
+        {
+          "term": "couch (US), sofa (UK)",
+          "definition": "диван"
+        },
+        {
+          "term": "heavy",
+          "definition": "тяжелый (по весу)"
+        },
+        {
+          "term": "amazing",
+          "definition": "поразительный"
+        },
+        {
+          "term": "offer, proposal, suggestion",
+          "definition": "предложение"
+        },
+        {
+          "term": "spaceship",
+          "definition": "космический корабль"
+        },
+        {
+          "term": "busy",
+          "definition": "занятый"
+        },
+        {
+          "term": "curtains",
+          "definition": "шторы, занавески"
+        },
+        {
+          "term": "paper",
+          "definition": "бумага"
+        },
+        {
+          "term": "wallpaper",
+          "definition": "обои"
+        },
+        {
+          "term": "fireplace",
+          "definition": "камин"
+        },
+        {
+          "term": "light",
+          "definition": "свет"
+        },
+        {
+          "term": "floor",
+          "definition": "пол, этаж"
+        },
+        {
+          "term": "carpet",
+          "definition": "ковер (во всю комнату)"
+        },
+        {
+          "term": "armchair",
+          "definition": "кресло"
+        },
+        {
+          "term": "furniture, a piece of furniture",
+          "definition": "мебель"
+        },
+        {
+          "term": "hairy",
+          "definition": "волосатый"
+        },
+        {
+          "term": "believe",
+          "definition": "верить"
+        },
+        {
+          "term": "alien",
+          "definition": "инопланетянин"
+        },
+        {
+          "term": "movie",
+          "definition": "фильм"
+        },
+        {
+          "term": "incredible",
+          "definition": "невероятный"
+        },
+        {
+          "term": "possible",
+          "definition": "возможный, вероятный"
+        },
+        {
+          "term": "miracle",
+          "definition": "чудо"
+        },
+        {
+          "term": "lifelong dream",
+          "definition": "мечта всей жизни"
+        },
+        {
+          "term": "get rid of",
+          "definition": "избавиться от"
+        },
+        {
+          "term": "dangerous",
+          "definition": "опасный"
+        },
+        {
+          "term": "hostile (хОстил)",
+          "definition": "враждебный"
+        },
+        {
+          "term": "poke needles",
+          "definition": "тыкать иголками"
+        },
+        {
+          "term": "needle",
+          "definition": "игла"
+        },
+        {
+          "term": "exciting",
+          "definition": "захватывающий"
+        },
+        {
+          "term": "choice",
+          "definition": "выбор"
+        },
+        {
+          "term": "lips",
+          "definition": "губы"
+        },
+        {
+          "term": "in the dark",
+          "definition": "в темноте"
+        },
+        {
+          "term": "dark",
+          "definition": "темный, темно"
+        },
+        {
+          "term": "friendly",
+          "definition": "дружелюбный"
+        },
+        {
+          "term": "have a snack",
+          "definition": "перекусить"
+        },
+        {
+          "term": "window",
+          "definition": "окно"
+        },
+        {
+          "term": "blinders",
+          "definition": "жалюзи"
+        },
+        {
+          "term": "wall",
+          "definition": "стена"
+        },
+        {
+          "term": "ceiling",
+          "definition": "потолок"
+        },
+        {
+          "term": "switch the light on",
+          "definition": "включи свет"
+        },
+        {
+          "term": "bookcase, bookshelves",
+          "definition": "книжный шкаф"
+        },
+        {
+          "term": "radiator",
+          "definition": "обогреватель, батарея"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 46",
+      "cards": [
+        {
+          "term": "I have ever sold",
+          "definition": "я когда-либо продал"
+        },
+        {
+          "term": "expect",
+          "definition": "ожидать"
+        },
+        {
+          "term": "at watch",
+          "definition": "на посту"
+        },
+        {
+          "term": "probably, perhaps",
+          "definition": "возможно, вероятно"
+        },
+        {
+          "term": "happen",
+          "definition": "происходить, случаться"
+        },
+        {
+          "term": "own",
+          "definition": "владеть, собственный"
+        },
+        {
+          "term": "wizard",
+          "definition": "волшебник"
+        },
+        {
+          "term": "access",
+          "definition": "доступ"
+        },
+        {
+          "term": "wonder",
+          "definition": "задаваться вопросом, интересоваться, думать"
+        },
+        {
+          "term": "seem",
+          "definition": "выглядеть, казаться"
+        },
+        {
+          "term": "wand",
+          "definition": "волшебная палочка"
+        },
+        {
+          "term": "wave",
+          "definition": "махать, волна"
+        },
+        {
+          "term": "obvious, apparent, evident",
+          "definition": "очевидный"
+        },
+        {
+          "term": "obviously, apparently, evidently",
+          "definition": "очевидно"
+        },
+        {
+          "term": "definitely",
+          "definition": "определенно"
+        },
+        {
+          "term": "no matter",
+          "definition": "не имеет значения"
+        },
+        {
+          "term": "curious",
+          "definition": "любопытный"
+        },
+        {
+          "term": "phoenix",
+          "definition": "феникс"
+        },
+        {
+          "term": "feather",
+          "definition": "перо"
+        },
+        {
+          "term": "destine",
+          "definition": "предназначать, быть предназначенным судьбой"
+        },
+        {
+          "term": "destiny",
+          "definition": "предназначается по судьбе"
+        },
+        {
+          "term": "scar",
+          "definition": "шрам"
+        },
+        {
+          "term": "choose chose chosen",
+          "definition": "выбирать"
+        },
+        {
+          "term": "clear",
+          "definition": "ясно, понятно, ясный, понятный\nчистый"
+        },
+        {
+          "term": "expectation",
+          "definition": "ожидание"
+        },
+        {
+          "term": "wound",
+          "definition": "рана, ранить, ранение"
+        },
+        {
+          "term": "guards",
+          "definition": "стражи"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 47",
+      "cards": [
+        {
+          "term": "I don't care",
+          "definition": "Меня не волнует"
+        },
+        {
+          "term": "towel",
+          "definition": "полотенце"
+        },
+        {
+          "term": "slippers",
+          "definition": "тапочки"
+        },
+        {
+          "term": "hangers",
+          "definition": "вешалки"
+        },
+        {
+          "term": "bring - brought - brought",
+          "definition": "приносить, приводить"
+        },
+        {
+          "term": "floor",
+          "definition": "пол, этаж"
+        },
+        {
+          "term": "guy",
+          "definition": "парень (разг.)"
+        },
+        {
+          "term": "human",
+          "definition": "человек (как отличие от животного)"
+        },
+        {
+          "term": "forever",
+          "definition": "навсегда"
+        },
+        {
+          "term": "even",
+          "definition": "даже"
+        },
+        {
+          "term": "weird",
+          "definition": "странный"
+        },
+        {
+          "term": "instead of",
+          "definition": "вместо"
+        },
+        {
+          "term": "Come on",
+          "definition": "да ладно тебе"
+        },
+        {
+          "term": "honest",
+          "definition": "честный"
+        },
+        {
+          "term": "paw",
+          "definition": "лапа"
+        },
+        {
+          "term": "sheets",
+          "definition": "постельное белье"
+        },
+        {
+          "term": "pillow",
+          "definition": "подушка для сна"
+        },
+        {
+          "term": "duvet, comforter, blanket",
+          "definition": "одеяло"
+        },
+        {
+          "term": "bathrobe",
+          "definition": "халат"
+        },
+        {
+          "term": "wi-fi password",
+          "definition": "пароль от wi-fi"
+        },
+        {
+          "term": "scales",
+          "definition": "весы"
+        },
+        {
+          "term": "iron",
+          "definition": "утюг"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 48",
+      "cards": [
+        {
+          "term": "spots",
+          "definition": "пятна"
+        },
+        {
+          "term": "deserve",
+          "definition": "заслуживать"
+        },
+        {
+          "term": "beauty",
+          "definition": "красота"
+        },
+        {
+          "term": "rough idea",
+          "definition": "общее представление"
+        },
+        {
+          "term": "pair",
+          "definition": "пара (вещей, объектов)"
+        },
+        {
+          "term": "arrange",
+          "definition": "организовывать, устраивать"
+        },
+        {
+          "term": "begin, began, begun (=start)",
+          "definition": "начинать(ся)"
+        },
+        {
+          "term": "it seems",
+          "definition": "кажется"
+        },
+        {
+          "term": "in spring",
+          "definition": "весной"
+        },
+        {
+          "term": "autumn (UK), fall (US)",
+          "definition": "осень"
+        },
+        {
+          "term": "in winter",
+          "definition": "зимой"
+        },
+        {
+          "term": "musician",
+          "definition": "музыкант"
+        },
+        {
+          "term": "be married to",
+          "definition": "быть женатым на"
+        },
+        {
+          "term": "intelligent enough",
+          "definition": "достаточно умный"
+        },
+        {
+          "term": "handsome",
+          "definition": "красивый (о мужчине)"
+        },
+        {
+          "term": "to do my best",
+          "definition": "сделать все, что в моих силах"
+        },
+        {
+          "term": "probably, perhaps",
+          "definition": "возможно"
+        },
+        {
+          "term": "creature",
+          "definition": "создание, существо"
+        },
+        {
+          "term": "almost, nearly",
+          "definition": "почти"
+        },
+        {
+          "term": "a hundred years",
+          "definition": "сто лет"
+        },
+        {
+          "term": "fifty-eight",
+          "definition": "пятьдесят восемь"
+        },
+        {
+          "term": "three hundred and forty",
+          "definition": "340"
+        },
+        {
+          "term": "quarter past three",
+          "definition": "3:15, пятнадцать минут четвёртого"
+        },
+        {
+          "term": "half past six",
+          "definition": "6:30,\nполовина седьмого"
+        },
+        {
+          "term": "happen",
+          "definition": "происходить, случаться"
+        },
+        {
+          "term": "since then",
+          "definition": "с тех пор"
+        },
+        {
+          "term": "pet",
+          "definition": "домашнее животное, питомец"
+        },
+        {
+          "term": "flat, apartment",
+          "definition": "квартира"
+        },
+        {
+          "term": "spring",
+          "definition": "весна"
+        },
+        {
+          "term": "summer",
+          "definition": "лето"
+        },
+        {
+          "term": "in summer",
+          "definition": "летом"
+        },
+        {
+          "term": "in autumn, in fall",
+          "definition": "осенью"
+        },
+        {
+          "term": "winter",
+          "definition": "зима"
+        },
+        {
+          "term": "nonsense",
+          "definition": "чепуха"
+        },
+        {
+          "term": "attractive",
+          "definition": "привлекательный"
+        },
+        {
+          "term": "at least",
+          "definition": "по крайней мере"
+        },
+        {
+          "term": "of course",
+          "definition": "конечно"
+        },
+        {
+          "term": "judge",
+          "definition": "судья"
+        },
+        {
+          "term": "look for",
+          "definition": "искать"
+        },
+        {
+          "term": "unusual",
+          "definition": "необычный"
+        },
+        {
+          "term": "breed",
+          "definition": "порода"
+        },
+        {
+          "term": "fancy",
+          "definition": "щёгольский"
+        },
+        {
+          "term": "legs",
+          "definition": "ноги"
+        },
+        {
+          "term": "head for",
+          "definition": "направляться"
+        },
+        {
+          "term": "already",
+          "definition": "уже"
+        },
+        {
+          "term": "fancy",
+          "definition": "= want"
+        },
+        {
+          "term": "thousand",
+          "definition": "тысяча"
+        },
+        {
+          "term": "what time is it?",
+          "definition": "Который час?"
+        },
+        {
+          "term": "quarter to eleven",
+          "definition": "10:45, без пятнадцати одиннадцать"
+        },
+        {
+          "term": "ten to ten",
+          "definition": "9:50, без десяти десять"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 49",
+      "cards": [
+        {
+          "term": "literally",
+          "definition": "буквально"
+        },
+        {
+          "term": "appreciate (эпрИшиэйт)",
+          "definition": "ценить, быть признательным"
+        },
+        {
+          "term": "the rest",
+          "definition": "оставшаяся часть"
+        },
+        {
+          "term": "fifth",
+          "definition": "пятый"
+        },
+        {
+          "term": "behind",
+          "definition": "за, позади"
+        },
+        {
+          "term": "age",
+          "definition": "возраст"
+        },
+        {
+          "term": "half a million",
+          "definition": "полмиллиона"
+        },
+        {
+          "term": "she's turning twenty",
+          "definition": "ей исполняется двадцать"
+        },
+        {
+          "term": "decide",
+          "definition": "решать"
+        },
+        {
+          "term": "Are you serious?",
+          "definition": "Ты серьезно?"
+        },
+        {
+          "term": "debt (дЭт)",
+          "definition": "долг"
+        },
+        {
+          "term": "deal",
+          "definition": "сделка, соглашение"
+        },
+        {
+          "term": "twelfth",
+          "definition": "двенадцатый"
+        },
+        {
+          "term": "twenty-first",
+          "definition": "двадцать первый"
+        },
+        {
+          "term": "November",
+          "definition": "ноябрь"
+        },
+        {
+          "term": "December",
+          "definition": "декабрь"
+        },
+        {
+          "term": "own",
+          "definition": "Владеть, собственный"
+        },
+        {
+          "term": "challenge",
+          "definition": "вызов"
+        },
+        {
+          "term": "view (вью)",
+          "definition": "вид"
+        },
+        {
+          "term": "keep in mind",
+          "definition": "иметь в виду, помнить, учитывать"
+        },
+        {
+          "term": "notice",
+          "definition": "замечать"
+        },
+        {
+          "term": "noise",
+          "definition": "шум"
+        },
+        {
+          "term": "believe",
+          "definition": "верить, полагать"
+        },
+        {
+          "term": "right away, straight away, immediately",
+          "definition": "сразу же"
+        },
+        {
+          "term": "make sb do sth",
+          "definition": "заставлять кого-либо сделать что-то"
+        },
+        {
+          "term": "scream",
+          "definition": "пронзительно кричать"
+        },
+        {
+          "term": "even",
+          "definition": "даже"
+        },
+        {
+          "term": "survive",
+          "definition": "выживать"
+        },
+        {
+          "term": "World War II veteran",
+          "definition": "ветеран второй мировой войны"
+        },
+        {
+          "term": "a couple (капл) of",
+          "definition": "пара (чего-то)"
+        },
+        {
+          "term": "cause",
+          "definition": "спровоцировать"
+        },
+        {
+          "term": "I'm bored",
+          "definition": "мне скучно"
+        },
+        {
+          "term": "determined",
+          "definition": "решительный, целеустремленный, нацеленный"
+        },
+        {
+          "term": "pay off",
+          "definition": "выплачивать, гасить (кредит)"
+        },
+        {
+          "term": "grandkid",
+          "definition": "внук, внучка"
+        },
+        {
+          "term": "first",
+          "definition": "первый"
+        },
+        {
+          "term": "second",
+          "definition": "второй"
+        },
+        {
+          "term": "third",
+          "definition": "третий"
+        },
+        {
+          "term": "ninth",
+          "definition": "девятый"
+        },
+        {
+          "term": "twentieth",
+          "definition": "двадцатый"
+        },
+        {
+          "term": "January",
+          "definition": "январь"
+        },
+        {
+          "term": "February",
+          "definition": "февраль"
+        },
+        {
+          "term": "March",
+          "definition": "март"
+        },
+        {
+          "term": "April",
+          "definition": "апрель"
+        },
+        {
+          "term": "May",
+          "definition": "май"
+        },
+        {
+          "term": "June",
+          "definition": "июнь"
+        },
+        {
+          "term": "July",
+          "definition": "июль"
+        },
+        {
+          "term": "August (Огас)",
+          "definition": "август"
+        },
+        {
+          "term": "September",
+          "definition": "сентябрь"
+        },
+        {
+          "term": "October",
+          "definition": "октябрь"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 50",
+      "cards": [
+        {
+          "term": "put on",
+          "definition": "надевать (одежду)"
+        },
+        {
+          "term": "dry",
+          "definition": "сухой, сушить"
+        },
+        {
+          "term": "disgusting",
+          "definition": "омерзительный, отвратительный, противный"
+        },
+        {
+          "term": "lovely",
+          "definition": "прекрасный"
+        },
+        {
+          "term": "pharmacy, chemist's (UK)",
+          "definition": "аптека"
+        },
+        {
+          "term": "pills",
+          "definition": "таблетки"
+        },
+        {
+          "term": "wear wore worn",
+          "definition": "носить (одежду)"
+        },
+        {
+          "term": "be going to",
+          "definition": "собираться сделать что-то"
+        },
+        {
+          "term": "hospital",
+          "definition": "больница"
+        },
+        {
+          "term": "be ill, be sick",
+          "definition": "болеть"
+        },
+        {
+          "term": "patient",
+          "definition": "пациент, терпеливый"
+        },
+        {
+          "term": "brave",
+          "definition": "смелый"
+        },
+        {
+          "term": "of course",
+          "definition": "конечно"
+        },
+        {
+          "term": "warm",
+          "definition": "теплый"
+        },
+        {
+          "term": "loud",
+          "definition": "громкий"
+        },
+        {
+          "term": "quiet",
+          "definition": "тихий, спокойный"
+        },
+        {
+          "term": "sunny",
+          "definition": "солнечный"
+        },
+        {
+          "term": "another",
+          "definition": "другой, еще один"
+        },
+        {
+          "term": "catch a cold",
+          "definition": "простудиться"
+        },
+        {
+          "term": "stomachache",
+          "definition": "боль в животе"
+        },
+        {
+          "term": "toothache",
+          "definition": "зубная боль"
+        },
+        {
+          "term": "backache",
+          "definition": "боль в спине"
+        },
+        {
+          "term": "doctor's appointment",
+          "definition": "прием у врача"
+        },
+        {
+          "term": "hurt hurt hurt",
+          "definition": "ранить, повреждать"
+        },
+        {
+          "term": "it's raining",
+          "definition": "идет дождь (сейчас)"
+        },
+        {
+          "term": "it rains",
+          "definition": "идет дождь (обычно)"
+        },
+        {
+          "term": "hat",
+          "definition": "шапка"
+        },
+        {
+          "term": "catch a cold",
+          "definition": "простудиться"
+        },
+        {
+          "term": "muddy puddles",
+          "definition": "грязные лужи"
+        },
+        {
+          "term": "inside",
+          "definition": "внутри, в помещении"
+        },
+        {
+          "term": "heavy",
+          "definition": "тяжелый, сильный"
+        },
+        {
+          "term": "medicine",
+          "definition": "лекарство"
+        },
+        {
+          "term": "until",
+          "definition": "до тех пор пока"
+        },
+        {
+          "term": "wide",
+          "definition": "широкий, широко"
+        },
+        {
+          "term": "sneeze",
+          "definition": "чихать"
+        },
+        {
+          "term": "impossible",
+          "definition": "невозможный"
+        },
+        {
+          "term": "runny nose",
+          "definition": "насморк"
+        },
+        {
+          "term": "cough",
+          "definition": "кашель, кашлять"
+        },
+        {
+          "term": "sore throat",
+          "definition": "больное горло"
+        },
+        {
+          "term": "fever, high temperature",
+          "definition": "повышенная температура"
+        },
+        {
+          "term": "weakness",
+          "definition": "слабость"
+        },
+        {
+          "term": "pain",
+          "definition": "боль"
+        },
+        {
+          "term": "headache",
+          "definition": "головная боль"
+        },
+        {
+          "term": "flu",
+          "definition": "грипп"
+        },
+        {
+          "term": "surgery",
+          "definition": "операция"
+        }
+      ]
+    },
+    {
+      "name": "Lesson 51",
+      "cards": [
+        {
+          "term": "square",
+          "definition": "площадь"
+        },
+        {
+          "term": "mosque (моск)",
+          "definition": "мечеть"
+        },
+        {
+          "term": "cross",
+          "definition": "пересекать"
+        },
+        {
+          "term": "castle",
+          "definition": "замок"
+        },
+        {
+          "term": "tower",
+          "definition": "башня"
+        },
+        {
+          "term": "statue",
+          "definition": "статуя"
+        },
+        {
+          "term": "in the north",
+          "definition": "на севере"
+        },
+        {
+          "term": "in the south",
+          "definition": "на юге"
+        },
+        {
+          "term": "in the west",
+          "definition": "на западе"
+        },
+        {
+          "term": "queen",
+          "definition": "королева"
+        },
+        {
+          "term": "come by, drop by",
+          "definition": "заглянуть в гости"
+        },
+        {
+          "term": "guided tour",
+          "definition": "тур с гидом"
+        },
+        {
+          "term": "stairs",
+          "definition": "ступеньки"
+        },
+        {
+          "term": "ring rang rung",
+          "definition": "звонить, звенеть"
+        },
+        {
+          "term": "sound",
+          "definition": "звук"
+        },
+        {
+          "term": "loud",
+          "definition": "громкий"
+        },
+        {
+          "term": "ship",
+          "definition": "корабль"
+        },
+        {
+          "term": "be full of",
+          "definition": "быть полным чего-либо"
+        },
+        {
+          "term": "medieval castle",
+          "definition": "средневековый замок"
+        },
+        {
+          "term": "palace",
+          "definition": "дворец"
+        },
+        {
+          "term": "Buckingham Palace",
+          "definition": "Букингемский дворец"
+        },
+        {
+          "term": "tall tower",
+          "definition": "высокая башня"
+        },
+        {
+          "term": "monument",
+          "definition": "памятник"
+        },
+        {
+          "term": "Trafalgar Square",
+          "definition": "Трафальгарская площадь"
+        },
+        {
+          "term": "church",
+          "definition": "церковь"
+        },
+        {
+          "term": "cathedral",
+          "definition": "собор"
+        },
+        {
+          "term": "temple",
+          "definition": "храм"
+        },
+        {
+          "term": "market",
+          "definition": "рынок"
+        },
+        {
+          "term": "bridge",
+          "definition": "мост"
+        },
+        {
+          "term": "park",
+          "definition": "парк"
+        },
+        {
+          "term": "museum",
+          "definition": "музей"
+        },
+        {
+          "term": "in the east",
+          "definition": "на востоке"
+        },
+        {
+          "term": "carpet",
+          "definition": "ковер"
+        },
+        {
+          "term": "decide",
+          "definition": "решать"
+        },
+        {
+          "term": "decision",
+          "definition": "решение"
+        },
+        {
+          "term": "ask",
+          "definition": "просить"
+        },
+        {
+          "term": "king",
+          "definition": "король"
+        },
+        {
+          "term": "Your Majesty",
+          "definition": "Ваше Величество"
+        },
+        {
+          "term": "tour",
+          "definition": "тур, экскурсия"
+        },
+        {
+          "term": "tour guide",
+          "definition": "экскурсовод"
+        },
+        {
+          "term": "way",
+          "definition": "способ, путь, дорога"
+        },
+        {
+          "term": "double-decker bus",
+          "definition": "двухъярусный автобус"
+        },
+        {
+          "term": "borrow",
+          "definition": "одолжить, взять с возвратом"
+        },
+        {
+          "term": "joke",
+          "definition": "шутить, шутка"
+        },
+        {
+          "term": "seat",
+          "definition": "место"
+        },
+        {
+          "term": "loudly",
+          "definition": "громко"
+        },
+        {
+          "term": "continue",
+          "definition": "продолжать"
+        },
+        {
+          "term": "sail",
+          "definition": "ходить под парусом, проплывать"
+        },
+        {
+          "term": "lift up",
+          "definition": "поднимать"
+        },
+        {
+          "term": "lower",
+          "definition": "опускать"
+        }
+      ]
+    }
+  ]
+}

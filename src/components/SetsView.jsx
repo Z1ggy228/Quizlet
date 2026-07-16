@@ -2,6 +2,17 @@ import { useEffect, useState } from 'react'
 import * as db from '../lib/db'
 import { Button, Card, EmptyState, ErrorText, Input, Modal, Spinner } from './ui'
 import { IconButton, PencilIcon, PlusIcon, TrashIcon } from './FoldersView'
+import Flashcards from './Flashcards'
+import Learn from './Learn'
+
+function shuffleArray(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 export default function SetsView({ user, folder, onOpen }) {
   const [sets, setSets] = useState([])
@@ -11,6 +22,14 @@ export default function SetsView({ user, folder, onOpen }) {
   const [dialog, setDialog] = useState(null)
   const [name, setName] = useState('')
   const [busy, setBusy] = useState(false)
+
+  // Сессия по всей папке: карточки всех наборов одним списком, только на время
+  // сессии. Ничего не создаём в базе, прогресс пишется тем же карточкам по их id.
+  const [session, setSession] = useState(null) // null | {mode, cards}
+  const [learnAllOpen, setLearnAllOpen] = useState(false)
+  const [learnAllMode, setLearnAllMode] = useState('learn')
+  const [shuffle, setShuffle] = useState(false)
+  const [starting, setStarting] = useState(false)
 
   useEffect(() => {
     load()
@@ -52,18 +71,61 @@ export default function SetsView({ user, folder, onOpen }) {
     }
   }
 
+  async function startFolderSession() {
+    setStarting(true)
+    setError('')
+    try {
+      const cards = await db.listFolderCards(folder.id)
+      if (!cards.length) throw new Error('В папке пока нет ни одной карточки.')
+      setSession({ mode: learnAllMode, cards: shuffle ? shuffleArray(cards) : cards })
+      setLearnAllOpen(false)
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setStarting(false)
+    }
+  }
+
+  if (session) {
+    const exit = () => {
+      setSession(null)
+      load() // счётчики и прогресс могли измениться за сессию
+    }
+    return session.mode === 'flash' ? (
+      <Flashcards cards={session.cards} setName={`${folder.name} · все слова`} onExit={exit} />
+    ) : (
+      <Learn cards={session.cards} setName={`${folder.name} · все слова`} onExit={exit} />
+    )
+  }
+
+  const totalCards = Object.values(counts).reduce((a, n) => a + n, 0)
+
   return (
     <div>
       <div className="mb-5 flex items-center justify-between gap-3">
         <div className="min-w-0">
           <h1 className="truncate text-2xl font-semibold">{folder.name}</h1>
           <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
-            Наборы внутри папки — например «Серия 1».
+            {sets.length > 0
+              ? `${sets.length} наборов · ${plural(totalCards)}`
+              : 'Наборы внутри папки — например «Серия 1».'}
           </p>
         </div>
-        <Button onClick={() => open('create')}>
-          <PlusIcon /> <span className="hidden sm:inline">Новый набор</span>
-        </Button>
+        <div className="flex shrink-0 gap-2">
+          <Button
+            variant="secondary"
+            onClick={() => setLearnAllOpen(true)}
+            disabled={totalCards === 0}
+          >
+            <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+              <path d="M10.394 2.08a1.75 1.75 0 0 0-.788 0l-7 1.75A1.75 1.75 0 0 0 1.25 5.53v.216c0 .524.234 1.02.638 1.35l6.75 5.5a1.75 1.75 0 0 0 2.224 0l6.75-5.5c.404-.33.638-.826.638-1.35V5.53a1.75 1.75 0 0 0-1.356-1.7l-7-1.75ZM3.5 9.35v3.9c0 .64.35 1.23.91 1.54 1.44.79 3.36 1.46 5.59 1.46s4.15-.67 5.59-1.46c.56-.31.91-.9.91-1.54v-3.9l-4.8 3.91a3.25 3.25 0 0 1-4.4 0L3.5 9.35Z" />
+            </svg>
+            <span className="hidden sm:inline">Учить все</span>
+          </Button>
+          <Button onClick={() => open('create')}>
+            <PlusIcon /> <span className="hidden sm:inline">Новый набор</span>
+          </Button>
+        </div>
       </div>
 
       {loading ? (
@@ -105,6 +167,56 @@ export default function SetsView({ user, folder, onOpen }) {
       )}
 
       {!dialog && error && <div className="mt-4"><ErrorText>{error}</ErrorText></div>}
+
+      <Modal open={learnAllOpen} onClose={() => setLearnAllOpen(false)} title="Учить всю папку">
+        <div className="space-y-4">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
+            Все слова из {sets.length} наборов папки «{folder.name}» — {plural(totalCards)} — одной
+            сессией. Прогресс сохраняется тем же карточкам, что и при изучении набора по отдельности.
+          </p>
+
+          <div className="grid gap-2 sm:grid-cols-2">
+            <ModeOption
+              title="Learn"
+              hint="Адаптивный тренажёр"
+              active={learnAllMode === 'learn'}
+              onClick={() => setLearnAllMode('learn')}
+            />
+            <ModeOption
+              title="Flashcards"
+              hint="Карточки с переворотом"
+              active={learnAllMode === 'flash'}
+              onClick={() => setLearnAllMode('flash')}
+            />
+          </div>
+
+          <label className="flex cursor-pointer items-start gap-2.5 rounded-lg p-1">
+            <input
+              type="checkbox"
+              checked={shuffle}
+              onChange={(e) => setShuffle(e.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-600 dark:border-slate-600 dark:bg-slate-800"
+            />
+            <span className="text-sm">
+              Перемешать
+              <span className="block text-xs text-slate-500 dark:text-slate-400">
+                По умолчанию порядок как в папке: наборы подряд, слова внутри набора по порядку.
+              </span>
+            </span>
+          </label>
+
+          <ErrorText>{error}</ErrorText>
+
+          <div className="flex justify-end gap-2">
+            <Button variant="secondary" onClick={() => setLearnAllOpen(false)}>
+              Отмена
+            </Button>
+            <Button onClick={startFolderSession} disabled={starting}>
+              {starting && <Spinner className="h-4 w-4" />} Начать
+            </Button>
+          </div>
+        </div>
+      </Modal>
 
       <Modal
         open={!!dialog}
@@ -154,6 +266,23 @@ export default function SetsView({ user, folder, onOpen }) {
         )}
       </Modal>
     </div>
+  )
+}
+
+function ModeOption({ title, hint, active, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-lg p-3 text-left ring-1 transition ${
+        active
+          ? 'bg-indigo-50 ring-2 ring-indigo-600 dark:bg-indigo-950/60'
+          : 'ring-slate-200 hover:ring-indigo-400 dark:ring-slate-700 dark:hover:ring-indigo-600'
+      }`}
+    >
+      <span className="block text-sm font-medium">{title}</span>
+      <span className="block text-xs text-slate-500 dark:text-slate-400">{hint}</span>
+    </button>
   )
 }
 

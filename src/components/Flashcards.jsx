@@ -84,8 +84,8 @@ export default function Flashcards({ cards, setName, onExit }) {
           aria-label="Перевернуть карточку"
         >
           {/* Лицо: русское слово */}
-          <div className="flip-face absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
-            <p className="text-3xl font-semibold sm:text-4xl">{card.word_ru}</p>
+          <div className="flip-face absolute inset-0 flex flex-col items-center justify-center overflow-y-auto rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
+            <p className="whitespace-pre-line text-3xl font-semibold sm:text-4xl">{card.word_ru}</p>
             <p className="mt-6 text-xs text-slate-400 dark:text-slate-500">
               Нажмите, чтобы перевернуть
             </p>
@@ -93,7 +93,7 @@ export default function Flashcards({ cards, setName, onExit }) {
 
           {/* Оборот: английское слово, картинка, контекст */}
           <div className="flip-face flip-face-back absolute inset-0 flex flex-col items-center justify-center gap-4 overflow-y-auto rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
-            <p className="text-3xl font-semibold text-indigo-600 dark:text-indigo-400 sm:text-4xl">
+            <p className="whitespace-pre-line text-3xl font-semibold text-indigo-600 dark:text-indigo-400 sm:text-4xl">
               {card.word_en}
             </p>
             {card.image_path && (

@@ -1,9 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 import * as db from '../lib/db'
 import { imageUrl } from '../lib/supabase'
-import { Button, ErrorText, Input, Label, Modal, Spinner, Textarea } from './ui'
+import { Button, ErrorText, Label, Modal, Spinner, Textarea } from './ui'
 
 const empty = { word_en: '', word_ru: '', context: '' }
+
+/**
+ * Слово и перевод — textarea, а не input: у части карточек значения в несколько
+ * строк, а input по спецификации вырезает переносы и молча портил бы их при
+ * правке. Enter при этом по-прежнему отправляет форму, перенос — Shift+Enter.
+ */
+function submitOnEnter(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault()
+    e.currentTarget.form?.requestSubmit()
+  }
+}
 
 /**
  * Одна форма на два случая: добавление пачкой (card === null) и правка одной
@@ -103,11 +115,13 @@ export default function CardDialog({ open, onClose, user, set, card, onSaved }) 
       <form onSubmit={submit} className="space-y-4">
         <label className="block">
           <Label>Английское слово *</Label>
-          <Input
+          <Textarea
             ref={enRef}
             autoFocus
+            rows={1}
             value={form.word_en}
             onChange={(e) => setForm({ ...form, word_en: e.target.value })}
+            onKeyDown={submitOnEnter}
             placeholder="platypus"
             required
           />
@@ -115,9 +129,11 @@ export default function CardDialog({ open, onClose, user, set, card, onSaved }) 
 
         <label className="block">
           <Label>Перевод *</Label>
-          <Input
+          <Textarea
+            rows={1}
             value={form.word_ru}
             onChange={(e) => setForm({ ...form, word_ru: e.target.value })}
+            onKeyDown={submitOnEnter}
             placeholder="утконос"
             required
           />

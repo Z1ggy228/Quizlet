@@ -37,15 +37,40 @@ function normalize(s) {
     .replace(/\s+/g, ' ')
 }
 
+/** Скобки в термине — это транскрипция или необязательный артикль: «write (рАйт)», «(a) mother». */
+const withoutParens = (s) => s.replace(/\([^)]*\)/g, ' ')
+
+/**
+ * Что засчитываем за верный ответ. Кроме самого термина принимаем его без
+ * скобок, а «cat / kitty» и «country, countryside» — по любому из вариантов.
+ */
+function answerVariants(expected) {
+  const out = new Set()
+  const add = (s) => {
+    const n = normalize(s)
+    if (n) out.add(n)
+  }
+  add(expected)
+  add(withoutParens(expected))
+  for (const part of expected.split(/[/,]/)) {
+    add(part)
+    add(withoutParens(part))
+  }
+  return out
+}
+
 function isCorrectAnswer(given, expected) {
   const g = normalize(given)
-  if (!g) return false
-  // «cat / kitty» и «cat, kitty» — засчитываем любой из вариантов.
-  return expected
-    .split(/[/,]/)
-    .map(normalize)
-    .filter(Boolean)
-    .some((v) => v === g)
+  return !!g && answerVariants(expected).has(g)
+}
+
+/**
+ * Термин, который реально набрать руками. Диалоги в несколько строк и длинные
+ * фразы спрашиваем только выбором: напечатать их без опечатки нельзя, слово
+ * навсегда осталось бы невыученным и сессия не закончилась бы.
+ */
+function isTypable(word) {
+  return !word.includes('\n') && normalize(withoutParens(word)).length <= 24
 }
 
 /**
@@ -81,6 +106,7 @@ function buildQuestion(states, allCards, lastId) {
   else if (st.mastery === 1) type = Math.random() < 0.5 ? 'choice' : 'input'
   else type = 'input'
   if (allCards.length < 2) type = 'input'
+  if (type === 'input' && !isTypable(st.card.word_en)) type = 'choice'
 
   let options = null
   if (type === 'choice') {
@@ -170,7 +196,8 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
   async function restart() {
     setResetting(true)
     try {
-      await db.resetMastery(cards[0].set_id)
+      // По id, а не по set_id: в сессии по всей папке карточки из разных наборов.
+      await db.resetMasteryForCards(cards.map((c) => c.id))
       const fresh = states.map((s) => ({ ...s, mastery: 0, wrong: 0, errored: false }))
       fresh.forEach((s) => onMastery?.(s.id, 0))
       nextStatesRef.current = fresh
@@ -237,7 +264,7 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
         <p className="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500">
           {question.type === 'choice' ? 'Выберите перевод' : 'Напишите по-английски'}
         </p>
-        <p className="mt-2 text-2xl font-semibold sm:text-3xl">{card.word_ru}</p>
+        <p className="mt-2 whitespace-pre-line text-2xl font-semibold sm:text-3xl">{card.word_ru}</p>
 
         {question.type === 'choice' ? (
           <div className="mt-6 grid gap-2 sm:grid-cols-2">
@@ -290,7 +317,7 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
           <div className="mt-5 animate-fade-in space-y-3 border-t border-slate-100 pt-4 dark:border-slate-800">
             <p className="text-sm text-slate-500 dark:text-slate-400">
               Правильный ответ:{' '}
-              <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="whitespace-pre-line font-semibold text-emerald-600 dark:text-emerald-400">
                 {card.word_en}
               </span>
             </p>
@@ -340,7 +367,7 @@ function ChoiceButton({ option, feedback, answer, onClick }) {
       type="button"
       disabled={!!feedback}
       onClick={onClick}
-      className={`rounded-lg px-4 py-3 text-left text-sm font-medium shadow-sm ring-1 transition ${tone}`}
+      className={`whitespace-pre-line rounded-lg px-4 py-3 text-left text-sm font-medium shadow-sm ring-1 transition ${tone}`}
     >
       {option}
     </button>
@@ -408,7 +435,7 @@ function FinalScreen({ total, mastered, reviewed, stats, onExit, onRestart, rese
       <h1 className="mt-4 text-2xl font-semibold">Сессия завершена</h1>
       <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
         {mastered === total
-          ? 'Все слова набора выучены.'
+          ? 'Все слова выучены.'
           : 'Прогресс сохранён — можно продолжить позже.'}
       </p>
 
@@ -427,7 +454,7 @@ function FinalScreen({ total, mastered, reviewed, stats, onExit, onRestart, rese
         </Button>
       </div>
       <p className="mt-3 text-xs text-slate-400 dark:text-slate-500">
-        «Учить заново» обнуляет прогресс всех слов набора.
+        «Учить заново» обнуляет прогресс всех слов этой сессии.
       </p>
     </div>
   )

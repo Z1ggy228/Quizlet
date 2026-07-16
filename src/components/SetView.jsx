@@ -152,8 +152,11 @@ export default function SetView({ user, set }) {
                 )}
 
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium">{c.word_en}</p>
-                  <p className="truncate text-sm text-slate-500 dark:text-slate-400">{c.word_ru}</p>
+                  {/* line-clamp, а не truncate: у части карточек значения в несколько строк */}
+                  <p className="line-clamp-2 whitespace-pre-line font-medium">{c.word_en}</p>
+                  <p className="line-clamp-2 whitespace-pre-line text-sm text-slate-500 dark:text-slate-400">
+                    {c.word_ru}
+                  </p>
                   {c.context && (
                     <p className="mt-0.5 truncate text-xs italic text-slate-400 dark:text-slate-500">
                       {c.context}
