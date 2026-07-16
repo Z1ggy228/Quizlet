@@ -95,20 +95,23 @@ export async function deleteSet(id) {
 }
 
 /**
- * Количество карточек в каждом наборе папки: { [setId]: count }
+ * Сколько в каждом наборе карточек и сколько из них выучено:
+ * { [setId]: { total, mastered } }
  *
  * Сортировка по id, а не по set_id: страницы режутся через limit/offset, и при
  * неуникальном ключе сортировки Postgres не обязан отдавать одинаковые строки
  * при равных значениях — на границе страниц карточки задваивались бы и терялись,
  * а счётчик врал бы на несколько слов.
  */
-export async function countCardsBySet(setIds) {
+export async function statsBySet(setIds) {
   if (!setIds.length) return {}
   const rows = await fetchAllPages(() =>
-    supabase.from('cards').select('set_id').in('set_id', setIds).order('id'),
+    supabase.from('cards').select('set_id, mastery_level').in('set_id', setIds).order('id'),
   )
   return rows.reduce((acc, row) => {
-    acc[row.set_id] = (acc[row.set_id] || 0) + 1
+    const s = (acc[row.set_id] ??= { total: 0, mastered: 0 })
+    s.total++
+    if (row.mastery_level >= 3) s.mastered++
     return acc
   }, {})
 }

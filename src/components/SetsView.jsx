@@ -16,7 +16,7 @@ function shuffleArray(arr) {
 
 export default function SetsView({ user, folder, onOpen }) {
   const [sets, setSets] = useState([])
-  const [counts, setCounts] = useState({})
+  const [stats, setStats] = useState({}) // { [setId]: {total, mastered} }
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [dialog, setDialog] = useState(null)
@@ -40,7 +40,7 @@ export default function SetsView({ user, folder, onOpen }) {
       setLoading(true)
       const rows = await db.listSets(folder.id)
       setSets(rows)
-      setCounts(await db.countCardsBySet(rows.map((s) => s.id)))
+      setStats(await db.statsBySet(rows.map((s) => s.id)))
       setError('')
     } catch (e) {
       setError(e.message)
@@ -98,7 +98,8 @@ export default function SetsView({ user, folder, onOpen }) {
     )
   }
 
-  const totalCards = Object.values(counts).reduce((a, n) => a + n, 0)
+  const totalCards = Object.values(stats).reduce((a, s) => a + s.total, 0)
+  const totalMastered = Object.values(stats).reduce((a, s) => a + s.mastered, 0)
 
   return (
     <div>
@@ -107,7 +108,16 @@ export default function SetsView({ user, folder, onOpen }) {
           <h1 className="truncate text-2xl font-semibold">{folder.name}</h1>
           {sets.length > 0 && (
             <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
-              {plural(sets.length, ['набор', 'набора', 'наборов'])} · {plural(totalCards)}
+              {plural(sets.length, ['набор', 'набора', 'наборов'])} · {plural(totalCards)} · выучено{' '}
+              <span
+                className={
+                  totalMastered === totalCards && totalCards > 0
+                    ? 'font-medium text-emerald-600 dark:text-emerald-400'
+                    : ''
+                }
+              >
+                {totalMastered}
+              </span>
             </p>
           )}
         </div>
@@ -139,16 +149,49 @@ export default function SetsView({ user, folder, onOpen }) {
         />
       ) : (
         <ul className="space-y-2">
-          {sets.map((s) => (
+          {sets.map((s) => {
+            const { total = 0, mastered = 0 } = stats[s.id] ?? {}
+            const done = total > 0 && mastered === total
+            return (
             <li key={s.id}>
-              <Card className="flex items-center gap-2 p-4 transition hover:ring-indigo-300 dark:hover:ring-indigo-700">
+              <Card
+                // ! обязателен: Card уже несёт bg-white и ring-slate-200, приоритет у
+                // одиночных утилит одинаковый, и в собранном css побеждает bg-white —
+                // без ! плашка выученного набора остаётся белой.
+                className={`flex items-center gap-2 p-4 transition ${
+                  done
+                    ? '!bg-emerald-50 !ring-emerald-400 dark:!bg-emerald-950/40 dark:!ring-emerald-700'
+                    : 'hover:ring-indigo-300 dark:hover:ring-indigo-700'
+                }`}
+              >
                 <button
                   onClick={() => onOpen(s)}
-                  className="flex min-w-0 flex-1 items-baseline gap-3 text-left"
+                  className="flex min-w-0 flex-1 items-center gap-3 text-left"
                 >
+                  {done && (
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+                      <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                        <path
+                          fillRule="evenodd"
+                          d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  )}
                   <span className="min-w-0 flex-1 truncate font-medium">{s.name}</span>
-                  <span className="shrink-0 text-xs text-slate-500 dark:text-slate-400">
-                    {plural(counts[s.id] || 0)}
+                  <span
+                    className={`shrink-0 text-xs ${
+                      done
+                        ? 'font-medium text-emerald-700 dark:text-emerald-400'
+                        : 'text-slate-500 dark:text-slate-400'
+                    }`}
+                  >
+                    {done
+                      ? 'всё выучено'
+                      : mastered > 0
+                        ? `выучено ${mastered} из ${total}`
+                        : plural(total)}
                   </span>
                 </button>
                 <div className="flex shrink-0 gap-1">
@@ -161,7 +204,8 @@ export default function SetsView({ user, folder, onOpen }) {
                 </div>
               </Card>
             </li>
-          ))}
+            )
+          })}
         </ul>
       )}
 
