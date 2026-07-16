@@ -80,7 +80,7 @@ export default function FoldersView({ user, onOpen }) {
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400">
                     <FolderIcon />
                   </span>
-                  <span className="truncate font-medium">{f.name}</span>
+                  <span className="truncate font-display font-medium">{f.name}</span>
                 </button>
                 <div className="flex shrink-0 gap-1">
                   <IconButton label="Переименовать" onClick={() => open('rename', f)}>
