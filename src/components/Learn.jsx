@@ -291,7 +291,9 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
         <p className="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500">
           {question.type === 'choice' ? 'Выберите перевод' : 'Напишите по-английски'}
         </p>
-        <p className="mt-2 whitespace-pre-line text-2xl font-semibold sm:text-3xl">{card.word_ru}</p>
+        <p className="mt-2 whitespace-pre-line font-display text-2xl font-semibold sm:text-3xl">
+          {card.word_ru}
+        </p>
 
         {question.type === 'choice' ? (
           <div className="mt-6 grid gap-2 sm:grid-cols-2">
@@ -344,7 +346,7 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
           <div className="mt-5 animate-fade-in space-y-3 border-t border-slate-100 pt-4 dark:border-slate-800">
             <p className="text-sm text-slate-500 dark:text-slate-400">
               Правильный ответ:{' '}
-              <span className="whitespace-pre-line font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="whitespace-pre-line font-display font-semibold text-emerald-600 dark:text-emerald-400">
                 {card.word_en}
               </span>
             </p>

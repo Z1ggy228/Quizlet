@@ -149,9 +149,11 @@ export default function Flashcards({ cards, setName, onExit }) {
 
   if (!card) return null
 
-  const faceRu = <span className="whitespace-pre-line">{card.word_ru}</span>
+  const faceRu = <span className="whitespace-pre-line font-display">{card.word_ru}</span>
   const faceEn = (
-    <span className="whitespace-pre-line text-indigo-600 dark:text-indigo-400">{card.word_en}</span>
+    <span className="whitespace-pre-line font-display text-indigo-600 dark:text-indigo-400">
+      {card.word_en}
+    </span>
   )
   // Оборот всегда несёт картинку и контекст — они привязаны к слову, а не к стороне.
   const extras = (

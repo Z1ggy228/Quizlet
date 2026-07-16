@@ -4,6 +4,11 @@ export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        // font-sans — весь текст по умолчанию, font-display — заголовки и слова.
+        sans: ['Roboto Variable', 'Roboto', 'system-ui', 'sans-serif'],
+        display: ['Russo One', 'Roboto Variable', 'sans-serif'],
+      },
       keyframes: {
         pop: {
           '0%': { transform: 'scale(0.8)', opacity: '0' },

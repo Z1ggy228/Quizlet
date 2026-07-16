@@ -9,7 +9,19 @@ body,
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+  @apply bg-slate-50 font-sans text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+}
+
+/* Заголовки страниц и диалогов — везде h1/h2, поэтому проще задать разом. */
+h1,
+h2 {
+  @apply font-display;
+}
+
+/* У Russo One единственное начертание. Без этого браузер на font-semibold
+   подрисовывает фальшивую жирность, и буквы плывут. */
+.font-display {
+  font-synthesis-weight: none;
 }
 
 /* 3D-переворот карточки в режиме Flashcards */
