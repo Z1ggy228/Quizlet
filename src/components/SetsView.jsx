@@ -152,6 +152,10 @@ export default function SetsView({ user, folder, onOpen }) {
           {sets.map((s) => {
             const { total = 0, mastered = 0 } = stats[s.id] ?? {}
             const done = total > 0 && mastered === total
+            // Округляем к нулю и к сотне: «100%» на невыученном слове и «0%» там,
+            // где что-то уже сделано, читались бы как враньё.
+            const raw = total ? (mastered / total) * 100 : 0
+            const pct = done ? 100 : raw === 0 ? 0 : Math.min(99, Math.max(1, Math.round(raw)))
             return (
             <li key={s.id}>
               <Card
@@ -166,33 +170,33 @@ export default function SetsView({ user, folder, onOpen }) {
               >
                 <button
                   onClick={() => onOpen(s)}
-                  className="flex min-w-0 flex-1 items-center gap-3 text-left"
+                  className="flex min-w-0 flex-1 flex-col gap-1.5 text-left"
                 >
-                  {done && (
-                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
-                      <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
-                        <path
-                          fillRule="evenodd"
-                          d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                  <span className="flex w-full items-center gap-2">
+                    {done && (
+                      <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white">
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                          <path
+                            fillRule="evenodd"
+                            d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    )}
+                    <span className="min-w-0 flex-1 truncate font-medium">{s.name}</span>
+                    <span
+                      className={`shrink-0 text-xs tabular-nums ${
+                        done
+                          ? 'font-medium text-emerald-700 dark:text-emerald-400'
+                          : 'text-slate-500 dark:text-slate-400'
+                      }`}
+                    >
+                      {mastered} / {total} · {pct}%
                     </span>
-                  )}
-                  <span className="min-w-0 flex-1 truncate font-medium">{s.name}</span>
-                  <span
-                    className={`shrink-0 text-xs ${
-                      done
-                        ? 'font-medium text-emerald-700 dark:text-emerald-400'
-                        : 'text-slate-500 dark:text-slate-400'
-                    }`}
-                  >
-                    {done
-                      ? 'всё выучено'
-                      : mastered > 0
-                        ? `выучено ${mastered} из ${total}`
-                        : plural(total)}
                   </span>
+
+                  <ProgressLine pct={pct} done={done} />
                 </button>
                 <div className="flex shrink-0 gap-1">
                   <IconButton label="Переименовать" onClick={() => open('rename', s)}>
@@ -310,6 +314,21 @@ export default function SetsView({ user, folder, onOpen }) {
         )}
       </Modal>
     </div>
+  )
+}
+
+function ProgressLine({ pct, done }) {
+  return (
+    <span
+      className={`block h-1.5 w-full overflow-hidden rounded-full ${
+        done ? 'bg-emerald-200 dark:bg-emerald-900' : 'bg-slate-200 dark:bg-slate-800'
+      }`}
+    >
+      <span
+        className="block h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-500"
+        style={{ width: `${pct}%` }}
+      />
+    </span>
   )
 }
 
