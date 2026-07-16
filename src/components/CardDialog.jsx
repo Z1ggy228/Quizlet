@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import * as db from '../lib/db'
 import { imageUrl } from '../lib/supabase'
 import { lookupWord } from '../lib/dictionary'
+import { translateToRu } from '../lib/translate'
 import { downloadImage, imagesConfigured, searchImages, trackDownload } from '../lib/images'
 import { Button, ErrorText, Label, Modal, SpeakButton, Spinner, Textarea } from './ui'
 
@@ -38,8 +39,8 @@ export default function CardDialog({ open, onClose, user, set, card, onSaved }) 
   const [picker, setPicker] = useState(null) // null | {loading, photos, error}
   const enRef = useRef(null)
   const lookedUp = useRef('')
-  // Что в полях транскрипции и части речи: подстановка словаря или ручной ввод.
-  const autoFilled = useRef({ transcription: false, part_of_speech: false })
+  // Что в полях перевода, транскрипции и части речи: наша подстановка или ручной ввод.
+  const autoFilled = useRef({ word_ru: false, transcription: false, part_of_speech: false })
 
   useEffect(() => {
     if (!open) return
@@ -63,18 +64,18 @@ export default function CardDialog({ open, onClose, user, set, card, onSaved }) 
     setPicker(null)
     lookedUp.current = ''
     // У существующей карточки поля пришли из базы — считаем их своими.
-    autoFilled.current = { transcription: false, part_of_speech: false }
+    autoFilled.current = { word_ru: false, transcription: false, part_of_speech: false }
   }, [open, card])
 
   /**
-   * Транскрипция и часть речи подтягиваются, когда слово дописано. Молча: если
-   * слова нет в словаре или он недоступен, поля просто остаются пустыми и их
-   * можно заполнить руками.
+   * Когда слово дописано, само подтягиваем перевод, транскрипцию и часть речи.
+   * Молча: нет слова в словаре, нет сети — поля просто остаются пустыми, и их
+   * заполняют руками.
    *
    * Помним, что в полях — наша подстановка или ручной ввод. Иначе получается
    * так: набрали слово, словарь заполнил транскрипцию, поменяли слово — а
    * защита «не затирать введённое руками» видит непустое поле и оставляет
-   * транскрипцию от предыдущего слова.
+   * данные от предыдущего слова.
    */
   async function autofill(word) {
     const w = word.trim()
@@ -82,19 +83,23 @@ export default function CardDialog({ open, onClose, user, set, card, onSaved }) 
     lookedUp.current = w
     setLookingUp(true)
     try {
-      const info = await lookupWord(w)
-      // Пока ходили в словарь, слово могли переписать: ответ по старому слову
+      // Словарь и переводчик — независимые сервисы, ходим в оба разом.
+      const [info, translation] = await Promise.all([lookupWord(w), translateToRu(w)])
+      // Пока ходили в сеть, слово могли переписать: ответ по старому слову
       // приезжает позже и иначе подставился бы к новому.
       if (lookedUp.current !== w) return
 
       const mine = autoFilled.current
       setForm((f) => ({
         ...f,
+        // Перевод не стираем, если он не нашёлся: чаще всего он уже введён.
+        word_ru: (mine.word_ru || !f.word_ru) && translation ? translation : f.word_ru,
         transcription: mine.transcription || !f.transcription ? info?.transcription || '' : f.transcription,
         part_of_speech:
           mine.part_of_speech || !f.part_of_speech ? info?.part_of_speech || '' : f.part_of_speech,
       }))
       autoFilled.current = {
+        word_ru: !!translation,
         transcription: !!info?.transcription,
         part_of_speech: !!info?.part_of_speech,
       }
@@ -214,15 +219,21 @@ export default function CardDialog({ open, onClose, user, set, card, onSaved }) 
           <SpeakButton text={form.word_en} className="mt-1" />
         </div>
 
-        <Textarea
-          rows={1}
-          value={form.word_ru}
-          onChange={(e) => setForm({ ...form, word_ru: e.target.value })}
-          onKeyDown={submitOnEnter}
-          placeholder="Перевод"
-          aria-label="Перевод"
-          required
-        />
+        <div className="relative">
+          <Textarea
+            rows={1}
+            value={form.word_ru}
+            onChange={(e) => {
+              autoFilled.current.word_ru = false // тронули руками — переводчик больше не хозяин
+              setForm({ ...form, word_ru: e.target.value })
+            }}
+            onKeyDown={submitOnEnter}
+            placeholder="Перевод"
+            aria-label="Перевод"
+            required
+          />
+          {lookingUp && <Spinner className="absolute right-2 top-2.5 h-4 w-4 text-slate-400" />}
+        </div>
 
         {/* Заполняется само из словаря, но всегда можно поправить руками. */}
         <div className="grid grid-cols-2 gap-2">

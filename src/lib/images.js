@@ -12,7 +12,7 @@
 //  ключ не задан, остальное приложение работает как обычно.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const UNSPLASH_ACCESS_KEY = 'ВСТАВЬТЕ_СЮДА_UNSPLASH_ACCESS_KEY'
+export const UNSPLASH_ACCESS_KEY = 'wyPZxQvZahIYrEpducFyt7ys89dMfOSZyqNQ93w3LUY'
 
 const API = 'https://api.unsplash.com'
 

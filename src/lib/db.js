@@ -316,15 +316,18 @@ export async function listReviewCards(limit = 200) {
 /** Сводка по всем словам пользователя. */
 export async function overallStats() {
   const now = new Date().toISOString()
-  const count = async (build) => {
-    const { count, error } = await build().select('id', { count: 'exact', head: true })
+  // Фильтры вешаются только на то, что вернул select(): у from() их просто нет,
+  // и .gte() до select() падает с TypeError.
+  const counter = () => supabase.from('cards').select('id', { count: 'exact', head: true })
+  const value = async (query) => {
+    const { count, error } = await query
     if (error) throw error
     return count ?? 0
   }
   const [total, mastered, due] = await Promise.all([
-    count(() => supabase.from('cards')),
-    count(() => supabase.from('cards').gte('mastery_level', MASTERED)),
-    count(() => supabase.from('cards').lte('due_date', now).lt('mastery_level', MASTERED)),
+    value(counter()),
+    value(counter().gte('mastery_level', MASTERED)),
+    value(counter().lte('due_date', now).lt('mastery_level', MASTERED)),
   ])
   return { total, mastered, due, learning: total - mastered }
 }

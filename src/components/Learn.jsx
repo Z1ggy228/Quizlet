@@ -229,8 +229,11 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
       wrong: p.wrong + (correct ? 0 : 1),
     }))
 
-    // Дневную цель двигает каждое новое слово за день, а не каждый ответ.
-    if (markStudied(st.id)) db.bumpStudyDay(1).catch(() => {})
+    // В дневную цель идут выученные слова: считаем в тот момент, когда слово
+    // дошло до последнего уровня, а не когда его просто показали.
+    if (mastery >= MASTERED && st.mastery < MASTERED && markStudied(st.id)) {
+      db.bumpStudyDay(1).catch(() => {})
+    }
     onMastery?.(st.id, mastery)
 
     setFeedback({

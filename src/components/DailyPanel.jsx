@@ -27,7 +27,8 @@ export default function DailyPanel({ user }) {
   async function load() {
     try {
       const [days, settings] = await Promise.all([db.listStudyDays(), db.getSettings(user.id)])
-      setStreak(streakFrom(days))
+      // Стрик считаем от текущей цели: день засчитан, только если цель взята.
+      setStreak(streakFrom(days, new Date(), settings.daily_goal))
       setToday(days.find((d) => d.day === localDay())?.words_count ?? 0)
       setGoal(settings.daily_goal)
       setError('')
@@ -48,9 +49,10 @@ export default function DailyPanel({ user }) {
     setBusy(true)
     try {
       await db.saveDailyGoal(user.id, value)
-      setGoal(value)
       setOpen(false)
       setError('')
+      await load() // от цели зависит стрик — пересчитываем
+
     } catch (e) {
       setError(e.message)
     } finally {
@@ -66,13 +68,13 @@ export default function DailyPanel({ user }) {
   return (
     <>
       <Card className="mb-5 flex items-center gap-4 p-4">
-        <div className="flex shrink-0 items-center gap-2" title="Дней подряд с занятиями">
+        <div
+          className="flex shrink-0 items-center gap-2"
+          title="Дней подряд, когда дневная цель была выполнена"
+        >
           <span className={`text-3xl ${streak > 0 ? '' : 'grayscale'}`}>🔥</span>
-          <span>
-            <span className="block text-xl font-semibold leading-none tabular-nums">{streak}</span>
-            <span className="block text-xs text-slate-500 dark:text-slate-400">
-              {plural(streak, ['день', 'дня', 'дней'])} подряд
-            </span>
+          <span className="text-xl font-semibold leading-none tabular-nums">
+            {plural(streak, ['день', 'дня', 'дней'])} подряд
           </span>
         </div>
 
@@ -126,8 +128,8 @@ export default function DailyPanel({ user }) {
             />
           </label>
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            Считаются разные слова за день, а не ответы: одно слово, отвеченное трижды за сессию,
-            засчитается один раз.
+            Считаются выученные слова — те, что дошли до последнего уровня. День попадает в стрик,
+            только если цель за него взята.
           </p>
           <ErrorText>{error}</ErrorText>
           <div className="flex justify-end gap-2">

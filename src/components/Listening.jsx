@@ -119,7 +119,10 @@ export default function Listening({ cards, setName, onMastery, onExit }) {
         setQueue((q) => q.map((c) => (c.id === card.id ? { ...c, ...patch } : c)))
       })
       .catch((err) => setError('Прогресс не сохранился: ' + err.message))
-    if (markStudied(card.id)) db.bumpStudyDay(1).catch(() => {})
+    // Как и в Learn: цель считает выученные слова, а не показанные.
+    if (mastery >= MASTERED && (card.mastery_level ?? 0) < MASTERED && markStudied(card.id)) {
+      db.bumpStudyDay(1).catch(() => {})
+    }
     onMastery?.(card.id, mastery)
 
     setStats((s) => ({

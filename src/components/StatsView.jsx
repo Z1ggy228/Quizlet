@@ -83,6 +83,17 @@ export default function StatsView() {
     )
   }
 
+  // Без этого упавший запрос давал белый экран вместо сообщения об ошибке.
+  if (!stats) {
+    return (
+      <div className="space-y-4">
+        <h1 className="text-2xl font-semibold">Статистика</h1>
+        <ErrorText>{error || 'Не удалось загрузить статистику.'}</ErrorText>
+        <Button onClick={load}>Попробовать ещё раз</Button>
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold">Статистика</h1>
