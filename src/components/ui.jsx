@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from 'react'
+import { speak, speechSupported } from '../lib/speech'
 
 const variants = {
   primary:
@@ -103,6 +104,59 @@ export function Modal({ open, onClose, title, children, wide = false }) {
         {children}
       </div>
     </div>
+  )
+}
+
+/** Кнопка «прослушать». Если браузер не умеет синтез речи — её просто нет. */
+export function SpeakButton({ text, className = '', size = 'md' }) {
+  const [busy, setBusy] = useState(false)
+  if (!speechSupported || !text) return null
+
+  const px = size === 'sm' ? 'h-4 w-4' : 'h-5 w-5'
+  return (
+    <button
+      type="button"
+      aria-label="Прослушать"
+      title="Прослушать"
+      onClick={async (e) => {
+        e.stopPropagation() // на карточке клик переворачивает — озвучка не должна
+        setBusy(true)
+        await speak(text)
+        setBusy(false)
+      }}
+      className={`shrink-0 rounded-lg p-1.5 transition ${
+        busy
+          ? 'text-indigo-600 dark:text-indigo-400'
+          : 'text-slate-400 hover:bg-slate-100 hover:text-indigo-600 dark:hover:bg-slate-800 dark:hover:text-indigo-400'
+      } ${className}`}
+    >
+      <svg viewBox="0 0 20 20" fill="currentColor" className={px}>
+        <path d="M10.5 3.75a.75.75 0 0 0-1.24-.57L5.9 6.25H3.5A1.5 1.5 0 0 0 2 7.75v4.5a1.5 1.5 0 0 0 1.5 1.5h2.4l3.36 3.07a.75.75 0 0 0 1.24-.57V3.75Z" />
+        {busy && (
+          <path d="M13.28 6.22a.75.75 0 0 1 1.06 0 5.35 5.35 0 0 1 0 7.56.75.75 0 1 1-1.06-1.06 3.85 3.85 0 0 0 0-5.44.75.75 0 0 1 0-1.06Zm2.47-2.47a.75.75 0 0 1 1.06 0 8.85 8.85 0 0 1 0 12.5.75.75 0 1 1-1.06-1.06 7.35 7.35 0 0 0 0-10.38.75.75 0 0 1 0-1.06Z" />
+        )}
+        {!busy && (
+          <path d="M13.28 6.22a.75.75 0 0 1 1.06 0 5.35 5.35 0 0 1 0 7.56.75.75 0 1 1-1.06-1.06 3.85 3.85 0 0 0 0-5.44.75.75 0 0 1 0-1.06Z" />
+        )}
+      </svg>
+    </button>
+  )
+}
+
+/** Транскрипция и часть речи рядом со словом. */
+export function WordInfo({ card, className = '' }) {
+  if (!card?.transcription && !card?.part_of_speech) return null
+  return (
+    <span className={`flex flex-wrap items-center justify-center gap-2 text-sm ${className}`}>
+      {card.transcription && (
+        <span className="text-slate-500 dark:text-slate-400">{card.transcription}</span>
+      )}
+      {card.part_of_speech && (
+        <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-xs text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+          {card.part_of_speech}
+        </span>
+      )}
+    </span>
   )
 }
 

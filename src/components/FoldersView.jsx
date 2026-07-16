@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import * as db from '../lib/db'
 import { Button, Card, EmptyState, ErrorText, Input, Modal, Spinner } from './ui'
+import DailyPanel from './DailyPanel'
 
 export default function FoldersView({ user, onOpen }) {
   const [folders, setFolders] = useState([])
@@ -50,6 +51,8 @@ export default function FoldersView({ user, onOpen }) {
 
   return (
     <div>
+      <DailyPanel user={user} />
+
       <div className="mb-5 flex items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-semibold">Папки</h1>

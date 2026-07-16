@@ -4,6 +4,7 @@ import { Button, Card, EmptyState, ErrorText, Input, Modal, plural, Spinner } fr
 import { IconButton, PencilIcon, PlusIcon, TrashIcon } from './FoldersView'
 import Flashcards from './Flashcards'
 import Learn from './Learn'
+import Listening from './Listening'
 
 function shuffleArray(arr) {
   const a = [...arr]
@@ -91,11 +92,12 @@ export default function SetsView({ user, folder, onOpen }) {
       setSession(null)
       load() // счётчики и прогресс могли измениться за сессию
     }
-    return session.mode === 'flash' ? (
-      <Flashcards cards={session.cards} setName={`${folder.name} · все слова`} onExit={exit} />
-    ) : (
-      <Learn cards={session.cards} setName={`${folder.name} · все слова`} onExit={exit} />
-    )
+    const title = `${folder.name} · все слова`
+    if (session.mode === 'flash')
+      return <Flashcards cards={session.cards} setName={title} onExit={exit} />
+    if (session.mode === 'listen')
+      return <Listening cards={session.cards} setName={title} onExit={exit} />
+    return <Learn cards={session.cards} setName={title} onExit={exit} />
   }
 
   const totalCards = Object.values(stats).reduce((a, s) => a + s.total, 0)
@@ -223,7 +225,7 @@ export default function SetsView({ user, folder, onOpen }) {
             сохраняется тем же карточкам, что и при изучении набора по отдельности.
           </p>
 
-          <div className="grid gap-2 sm:grid-cols-2">
+          <div className="grid gap-2 sm:grid-cols-3">
             <ModeOption
               title="Learn"
               hint="Адаптивный тренажёр"
@@ -235,6 +237,12 @@ export default function SetsView({ user, folder, onOpen }) {
               hint="Карточки с переворотом"
               active={learnAllMode === 'flash'}
               onClick={() => setLearnAllMode('flash')}
+            />
+            <ModeOption
+              title="На слух"
+              hint="Слушать и записывать"
+              active={learnAllMode === 'listen'}
+              onClick={() => setLearnAllMode('listen')}
             />
           </div>
 

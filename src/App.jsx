@@ -4,6 +4,7 @@ import AuthScreen from './components/AuthScreen'
 import FoldersView from './components/FoldersView'
 import SetsView from './components/SetsView'
 import SetView from './components/SetView'
+import StatsView from './components/StatsView'
 import { Button, Card, Spinner, ThemeToggle } from './components/ui'
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
   // Навигация без роутера: два уровня вложенности, обратно — по хлебным крошкам.
   const [folder, setFolder] = useState(null)
   const [set, setSet] = useState(null)
+  const [stats, setStats] = useState(false)
 
   useEffect(() => {
     if (!isSupabaseConfigured) {
@@ -45,38 +47,56 @@ export default function App() {
   if (!session) return <AuthScreen />
 
   const user = session.user
+  const home = () => {
+    setFolder(null)
+    setSet(null)
+    setStats(false)
+  }
 
   return (
     <div className="min-h-full">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-slate-50/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
         <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-3">
-          <button
-            onClick={() => {
-              setFolder(null)
-              setSet(null)
-            }}
-            className="flex shrink-0 items-center gap-2"
-          >
+          <button onClick={home} className="flex shrink-0 items-center gap-2">
             <span className="grid h-8 w-8 place-items-center rounded-lg bg-indigo-600 text-sm font-bold text-white">
               A
             </span>
             <span className="hidden font-semibold sm:inline">Слова</span>
           </button>
 
-          <Breadcrumbs
-            folder={folder}
-            set={set}
-            onRoot={() => {
-              setFolder(null)
-              setSet(null)
-            }}
-            onFolder={() => setSet(null)}
-          />
+          {stats ? (
+            <nav className="flex min-w-0 items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
+              <span className="text-slate-300 dark:text-slate-600">/</span>
+              <span className="text-slate-900 dark:text-slate-100">Статистика</span>
+            </nav>
+          ) : (
+            <Breadcrumbs
+              folder={folder}
+              set={set}
+              onRoot={home}
+              onFolder={() => setSet(null)}
+            />
+          )}
 
           <div className="ml-auto flex shrink-0 items-center gap-1">
             <span className="hidden max-w-[12rem] truncate text-xs text-slate-500 dark:text-slate-400 lg:inline">
               {user.email}
             </span>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setStats((v) => !v)
+                setFolder(null)
+                setSet(null)
+              }}
+              className="px-2"
+              aria-label="Статистика"
+              title="Статистика"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                <path d="M15.5 2A1.5 1.5 0 0 0 14 3.5v13a1.5 1.5 0 0 0 3 0v-13A1.5 1.5 0 0 0 15.5 2ZM10 7a1.5 1.5 0 0 0-1.5 1.5v8a1.5 1.5 0 0 0 3 0v-8A1.5 1.5 0 0 0 10 7ZM4.5 11A1.5 1.5 0 0 0 3 12.5v4a1.5 1.5 0 0 0 3 0v-4A1.5 1.5 0 0 0 4.5 11Z" />
+              </svg>
+            </Button>
             <ThemeToggle />
             <Button
               variant="ghost"
@@ -103,7 +123,9 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-5xl px-4 py-6 sm:py-8">
-        {set ? (
+        {stats ? (
+          <StatsView />
+        ) : set ? (
           <SetView user={user} set={set} />
         ) : folder ? (
           <SetsView user={user} folder={folder} onOpen={setSet} />

@@ -14,8 +14,10 @@
       `cards`, политики RLS и бакет `card-images`.
    2. [`supabase/migration_02_positions.sql`](supabase/migration_02_positions.sql) —
       колонки `position` для явного порядка наборов и карточек.
+   3. [`supabase/migration_03_srs.sql`](supabase/migration_03_srs.sql) — поля
+      интервального повторения и словаря, таблицы `user_settings` и `study_days`.
 
-   Оба скрипта идемпотентные, повторный запуск ничего не сломает.
+   Все скрипты идемпотентные, повторный запуск ничего не сломает.
 
 3. **Вставьте ключи.** Откройте [`src/lib/supabase.js`](src/lib/supabase.js) и замените
    значения двух переменных вверху файла:
@@ -29,7 +31,12 @@
    `SUPABASE_URL` — это поле **Project URL**, `SUPABASE_ANON_KEY` — ключ **anon / public**.
    Ключ `service_role` сюда вставлять нельзя.
 
-4. **Запустите:**
+4. **Ключ для подбора картинок** (необязательно). Откройте
+   [`src/lib/images.js`](src/lib/images.js) и вставьте свой Access Key от Unsplash —
+   где его взять, написано там же в комментарии. Без ключа работает всё, кроме кнопки
+   «Подобрать картинку»: картинку по-прежнему можно выбрать с диска.
+
+5. **Запустите:**
 
    ```bash
    npm install
@@ -74,7 +81,15 @@ npm run preview  # локальный просмотр собранной вер
 | Файл | Что внутри |
 | --- | --- |
 | `src/lib/supabase.js` | Ключи Supabase, клиент, ссылки на картинки |
+| `src/lib/images.js` | Ключ Unsplash и подбор картинок по слову |
 | `src/lib/db.js` | Все запросы к базе и загрузка файлов |
+| `src/lib/srs.js` | Алгоритм SM-2, срок повторения, стрик |
+| `src/lib/speech.js` | Озвучка через встроенный синтез речи браузера |
+| `src/lib/dictionary.js` | Транскрипция и часть речи из dictionaryapi.dev |
+| `src/lib/export.js` | Выгрузка в JSON и CSV |
+| `src/components/Listening.jsx` | Режим на слух |
+| `src/components/StatsView.jsx` | Статистика, повторение, экспорт |
+| `src/components/DailyPanel.jsx` | Стрик и дневная цель |
 | `src/components/FoldersView.jsx` | Папки: создание, переименование, удаление |
 | `src/components/SetsView.jsx` | Наборы внутри папки, режим «Учить все» |
 | `scripts/import_cards.mjs` | Разовый импорт выгрузки из `data/` |

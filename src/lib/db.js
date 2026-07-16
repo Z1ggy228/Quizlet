@@ -1,4 +1,5 @@
 import { supabase, CARD_IMAGES_BUCKET } from './supabase'
+import { localDay, schedule } from './srs'
 
 // Все запросы дополнительно фильтруются политиками RLS на стороне Supabase,
 // user_id проставляется явно, потому что он NOT NULL и участвует в проверке.
@@ -118,7 +119,9 @@ export async function statsBySet(setIds) {
 
 // ── Карточки ─────────────────────────────────────────────────────────────────
 
-const CARD_FIELDS = 'id, set_id, word_en, word_ru, image_path, context, mastery_level, position, created_at'
+const CARD_FIELDS =
+  'id, set_id, word_en, word_ru, image_path, context, mastery_level, position, created_at, ' +
+  'transcription, part_of_speech, ease_factor, interval_days, repetitions, due_date, times_seen, times_wrong'
 
 export async function listCards(setId) {
   return fetchAllPages(() =>
@@ -162,7 +165,11 @@ export async function listFolderCards(folderId) {
   )
 }
 
-export async function createCard(userId, setId, { word_en, word_ru, image_path, context }) {
+export async function createCard(
+  userId,
+  setId,
+  { word_en, word_ru, image_path, context, transcription, part_of_speech },
+) {
   const position = await nextPosition('cards', 'set_id', setId)
   const { data, error } = await supabase
     .from('cards')
@@ -173,6 +180,8 @@ export async function createCard(userId, setId, { word_en, word_ru, image_path, 
       word_ru: word_ru.trim(),
       image_path: image_path || null,
       context: context?.trim() || null,
+      transcription: transcription?.trim() || null,
+      part_of_speech: part_of_speech?.trim() || null,
       position,
     })
     .select()
@@ -205,6 +214,34 @@ export async function setMastery(cardId, level) {
   const { error } = await supabase
     .from('cards')
     .update({ mastery_level: level })
+    .eq('id', cardId)
+  if (error) throw error
+}
+
+/**
+ * Ответ на карточку: разом обновляем и уровень освоения (для сессии), и
+ * состояние SM-2 (для расписания повторений), и счётчики показов/ошибок.
+ * Возвращаем поля, которые записали, — вызывающий кладёт их в свою копию
+ * карточки, иначе следующий расчёт SM-2 пойдёт от устаревших значений.
+ */
+export async function recordAnswer(card, { mastery, quality, correct }) {
+  const srs = schedule(card, quality)
+  const patch = {
+    ...srs,
+    mastery_level: mastery,
+    times_seen: (card.times_seen ?? 0) + 1,
+    times_wrong: (card.times_wrong ?? 0) + (correct ? 0 : 1),
+  }
+  const { error } = await supabase.from('cards').update(patch).eq('id', card.id)
+  if (error) throw error
+  return patch
+}
+
+/** Ручная правка транскрипции и части речи. */
+export async function setWordInfo(cardId, { transcription, part_of_speech }) {
+  const { error } = await supabase
+    .from('cards')
+    .update({ transcription: transcription || null, part_of_speech: part_of_speech || null })
     .eq('id', cardId)
   if (error) throw error
 }
@@ -252,4 +289,142 @@ export async function uploadCardImage(userId, file) {
 export async function removeCardImage(path) {
   if (!path) return
   await supabase.storage.from(CARD_IMAGES_BUCKET).remove([path])
+}
+
+// ── Повторение и статистика по всем наборам сразу ────────────────────────────
+
+const MASTERED = 3
+
+/**
+ * Очередь на повторение: карточки, у которых наступил срок по SM-2, плюс просто
+ * недоученные. Не привязана к папкам — это отдельный поток «что горит сегодня».
+ */
+export async function listReviewCards(limit = 200) {
+  const now = new Date().toISOString()
+  const due = await fetchAllPages(() =>
+    supabase
+      .from('cards')
+      .select(CARD_FIELDS)
+      .lte('due_date', now)
+      .lt('mastery_level', MASTERED)
+      .order('due_date', { ascending: true })
+      .order('id'),
+  )
+  return due.slice(0, limit)
+}
+
+/** Сводка по всем словам пользователя. */
+export async function overallStats() {
+  const now = new Date().toISOString()
+  const count = async (build) => {
+    const { count, error } = await build().select('id', { count: 'exact', head: true })
+    if (error) throw error
+    return count ?? 0
+  }
+  const [total, mastered, due] = await Promise.all([
+    count(() => supabase.from('cards')),
+    count(() => supabase.from('cards').gte('mastery_level', MASTERED)),
+    count(() => supabase.from('cards').lte('due_date', now).lt('mastery_level', MASTERED)),
+  ])
+  return { total, mastered, due, learning: total - mastered }
+}
+
+/** Слова, которые чаще всего заваливаются. */
+export async function problemCards(limit = 15) {
+  const { data, error } = await supabase
+    .from('cards')
+    .select(CARD_FIELDS)
+    .gt('times_wrong', 0)
+    .order('times_wrong', { ascending: false })
+    .order('id')
+    .limit(limit)
+  if (error) throw error
+  return data
+}
+
+// ── Настройки, стрик и дневная цель ──────────────────────────────────────────
+
+export const DEFAULT_DAILY_GOAL = 20
+
+/** Настройки создаются лениво: строки может ещё не быть. */
+export async function getSettings(userId) {
+  const { data, error } = await supabase
+    .from('user_settings')
+    .select('user_id, daily_goal')
+    .eq('user_id', userId)
+    .maybeSingle()
+  if (error) throw error
+  return data ?? { user_id: userId, daily_goal: DEFAULT_DAILY_GOAL }
+}
+
+export async function saveDailyGoal(userId, goal) {
+  const { error } = await supabase
+    .from('user_settings')
+    .upsert({ user_id: userId, daily_goal: goal }, { onConflict: 'user_id' })
+  if (error) throw error
+}
+
+/** Дни занятий за последний год — из них считается стрик. */
+export async function listStudyDays(days = 400) {
+  const from = new Date()
+  from.setDate(from.getDate() - days)
+  const { data, error } = await supabase
+    .from('study_days')
+    .select('day, words_count')
+    .gte('day', localDay(from))
+    .order('day', { ascending: false })
+  if (error) throw error
+  return data
+}
+
+/**
+ * Отмечаем изученное слово за сегодня. Считает функция в базе: PostgREST не
+ * умеет инкремент, а читать-и-писать из браузера — гонка между ответами.
+ */
+export async function bumpStudyDay(words = 1) {
+  const { data, error } = await supabase.rpc('bump_study_day', {
+    p_day: localDay(),
+    p_words: words,
+  })
+  if (error) throw error
+  return Array.isArray(data) ? data[0] : data
+}
+
+// ── Экспорт ──────────────────────────────────────────────────────────────────
+
+/** Полный слепок данных пользователя: папки → наборы → карточки. Без картинок. */
+export async function exportEverything() {
+  const [folders, sets] = await Promise.all([
+    listFolders(),
+    fetchAllPages(() =>
+      supabase.from('sets').select('id, folder_id, name, position, created_at').order('id'),
+    ),
+  ])
+  const cards = await fetchAllPages(() => supabase.from('cards').select(CARD_FIELDS).order('id'))
+
+  const bySet = new Map()
+  for (const c of cards) {
+    if (!bySet.has(c.set_id)) bySet.set(c.set_id, [])
+    bySet.get(c.set_id).push(c)
+  }
+  const byFolder = new Map()
+  for (const s of sets) {
+    if (!byFolder.has(s.folder_id)) byFolder.set(s.folder_id, [])
+    byFolder.get(s.folder_id).push(s)
+  }
+  const sortPos = (a, b) => a.position - b.position || a.created_at.localeCompare(b.created_at)
+
+  return {
+    exported_at: new Date().toISOString(),
+    folders: folders.map((f) => ({
+      name: f.name,
+      created_at: f.created_at,
+      sets: (byFolder.get(f.id) ?? []).sort(sortPos).map((s) => ({
+        name: s.name,
+        position: s.position,
+        created_at: s.created_at,
+        cards: (bySet.get(s.id) ?? []).sort(sortPos).map(({ id, set_id, ...card }) => card),
+      })),
+    })),
+  }
 }

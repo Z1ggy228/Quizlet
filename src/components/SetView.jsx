@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import * as db from '../lib/db'
 import { imageUrl } from '../lib/supabase'
-import { Button, Card, EmptyState, ErrorText, Modal, plural, Spinner } from './ui'
+import { Button, Card, EmptyState, ErrorText, Modal, plural, SpeakButton, Spinner } from './ui'
 import { IconButton, PencilIcon, PlusIcon, TrashIcon } from './FoldersView'
 import CardDialog from './CardDialog'
 import ImportDialog from './ImportDialog'
 import Flashcards from './Flashcards'
 import Learn from './Learn'
+import Listening from './Listening'
 
 export default function SetView({ user, set }) {
   const [cards, setCards] = useState([])
@@ -73,6 +74,16 @@ export default function SetView({ user, set }) {
       />
     )
   }
+  if (mode === 'listen') {
+    return (
+      <Listening
+        cards={cards}
+        setName={set.name}
+        onMastery={applyMastery}
+        onExit={() => setMode('cards')}
+      />
+    )
+  }
 
   const mastered = cards.filter((c) => c.mastery_level >= 3).length
 
@@ -85,7 +96,7 @@ export default function SetView({ user, set }) {
         </p>
       </div>
 
-      <div className="mb-6 grid gap-3 sm:grid-cols-2">
+      <div className="mb-6 grid gap-3 sm:grid-cols-3">
         <ModeButton
           title="Flashcards"
           hint="Карточки с переворотом"
@@ -105,6 +116,18 @@ export default function SetView({ user, set }) {
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
               <path d="M10.394 2.08a1.75 1.75 0 0 0-.788 0l-7 1.75A1.75 1.75 0 0 0 1.25 5.53v.216c0 .524.234 1.02.638 1.35l6.75 5.5a1.75 1.75 0 0 0 2.224 0l6.75-5.5c.404-.33.638-.826.638-1.35V5.53a1.75 1.75 0 0 0-1.356-1.7l-7-1.75ZM3.5 9.35v3.9c0 .64.35 1.23.91 1.54 1.44.79 3.36 1.46 5.59 1.46s4.15-.67 5.59-1.46c.56-.31.91-.9.91-1.54v-3.9l-4.8 3.91a3.25 3.25 0 0 1-4.4 0L3.5 9.35Z" />
+            </svg>
+          }
+        />
+        <ModeButton
+          title="На слух"
+          hint="Слушать и записывать"
+          disabled={cards.length === 0}
+          onClick={() => setMode('listen')}
+          icon={
+            <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+              <path d="M10.5 3.75a.75.75 0 0 0-1.24-.57L5.9 6.25H3.5A1.5 1.5 0 0 0 2 7.75v4.5a1.5 1.5 0 0 0 1.5 1.5h2.4l3.36 3.07a.75.75 0 0 0 1.24-.57V3.75Z" />
+              <path d="M13.28 6.22a.75.75 0 0 1 1.06 0 5.35 5.35 0 0 1 0 7.56.75.75 0 1 1-1.06-1.06 3.85 3.85 0 0 0 0-5.44.75.75 0 0 1 0-1.06Zm2.47-2.47a.75.75 0 0 1 1.06 0 8.85 8.85 0 0 1 0 12.5.75.75 0 1 1-1.06-1.06 7.35 7.35 0 0 0 0-10.38.75.75 0 0 1 0-1.06Z" />
             </svg>
           }
         />
@@ -152,10 +175,18 @@ export default function SetView({ user, set }) {
                 )}
 
                 <div className="min-w-0 flex-1">
-                  {/* line-clamp, а не truncate: у части карточек значения в несколько строк */}
-                  <p className="line-clamp-2 whitespace-pre-line font-display font-medium">
-                    {c.word_en}
-                  </p>
+                  <div className="flex items-center gap-1">
+                    {/* line-clamp, а не truncate: у части карточек значения в несколько строк */}
+                    <p className="line-clamp-2 whitespace-pre-line font-display font-medium">
+                      {c.word_en}
+                    </p>
+                    <SpeakButton text={c.word_en} size="sm" />
+                    {c.transcription && (
+                      <span className="shrink-0 truncate text-xs text-slate-400 dark:text-slate-500">
+                        {c.transcription}
+                      </span>
+                    )}
+                  </div>
                   <p className="line-clamp-2 whitespace-pre-line text-sm text-slate-500 dark:text-slate-400">
                     {c.word_ru}
                   </p>

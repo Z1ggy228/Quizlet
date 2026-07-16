@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { imageUrl } from '../lib/supabase'
-import { Button, Card, Modal, OptionGroup, useSetting } from './ui'
+import { Button, Card, Modal, OptionGroup, SpeakButton, WordInfo, useSetting } from './ui'
 
 const PRAISE = [
   'Так держать!',
@@ -155,6 +155,15 @@ export default function Flashcards({ cards, setName, onExit }) {
       {card.word_en}
     </span>
   )
+  // Транскрипция и озвучка нужны только рядом с английским словом.
+  const enExtras = (
+    <>
+      <div className="flex items-center justify-center gap-1">
+        <SpeakButton text={card.word_en} />
+      </div>
+      <WordInfo card={card} />
+    </>
+  )
   // Оборот всегда несёт картинку и контекст — они привязаны к слову, а не к стороне.
   const extras = (
     <>
@@ -217,14 +226,16 @@ export default function Flashcards({ cards, setName, onExit }) {
       >
         <div className="flip-scene">
           <div className={`flip-card relative h-[22rem] w-full cursor-grab active:cursor-grabbing sm:h-[26rem] ${flipped ? 'is-flipped' : ''}`}>
-            <div className="flip-face absolute inset-0 flex flex-col items-center justify-center gap-4 overflow-y-auto rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
+            <div className="flip-face absolute inset-0 flex flex-col items-center justify-center gap-3 overflow-y-auto rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
               <p className="text-3xl font-semibold sm:text-4xl">{front === 'ru' ? faceRu : faceEn}</p>
+              {front === 'en' && enExtras}
               <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
                 Нажмите, чтобы перевернуть · тяните вправо «знаю», влево «не знаю»
               </p>
             </div>
-            <div className="flip-face flip-face-back absolute inset-0 flex flex-col items-center justify-center gap-4 overflow-y-auto rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
+            <div className="flip-face flip-face-back absolute inset-0 flex flex-col items-center justify-center gap-3 overflow-y-auto rounded-2xl bg-white p-6 text-center shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
               <p className="text-3xl font-semibold sm:text-4xl">{front === 'ru' ? faceEn : faceRu}</p>
+              {front === 'ru' && enExtras}
               {extras}
             </div>
           </div>
