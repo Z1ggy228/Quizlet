@@ -94,11 +94,18 @@ export async function deleteSet(id) {
   if (error) throw error
 }
 
-/** Количество карточек в каждом наборе папки: { [setId]: count } */
+/**
+ * Количество карточек в каждом наборе папки: { [setId]: count }
+ *
+ * Сортировка по id, а не по set_id: страницы режутся через limit/offset, и при
+ * неуникальном ключе сортировки Postgres не обязан отдавать одинаковые строки
+ * при равных значениях — на границе страниц карточки задваивались бы и терялись,
+ * а счётчик врал бы на несколько слов.
+ */
 export async function countCardsBySet(setIds) {
   if (!setIds.length) return {}
   const rows = await fetchAllPages(() =>
-    supabase.from('cards').select('set_id').in('set_id', setIds).order('set_id'),
+    supabase.from('cards').select('set_id').in('set_id', setIds).order('id'),
   )
   return rows.reduce((acc, row) => {
     acc[row.set_id] = (acc[row.set_id] || 0) + 1
@@ -138,8 +145,12 @@ export async function listFolderCards(folderId) {
         'set_id',
         sets.map((s) => s.id),
       )
+      // Ключ сортировки обязан быть уникальным, иначе постраничное чтение
+      // теряет карточки на границе страниц; id — подстраховка на случай
+      // одинаковых position.
       .order('set_id')
-      .order('position', { ascending: true }),
+      .order('position', { ascending: true })
+      .order('id'),
   )
 
   const setOrder = new Map(sets.map((s, i) => [s.id, i]))
