@@ -511,10 +511,22 @@ function FinalScreen({ total, mastered, reviewed, stats, onExit, onRestart, rese
       </p>
 
       <div className="mt-6 grid grid-cols-3 gap-3">
-        <Stat value={mastered} label="выучено" tone="text-emerald-600 dark:text-emerald-400" />
-        <Stat value={reviewed} label="на повторение" tone="text-amber-600 dark:text-amber-400" />
+        {/* Со слэшем, а не «из»: на телефоне «1721 из 1721» не влезает в треть ширины. */}
+        <Stat
+          value={`${mastered}/${total}`}
+          label="выучено"
+          tone="text-emerald-600 dark:text-emerald-400"
+        />
+        <Stat value={reviewed} label="с ошибками" tone="text-amber-600 dark:text-amber-400" />
         <Stat value={`${accuracy}%`} label="точность" />
       </div>
+
+      {reviewed > 0 && (
+        <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+          «С ошибками» — слова, где вы ошиблись хотя бы раз за сессию. Они тоже выучены: сессия
+          заканчивается, только когда все слова доведены до конца.
+        </p>
+      )}
 
       <ErrorText>{error}</ErrorText>
 

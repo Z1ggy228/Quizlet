@@ -69,7 +69,7 @@ export default function FoldersView({ user, onOpen }) {
           action={<Button onClick={() => open('create')}>Создать первую папку</Button>}
         />
       ) : (
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="space-y-2">
           {folders.map((f) => (
             <li key={f.id}>
               <Card className="group flex items-center gap-2 p-4 transition hover:ring-indigo-300 dark:hover:ring-indigo-700">

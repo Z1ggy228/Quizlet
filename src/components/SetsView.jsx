@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import * as db from '../lib/db'
-import { Button, Card, EmptyState, ErrorText, Input, Modal, Spinner } from './ui'
+import { Button, Card, EmptyState, ErrorText, Input, Modal, plural, Spinner } from './ui'
 import { IconButton, PencilIcon, PlusIcon, TrashIcon } from './FoldersView'
 import Flashcards from './Flashcards'
 import Learn from './Learn'
@@ -138,16 +138,16 @@ export default function SetsView({ user, folder, onOpen }) {
           action={<Button onClick={() => open('create')}>Создать набор</Button>}
         />
       ) : (
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="space-y-2">
           {sets.map((s) => (
             <li key={s.id}>
               <Card className="flex items-center gap-2 p-4 transition hover:ring-indigo-300 dark:hover:ring-indigo-700">
                 <button
                   onClick={() => onOpen(s)}
-                  className="flex min-w-0 flex-1 flex-col items-start text-left"
+                  className="flex min-w-0 flex-1 items-baseline gap-3 text-left"
                 >
-                  <span className="w-full truncate font-medium">{s.name}</span>
-                  <span className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                  <span className="min-w-0 flex-1 truncate font-medium">{s.name}</span>
+                  <span className="shrink-0 text-xs text-slate-500 dark:text-slate-400">
                     {plural(counts[s.id] || 0)}
                   </span>
                 </button>
@@ -286,11 +286,3 @@ function ModeOption({ title, hint, active, onClick }) {
   )
 }
 
-/** Склонение: plural(2, ['слово','слова','слов']) → «2 слова». */
-function plural(n, forms = ['слово', 'слова', 'слов']) {
-  const mod10 = n % 10
-  const mod100 = n % 100
-  if (mod10 === 1 && mod100 !== 11) return `${n} ${forms[0]}`
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} ${forms[1]}`
-  return `${n} ${forms[2]}`
-}

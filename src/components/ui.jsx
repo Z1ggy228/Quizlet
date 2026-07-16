@@ -138,6 +138,15 @@ export function ErrorText({ children }) {
   )
 }
 
+/** Склонение: plural(2, ['слово','слова','слов']) → «2 слова». */
+export function plural(n, forms = ['слово', 'слова', 'слов']) {
+  const mod10 = n % 10
+  const mod100 = n % 100
+  if (mod10 === 1 && mod100 !== 11) return `${n} ${forms[0]}`
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${n} ${forms[1]}`
+  return `${n} ${forms[2]}`
+}
+
 /** Настройка режима, переживающая перезагрузку: хранится локально в браузере. */
 export function useSetting(key, initial) {
   const [value, setValue] = useState(() => {

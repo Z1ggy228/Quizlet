@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import * as db from '../lib/db'
 import { imageUrl } from '../lib/supabase'
-import { Button, Card, EmptyState, ErrorText, Modal, Spinner } from './ui'
+import { Button, Card, EmptyState, ErrorText, Modal, plural, Spinner } from './ui'
 import { IconButton, PencilIcon, PlusIcon, TrashIcon } from './FoldersView'
 import CardDialog from './CardDialog'
 import ImportDialog from './ImportDialog'
@@ -81,7 +81,7 @@ export default function SetView({ user, set }) {
       <div className="mb-5">
         <h1 className="truncate text-2xl font-semibold">{set.name}</h1>
         <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
-          {cards.length} карточек · выучено {mastered}
+          {plural(cards.length, ['карточка', 'карточки', 'карточек'])} · выучено {mastered}
         </p>
       </div>
 
