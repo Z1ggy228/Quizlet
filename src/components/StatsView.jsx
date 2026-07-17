@@ -64,7 +64,11 @@ export default function StatsView({ user }) {
       setProblem((prev) =>
         prev
           .map((c) => (c.id === card.id ? { ...c, flagged: false } : c))
-          .filter((c) => c.flagged || (c.times_wrong > 0 && c.times_seen >= db.MIN_SEEN_FOR_PROBLEM)),
+          .filter(
+            (c) =>
+              c.flagged ||
+              (c.mastery_level < 3 && c.times_wrong > 0 && c.times_seen >= db.MIN_SEEN_FOR_PROBLEM),
+          ),
       )
     } catch (e) {
       setError(e.message)

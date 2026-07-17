@@ -232,9 +232,6 @@ export async function recordAnswer(card, { mastery, quality, correct }) {
     times_seen: (card.times_seen ?? 0) + 1,
     times_wrong: (card.times_wrong ?? 0) + (correct ? 0 : 1),
   }
-  // Выучили — снимаем ручную пометку: слово всё равно уходит из проблемных,
-  // а флаг иначе всплыл бы снова при первой же будущей ошибке.
-  if (mastery >= MASTERED) patch.flagged = false
   const { error } = await supabase.from('cards').update(patch).eq('id', card.id)
   if (error) throw error
   return patch
@@ -357,27 +354,26 @@ export const MIN_SEEN_FOR_PROBLEM = 3
  * кренил список в сторону слов, которые просто чаще гоняли: 5 ошибок из 50
  * (10%) оказывались выше 4 из 5 (80%). Помеченные руками идут первыми.
  *
- * Выученные слова исключаются. Счётчик ошибок никогда не убывает, и без этого
- * фильтра слово, только что прогнанное без единой ошибки, висело бы в списке
- * вечно: чистый прогон растит только знаменатель (4 из 5 → 4 из 8, то есть 80%
- * → 50%). Ошибётесь снова — уровень обнулится, слово вернётся со всей историей.
- * Ручную пометку тоже снимаем при выучивании — см. recordAnswer.
+ * Помеченное слово показывается ВСЕГДА, даже выученное: в этом и смысл ручной
+ * пометки — подрилить слово, которое статистика считает известным. Пометка
+ * снимается только руками. А «набравшие ошибки» исключаются при выучивании:
+ * счётчик ошибок не убывает, и без этого слово, прогнанное без единой ошибки,
+ * висело бы вечно (чистый прогон растит только знаменатель: 4 из 5 → 4 из 8).
  *
- * Порог в 3 показа — только для «набравших ошибки», ручная пометка его минует:
- * пометили слово с первого раза — оно уже в списке. Фильтр по times_seen
- * применяем на клиенте, поэтому в запросе только «flagged ИЛИ есть ошибки».
+ * Порог в 3 показа — только для «набравших ошибки», ручная пометка его минует.
+ * Часть условий (порог показов) проверяем на клиенте: в запросе оставляем
+ * «flagged ИЛИ (невыучено И есть ошибки)».
  */
 export async function problemCards() {
   const rows = await fetchAllPages(() =>
     supabase
       .from('cards')
       .select(CARD_FIELDS)
-      .lt('mastery_level', MASTERED)
-      .or('flagged.eq.true,times_wrong.gt.0')
+      .or(`flagged.eq.true,and(mastery_level.lt.${MASTERED},times_wrong.gt.0)`)
       .order('id'),
   )
   return rows
-    .filter((c) => c.flagged || c.times_seen >= MIN_SEEN_FOR_PROBLEM)
+    .filter((c) => c.flagged || (c.mastery_level < MASTERED && c.times_seen >= MIN_SEEN_FOR_PROBLEM))
     .map((c) => ({ ...c, wrong_rate: c.times_seen ? c.times_wrong / c.times_seen : 0 }))
     .sort(
       (a, b) =>
