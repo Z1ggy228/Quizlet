@@ -58,10 +58,8 @@ export default function App() {
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-slate-50/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
         <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-3">
           <button onClick={home} className="flex shrink-0 items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-indigo-600 text-sm font-bold text-white">
-              A
-            </span>
-            <span className="hidden font-semibold sm:inline">Слова</span>
+            <img src="/favicon.svg" alt="" className="h-8 w-8 rounded-lg" />
+            <span className="hidden font-display text-lg sm:inline">Ziglish</span>
           </button>
 
           {stats ? (

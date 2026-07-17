@@ -40,10 +40,8 @@ export default function AuthScreen() {
       <div className="w-full max-w-sm">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="grid h-9 w-9 place-items-center rounded-lg bg-indigo-600 text-lg font-bold text-white">
-              A
-            </div>
-            <span className="text-lg font-semibold">Слова</span>
+            <img src="/favicon.svg" alt="" className="h-9 w-9 rounded-lg" />
+            <span className="font-display text-xl">Ziglish</span>
           </div>
           <ThemeToggle />
         </div>
