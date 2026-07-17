@@ -466,21 +466,31 @@ function ChoiceButton({ option, feedback, answer, onClick }) {
     else tone = 'bg-white opacity-50 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800'
   }
 
+  // Динамик — отдельный элемент поверх варианта, а не вложенная кнопка (вложить
+  // button в button нельзя). SpeakButton внутри гасит всплытие, поэтому нажатие
+  // на него озвучивает слово, но не засчитывает ответ.
   return (
-    <button
-      type="button"
-      disabled={!!feedback}
-      onClick={(e) => {
-        // Сбрасываем фокус: иначе на телефоне подсветка нажатой кнопки
-        // остаётся и достаётся варианту на том же месте в следующем вопросе.
-        e.currentTarget.blur()
-        playClick()
-        onClick()
-      }}
-      className={`whitespace-pre-line break-words rounded-lg px-4 py-3 text-left text-sm font-medium shadow-sm ring-1 transition ${tone}`}
-    >
-      {option}
-    </button>
+    <div className={`relative rounded-lg shadow-sm ring-1 transition ${tone}`}>
+      <button
+        type="button"
+        disabled={!!feedback}
+        onClick={(e) => {
+          // Сбрасываем фокус: иначе на телефоне подсветка нажатой кнопки
+          // остаётся и достаётся варианту на том же месте в следующем вопросе.
+          e.currentTarget.blur()
+          playClick()
+          onClick()
+        }}
+        className="w-full whitespace-pre-line break-words rounded-lg py-3 pl-4 pr-11 text-left text-sm font-medium"
+      >
+        {option}
+      </button>
+      <SpeakButton
+        text={option}
+        size="sm"
+        className="absolute right-1.5 top-1/2 -translate-y-1/2"
+      />
+    </div>
   )
 }
 
