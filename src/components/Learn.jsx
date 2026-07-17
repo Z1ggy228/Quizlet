@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import * as db from '../lib/db'
 import { imageUrl } from '../lib/supabase'
 import { qualityOf } from '../lib/srs'
+import { isCorrectAnswer, isTypable } from '../lib/answer'
 import { markStudied } from '../lib/daily'
 import { nextPraise } from '../lib/praise'
 import { playClick, playCorrect, playFinish, playWrong, setSoundEnabled, soundEnabled, soundSupported } from '../lib/sound'
@@ -37,52 +38,6 @@ export function shuffle(arr) {
     ;[a[i], a[j]] = [a[j], a[i]]
   }
   return a
-}
-
-/** Сравниваем ответы мягко: регистр, пробелы, артикль и пунктуация не важны. */
-function normalize(s) {
-  return s
-    .toLowerCase()
-    .trim()
-    .replace(/^(to|a|an|the)\s+/, '')
-    .replace(/[.,!?;:"'`’]/g, '')
-    .replace(/\s+/g, ' ')
-}
-
-/** Скобки в термине — это транскрипция или необязательный артикль: «write (рАйт)», «(a) mother». */
-const withoutParens = (s) => s.replace(/\([^)]*\)/g, ' ')
-
-/**
- * Что засчитываем за верный ответ. Кроме самого термина принимаем его без
- * скобок, а «cat / kitty» и «country, countryside» — по любому из вариантов.
- */
-function answerVariants(expected) {
-  const out = new Set()
-  const add = (s) => {
-    const n = normalize(s)
-    if (n) out.add(n)
-  }
-  add(expected)
-  add(withoutParens(expected))
-  for (const part of expected.split(/[/,]/)) {
-    add(part)
-    add(withoutParens(part))
-  }
-  return out
-}
-
-export function isCorrectAnswer(given, expected) {
-  const g = normalize(given)
-  return !!g && answerVariants(expected).has(g)
-}
-
-/**
- * Термин, который реально набрать руками. Диалоги в несколько строк и длинные
- * фразы спрашиваем только выбором: напечатать их без опечатки нельзя, слово
- * навсегда осталось бы невыученным и сессия не закончилась бы.
- */
-function isTypable(word) {
-  return !word.includes('\n') && normalize(withoutParens(word)).length <= 24
 }
 
 /**

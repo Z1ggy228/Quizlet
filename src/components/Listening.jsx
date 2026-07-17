@@ -15,7 +15,8 @@ import {
   WordInfo,
   useSetting,
 } from './ui'
-import { isCorrectAnswer, shuffle } from './Learn'
+import { shuffle } from './Learn'
+import { isCorrectAnswer } from '../lib/answer'
 import { nextPraise } from '../lib/praise'
 import { playCorrect, playWrong } from '../lib/sound'
 
