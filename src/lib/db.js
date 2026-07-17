@@ -324,12 +324,20 @@ export async function overallStats() {
     if (error) throw error
     return count ?? 0
   }
-  const [total, mastered, due] = await Promise.all([
+  const [total, mastered, due, problem] = await Promise.all([
     value(counter()),
     value(counter().gte('mastery_level', MASTERED)),
     value(counter().lte('due_date', now).lt('mastery_level', MASTERED)),
+    // Те же правила, что у списка проблемных: невыученные, с ошибками и с
+    // достаточным числом показов, чтобы доля промахов что-то значила.
+    value(
+      counter()
+        .gt('times_wrong', 0)
+        .gte('times_seen', MIN_SEEN_FOR_PROBLEM)
+        .lt('mastery_level', MASTERED),
+    ),
   ])
-  return { total, mastered, due, learning: total - mastered }
+  return { total, mastered, due, problem, learning: total - mastered }
 }
 
 /**

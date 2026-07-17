@@ -111,7 +111,9 @@ export default function StatsView({ user }) {
         <Stat value={stats.total} label="всего слов" />
         <Stat value={stats.mastered} label="выучено" tone="text-emerald-600 dark:text-emerald-400" />
         <Stat value={stats.learning} label="в работе" tone="text-indigo-600 dark:text-indigo-400" />
-        <Stat value={stats.due} label="на повторение" tone="text-amber-600 dark:text-amber-400" />
+        {/* Сколько слов ждёт повторения — видно в блоке ниже. Здесь полезнее то,
+            что не выводится больше нигде: сколько слов упорно не даётся. */}
+        <Stat value={stats.problem} label="проблемные" tone="text-rose-600 dark:text-rose-400" />
       </div>
 
       <Card className="p-4 sm:p-5">
@@ -152,6 +154,12 @@ export default function StatsView({ user }) {
           выучены: доведёте слово до конца — оно уйдёт из списка, начнёте снова ошибаться —
           вернётся со всей своей историей.
         </p>
+        {stats.problem > problem.length && (
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            Всего таких слов {stats.problem} — ниже {problem.length} самых тяжёлых, их же запускает
+            кнопка.
+          </p>
+        )}
         {problem.length === 0 ? (
           <p className="mt-4 rounded-lg border border-dashed border-slate-300 p-6 text-center text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
             Проблемных слов сейчас нет — те, что давались трудно, вы уже довели до конца. Список
