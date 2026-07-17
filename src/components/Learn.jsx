@@ -10,6 +10,8 @@ import {
   Button,
   Card,
   ErrorText,
+  IconArrowLeft,
+  IconArrowRight,
   Input,
   Modal,
   OptionGroup,
@@ -258,7 +260,7 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
     <div className="mx-auto max-w-2xl">
       <div className="mb-4 flex items-center justify-between gap-2">
         <Button variant="ghost" onClick={onExit} className="px-2">
-          ← <span className="hidden sm:inline">К набору</span>
+          <IconArrowLeft /> <span className="hidden sm:inline">К набору</span>
         </Button>
         <span className="min-w-0 truncate text-sm text-slate-500 dark:text-slate-400">{setName}</span>
         <div className="flex shrink-0 gap-1">
@@ -303,11 +305,6 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
         </div>
       </div>
 
-      {card.flagged && (
-        <p className="mb-2 text-center text-xs font-medium text-rose-500 dark:text-rose-400">
-          Помечено как проблемное — попадёт в список в статистике
-        </p>
-      )}
 
       <ProgressBar mastered={mastered} total={total} />
 
@@ -399,7 +396,7 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
               <p className="text-sm italic text-slate-500 dark:text-slate-400">«{card.context}»</p>
             )}
             <Button onClick={advance} className="w-full sm:w-auto">
-              Дальше →
+              Дальше <IconArrowRight />
             </Button>
           </div>
         )}
@@ -527,8 +524,8 @@ function ProgressBar({ mastered, total }) {
               key={p}
               className={`absolute top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full border-2 transition ${
                 reached
-                  ? 'animate-pop border-emerald-600 bg-emerald-500 text-white'
-                  : 'border-slate-300 bg-white text-transparent dark:border-slate-600 dark:bg-slate-900'
+                  ? 'animate-pop border-emerald-600 bg-emerald-500'
+                  : 'border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-900'
               }`}
               // Последнюю отметку прижимаем внутрь: по центру она на треть
               // вылезала за правый край и растягивала страницу на телефоне.
@@ -538,13 +535,7 @@ function ProgressBar({ mastered, total }) {
               }}
               title={`${count} слов`}
             >
-              <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
-                <path
-                  fillRule="evenodd"
-                  d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              {reached && <span className="h-2 w-2 rounded-full bg-white" />}
             </span>
           )
         })}

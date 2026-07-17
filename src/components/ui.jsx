@@ -196,6 +196,41 @@ export function ErrorText({ children }) {
   )
 }
 
+/** Жирные стрелки — под стать остальным иконкам приложения. */
+export function IconArrowLeft({ className = 'h-4 w-4' }) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M15 10H5" />
+      <path d="M9.5 5 4.5 10l5 5" />
+    </svg>
+  )
+}
+
+export function IconArrowRight({ className = 'h-4 w-4' }) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M5 10h10" />
+      <path d="M10.5 5 15.5 10l-5 5" />
+    </svg>
+  )
+}
+
 /** Склонение: plural(2, ['слово','слова','слов']) → «2 слова». */
 export function plural(n, forms = ['слово', 'слова', 'слов']) {
   const mod10 = n % 10

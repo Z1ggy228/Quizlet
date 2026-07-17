@@ -2,7 +2,17 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { imageUrl } from '../lib/supabase'
 import { nextPraise } from '../lib/praise'
 import { playClick, playCorrect } from '../lib/sound'
-import { Button, Card, Modal, OptionGroup, SpeakButton, WordInfo, useSetting } from './ui'
+import {
+  Button,
+  Card,
+  IconArrowLeft,
+  IconArrowRight,
+  Modal,
+  OptionGroup,
+  SpeakButton,
+  WordInfo,
+  useSetting,
+} from './ui'
 
 // Насколько далеко надо утащить карточку, чтобы это засчиталось за ответ.
 const SWIPE = 110
@@ -179,7 +189,7 @@ export default function Flashcards({ cards, setName, onExit }) {
     <div className="mx-auto max-w-2xl">
       <div className="mb-4 flex items-center justify-between gap-2">
         <Button variant="ghost" onClick={onExit} className="px-2">
-          ← <span className="hidden sm:inline">К набору</span>
+          <IconArrowLeft /> <span className="hidden sm:inline">К набору</span>
         </Button>
         <span className="min-w-0 truncate text-sm text-slate-500 dark:text-slate-400">
           {setName} · {pos + 1} / {deck.length}
@@ -275,7 +285,7 @@ export default function Flashcards({ cards, setName, onExit }) {
           ✕ Не знаю
         </Button>
         <Button variant="ghost" onClick={() => advance(-1)} disabled={pos === 0} className="px-2" title="Предыдущая">
-          ←
+          <IconArrowLeft className="h-5 w-5" />
         </Button>
         <Button
           variant="ghost"
@@ -284,7 +294,7 @@ export default function Flashcards({ cards, setName, onExit }) {
           className="px-2"
           title="Следующая"
         >
-          →
+          <IconArrowRight className="h-5 w-5" />
         </Button>
         <Button
           variant="secondary"
