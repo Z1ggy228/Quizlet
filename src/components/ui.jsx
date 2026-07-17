@@ -22,11 +22,13 @@ export function Button({ variant = 'primary', className = '', ...props }) {
   )
 }
 
+// text-base на телефоне — не прихоть: при шрифте меньше 16px мобильный Safari
+// сам увеличивает страницу, как только курсор попадает в поле.
 export const Input = forwardRef(function Input({ className = '', ...props }, ref) {
   return (
     <input
       ref={ref}
-      className={`w-full rounded-lg border-0 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm
+      className={`w-full rounded-lg border-0 bg-white px-3 py-2 text-base text-slate-900 shadow-sm sm:text-sm
         ring-1 ring-inset ring-slate-300 placeholder:text-slate-400
         focus:ring-2 focus:ring-inset focus:ring-indigo-600
         dark:bg-slate-800 dark:text-slate-100 dark:ring-slate-700 dark:placeholder:text-slate-500
@@ -40,7 +42,7 @@ export const Textarea = forwardRef(function Textarea({ className = '', ...props 
   return (
     <textarea
       ref={ref}
-      className={`w-full rounded-lg border-0 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm
+      className={`w-full rounded-lg border-0 bg-white px-3 py-2 text-base text-slate-900 shadow-sm sm:text-sm
         ring-1 ring-inset ring-slate-300 placeholder:text-slate-400
         focus:ring-2 focus:ring-inset focus:ring-indigo-600
         dark:bg-slate-800 dark:text-slate-100 dark:ring-slate-700 dark:placeholder:text-slate-500
@@ -89,11 +91,13 @@ export function Modal({ open, onClose, title, children, wide = false }) {
         role="dialog"
         aria-modal="true"
       >
-        <div className="mb-4 flex items-start justify-between gap-4">
-          <h2 className="text-lg font-semibold">{title}</h2>
+        <div className="mb-4 flex items-start justify-between gap-3">
+          {/* min-w-0 и перенос: длинный заголовок вроде «Картинка для «…»»
+              иначе распирает шапку на телефоне. */}
+          <h2 className="min-w-0 break-words text-lg font-semibold">{title}</h2>
           <button
             onClick={onClose}
-            className="-m-1 rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+            className="shrink-0 rounded-lg p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200"
             aria-label="Закрыть"
           >
             <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">

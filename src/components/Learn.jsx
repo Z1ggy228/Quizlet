@@ -456,8 +456,13 @@ function ChoiceButton({ option, feedback, answer, onClick }) {
     <button
       type="button"
       disabled={!!feedback}
-      onClick={onClick}
-      className={`whitespace-pre-line rounded-lg px-4 py-3 text-left text-sm font-medium shadow-sm ring-1 transition ${tone}`}
+      onClick={(e) => {
+        // Сбрасываем фокус: иначе на телефоне подсветка нажатой кнопки
+        // остаётся и достаётся варианту на том же месте в следующем вопросе.
+        e.currentTarget.blur()
+        onClick()
+      }}
+      className={`whitespace-pre-line break-words rounded-lg px-4 py-3 text-left text-sm font-medium shadow-sm ring-1 transition ${tone}`}
     >
       {option}
     </button>
@@ -493,12 +498,17 @@ function ProgressBar({ mastered, total }) {
           return (
             <span
               key={p}
-              className={`absolute top-1/2 grid h-6 w-6 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 transition ${
+              className={`absolute top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full border-2 transition ${
                 reached
                   ? 'animate-pop border-emerald-600 bg-emerald-500 text-white'
                   : 'border-slate-300 bg-white text-transparent dark:border-slate-600 dark:bg-slate-900'
               }`}
-              style={{ left: `${p * 100}%` }}
+              // Последнюю отметку прижимаем внутрь: по центру она на треть
+              // вылезала за правый край и растягивала страницу на телефоне.
+              style={{
+                left: `${p * 100}%`,
+                marginLeft: p === 1 ? '-1.5rem' : '-0.75rem',
+              }}
               title={`${count} слов`}
             >
               <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">

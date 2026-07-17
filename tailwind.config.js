@@ -2,6 +2,12 @@
 export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
+  future: {
+    // hover: применяется только там, где мышь действительно есть. Без этого на
+    // телефоне подсветка залипает на кнопке после касания и переезжает на
+    // следующий вопрос вместе с переиспользованным элементом.
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       fontFamily: {

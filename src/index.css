@@ -24,6 +24,21 @@ h2 {
   font-synthesis-weight: none;
 }
 
+/* Сетка активности: размер клетки задан один раз, от него считаются и
+   подписи месяцев. На телефоне клетки мельче, чтобы влезло больше недель. */
+.activity-grid {
+  --cell: 13px;
+}
+@media (min-width: 640px) {
+  .activity-grid {
+    --cell: 16px;
+  }
+}
+.activity-cell {
+  width: var(--cell);
+  height: var(--cell);
+}
+
 /* 3D-переворот карточки в режиме Flashcards */
 .flip-scene {
   perspective: 1600px;

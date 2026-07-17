@@ -3,12 +3,14 @@ import * as db from '../lib/db'
 import { exportCsv, exportJson } from '../lib/export'
 import { formatDue } from '../lib/srs'
 import { Button, Card, EmptyState, ErrorText, plural, SpeakButton, Spinner } from './ui'
+import ActivityGrid from './ActivityGrid'
 import Learn from './Learn'
 import Listening from './Listening'
 
-export default function StatsView() {
+export default function StatsView({ user }) {
   const [stats, setStats] = useState(null)
   const [problem, setProblem] = useState([])
+  const [activity, setActivity] = useState({ days: [], goal: db.DEFAULT_DAILY_GOAL })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [session, setSession] = useState(null) // null | {mode, cards}
@@ -23,9 +25,15 @@ export default function StatsView() {
   async function load() {
     try {
       setLoading(true)
-      const [s, p] = await Promise.all([db.overallStats(), db.problemCards(15)])
+      const [s, p, days, settings] = await Promise.all([
+        db.overallStats(),
+        db.problemCards(15),
+        db.listStudyDays(),
+        db.getSettings(user.id),
+      ])
       setStats(s)
       setProblem(p)
+      setActivity({ days, goal: settings.daily_goal })
       setError('')
     } catch (e) {
       setError(e.message)
@@ -106,6 +114,16 @@ export default function StatsView() {
         <Stat value={stats.learning} label="в работе" tone="text-indigo-600 dark:text-indigo-400" />
         <Stat value={stats.due} label="на повторение" tone="text-amber-600 dark:text-amber-400" />
       </div>
+
+      <Card className="p-4 sm:p-5">
+        <h2 className="text-lg font-semibold">Активность</h2>
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+          Сколько слов выучено в каждый день. Насыщенность квадрата — доля от дневной цели ({activity.goal}).
+        </p>
+        <div className="mt-4">
+          <ActivityGrid days={activity.days} goal={activity.goal} />
+        </div>
+      </Card>
 
       {/* Повторение поверх папок: важно не «где лежит слово», а «когда его пора показать». */}
       <Card className="p-5">

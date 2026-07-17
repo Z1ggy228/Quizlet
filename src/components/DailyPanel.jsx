@@ -67,7 +67,8 @@ export default function DailyPanel({ user }) {
 
   return (
     <>
-      <Card className="mb-5 flex items-center gap-4 p-4">
+      {/* На телефоне в строку не влезает: стрик и прогресс встают друг под друга. */}
+      <Card className="mb-5 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4">
         <div
           className="flex shrink-0 items-center gap-2"
           title="Дней подряд, когда дневная цель была выполнена"
