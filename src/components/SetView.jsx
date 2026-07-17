@@ -53,6 +53,18 @@ export default function SetView({ user, set }) {
     }
   }
 
+  /** Пометить/снять «проблемное слово» прямо из списка. */
+  async function toggleFlag(card) {
+    const flagged = !card.flagged
+    setCards((prev) => prev.map((c) => (c.id === card.id ? { ...c, flagged } : c)))
+    try {
+      await db.setFlag(card.id, flagged)
+    } catch (e) {
+      setError(e.message)
+      setCards((prev) => prev.map((c) => (c.id === card.id ? { ...c, flagged: !flagged } : c)))
+    }
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center py-16 text-slate-400">
@@ -200,6 +212,35 @@ export default function SetView({ user, set }) {
                 <MasteryDots level={c.mastery_level} />
 
                 <div className="flex shrink-0 gap-1">
+                  <button
+                    type="button"
+                    onClick={() => toggleFlag(c)}
+                    aria-pressed={c.flagged}
+                    title={c.flagged ? 'Убрать из проблемных' : 'Пометить как проблемное'}
+                    aria-label={c.flagged ? 'Убрать из проблемных' : 'Пометить как проблемное'}
+                    className={`rounded-lg p-2 transition hover:bg-slate-100 dark:hover:bg-slate-800 ${
+                      c.flagged
+                        ? 'text-rose-500 dark:text-rose-400'
+                        : 'text-slate-400 hover:text-rose-500 dark:hover:text-rose-400'
+                    }`}
+                  >
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill={c.flagged ? 'currentColor' : 'none'}
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      className="h-4 w-4"
+                    >
+                      <path
+                        strokeLinejoin="round"
+                        d="M4 2.75a.75.75 0 0 1 .75.75v13a.75.75 0 0 1-1.5 0v-13A.75.75 0 0 1 4 2.75Z"
+                      />
+                      <path
+                        strokeLinejoin="round"
+                        d="M4.75 4h9.5a.5.5 0 0 1 .38.82L12.5 7.5l2.13 2.68a.5.5 0 0 1-.38.82h-9.5V4Z"
+                      />
+                    </svg>
+                  </button>
                   <IconButton label="Редактировать" onClick={() => setCardDialog({ card: c })}>
                     <PencilIcon />
                   </IconButton>
