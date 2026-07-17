@@ -332,17 +332,39 @@ export async function overallStats() {
   return { total, mastered, due, learning: total - mastered }
 }
 
-/** Слова, которые чаще всего заваливаются. */
+/**
+ * Сколько раз слово должно быть показано, чтобы попасть в проблемные.
+ * Без порога одна ошибка с одного показа даёт «100% промахов» и вытесняет
+ * слова, которые вы правда заваливаете раз за разом.
+ */
+export const MIN_SEEN_FOR_PROBLEM = 3
+
+/**
+ * Слова, которые чаще всего заваливаются — по доле промахов, а не по их числу.
+ * Абсолютный счётчик кренил список в сторону слов, которые просто чаще гоняли:
+ * 5 ошибок из 50 (10%) оказывались выше 4 из 5 (80%).
+ *
+ * Считаем на клиенте: PostgREST не умеет сортировать по выражению
+ * times_wrong / times_seen, а заводить ради этого представление в базе не стоит.
+ */
 export async function problemCards(limit = 15) {
-  const { data, error } = await supabase
-    .from('cards')
-    .select(CARD_FIELDS)
-    .gt('times_wrong', 0)
-    .order('times_wrong', { ascending: false })
-    .order('id')
-    .limit(limit)
-  if (error) throw error
-  return data
+  const rows = await fetchAllPages(() =>
+    supabase
+      .from('cards')
+      .select(CARD_FIELDS)
+      .gt('times_wrong', 0)
+      .gte('times_seen', MIN_SEEN_FOR_PROBLEM)
+      .order('id'),
+  )
+  return rows
+    .map((c) => ({ ...c, wrong_rate: c.times_wrong / c.times_seen }))
+    .sort(
+      (a, b) =>
+        b.wrong_rate - a.wrong_rate || // сначала доля промахов
+        b.times_wrong - a.times_wrong || // при равной доле — где ошибок больше
+        a.id.localeCompare(b.id), // и стабильный порядок при полном равенстве
+    )
+    .slice(0, limit)
 }
 
 // ── Настройки, стрик и дневная цель ──────────────────────────────────────────

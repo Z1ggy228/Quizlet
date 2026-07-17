@@ -48,7 +48,7 @@ export default function StatsView({ user }) {
     try {
       const cards = await db.listReviewCards()
       if (!cards.length) throw new Error('Повторять нечего — на сегодня всё чисто.')
-      setSession({ mode, cards })
+      setSession({ mode, cards, title: 'Повторение' })
     } catch (e) {
       setError(e.message)
     } finally {
@@ -73,13 +73,12 @@ export default function StatsView({ user }) {
   if (session) {
     const exit = () => {
       setSession(null)
-      load()
+      load() // за сессию поменялись и счётчики ошибок, и сроки повторения
     }
-    const title = 'Повторение'
     return session.mode === 'listen' ? (
-      <Listening cards={session.cards} setName={title} onExit={exit} />
+      <Listening cards={session.cards} setName={session.title} onExit={exit} />
     ) : (
-      <Learn cards={session.cards} setName={title} onExit={exit} />
+      <Learn cards={session.cards} setName={session.title} onExit={exit} />
     )
   }
 
@@ -145,42 +144,64 @@ export default function StatsView({ user }) {
         )}
       </Card>
 
-      <Card className="p-5">
+      <Card className="p-4 sm:p-5">
         <h2 className="text-lg font-semibold">Самые проблемные слова</h2>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          Те, на которых вы чаще всего ошибаетесь.
+          Те, на которых вы чаще всего промахиваетесь — по доле ошибок, а не по их числу. В счёт
+          идут слова, которые спрашивали хотя бы {db.MIN_SEEN_FOR_PROBLEM} раза.
         </p>
         {problem.length === 0 ? (
           <p className="mt-4 rounded-lg border border-dashed border-slate-300 p-6 text-center text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
-            Ошибок пока нет — список появится, когда вы начнёте заниматься.
+            Пока пусто. Список наберётся, когда слова встретятся вам по нескольку раз — и какие-то
+            начнут упорно не даваться.
           </p>
         ) : (
-          <ul className="mt-4 space-y-1">
-            {problem.map((c) => (
-              <li
-                key={c.id}
-                className="flex items-center gap-2 rounded-lg px-2 py-2 odd:bg-slate-50 dark:odd:bg-slate-800/40"
-              >
-                <span className="min-w-0 flex-1">
-                  <span className="flex items-center gap-1">
-                    <span className="truncate whitespace-pre-line font-display font-medium">
-                      {c.word_en}
+          <>
+            <div className="mt-4">
+              <Button onClick={() => setSession({ mode: 'learn', cards: problem, title: 'Проблемные слова' })}>
+                Прогнать проблемные ({problem.length})
+              </Button>
+            </div>
+
+            <ul className="mt-4 space-y-1">
+              {problem.map((c) => {
+                const pct = Math.round(c.wrong_rate * 100)
+                return (
+                  <li
+                    key={c.id}
+                    className="flex items-center gap-3 rounded-lg px-2 py-2 odd:bg-slate-50 dark:odd:bg-slate-800/40"
+                  >
+                    <span className="min-w-0 flex-1">
+                      <span className="flex items-center gap-1">
+                        <span className="truncate whitespace-pre-line font-display font-medium">
+                          {c.word_en}
+                        </span>
+                        <SpeakButton text={c.word_en} size="sm" />
+                      </span>
+                      <span className="block truncate text-xs text-slate-500 dark:text-slate-400">
+                        {c.word_ru}
+                      </span>
                     </span>
-                    <SpeakButton text={c.word_en} size="sm" />
-                  </span>
-                  <span className="block truncate text-xs text-slate-500 dark:text-slate-400">
-                    {c.word_ru}
-                  </span>
-                </span>
-                <span className="shrink-0 text-right text-xs text-slate-400 dark:text-slate-500">
-                  <span className="block font-medium text-rose-600 dark:text-rose-400">
-                    {plural(c.times_wrong, ['ошибка', 'ошибки', 'ошибок'])}
-                  </span>
-                  из {c.times_seen} · {formatDue(c)}
-                </span>
-              </li>
-            ))}
-          </ul>
+
+                    {/* Полоска показывает долю промахов нагляднее числа. */}
+                    <span className="hidden h-1.5 w-20 shrink-0 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700 sm:block">
+                      <span
+                        className="block h-full rounded-full bg-rose-500"
+                        style={{ width: `${pct}%` }}
+                      />
+                    </span>
+
+                    <span className="shrink-0 text-right text-xs text-slate-400 dark:text-slate-500">
+                      <span className="block font-semibold tabular-nums text-rose-600 dark:text-rose-400">
+                        {pct}%
+                      </span>
+                      {c.times_wrong} из {c.times_seen} · {formatDue(c)}
+                    </span>
+                  </li>
+                )
+              })}
+            </ul>
+          </>
         )}
       </Card>
 
