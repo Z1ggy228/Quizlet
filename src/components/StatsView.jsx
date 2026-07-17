@@ -56,6 +56,21 @@ export default function StatsView({ user }) {
     }
   }
 
+  async function unflag(card) {
+    try {
+      await db.setFlag(card.id, false)
+      // Снятая пометка выбрасывает слово из списка, если его там больше ничто
+      // не держит (нет ошибок или мало показов).
+      setProblem((prev) =>
+        prev
+          .map((c) => (c.id === card.id ? { ...c, flagged: false } : c))
+          .filter((c) => c.flagged || (c.times_wrong > 0 && c.times_seen >= db.MIN_SEEN_FOR_PROBLEM)),
+      )
+    } catch (e) {
+      setError(e.message)
+    }
+  }
+
   async function runExport(kind) {
     setExporting(kind)
     setError('')
@@ -113,7 +128,7 @@ export default function StatsView({ user }) {
         <Stat value={stats.learning} label="в работе" tone="text-indigo-600 dark:text-indigo-400" />
         {/* Сколько слов ждёт повторения — видно в блоке ниже. Здесь полезнее то,
             что не выводится больше нигде: сколько слов упорно не даётся. */}
-        <Stat value={stats.problem} label="проблемные" tone="text-rose-600 dark:text-rose-400" />
+        <Stat value={problem.length} label="проблемные" tone="text-rose-600 dark:text-rose-400" />
       </div>
 
       <Card className="p-4 sm:p-5">
@@ -177,6 +192,7 @@ export default function StatsView({ user }) {
             <ul className="mt-4 max-h-[32rem] space-y-1 overflow-y-auto pr-1">
               {problem.map((c) => {
                 const pct = Math.round(c.wrong_rate * 100)
+                const hasErrors = c.times_wrong > 0
                 return (
                   <li
                     key={c.id}
@@ -184,6 +200,7 @@ export default function StatsView({ user }) {
                   >
                     <span className="min-w-0 flex-1">
                       <span className="flex items-center gap-1">
+                        {c.flagged && <FlagIcon />}
                         <span className="truncate whitespace-pre-line font-display font-medium">
                           {c.word_en}
                         </span>
@@ -194,20 +211,43 @@ export default function StatsView({ user }) {
                       </span>
                     </span>
 
-                    {/* Полоска показывает долю промахов нагляднее числа. */}
-                    <span className="hidden h-1.5 w-20 shrink-0 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700 sm:block">
-                      <span
-                        className="block h-full rounded-full bg-rose-500"
-                        style={{ width: `${pct}%` }}
-                      />
-                    </span>
-
-                    <span className="shrink-0 text-right text-xs text-slate-400 dark:text-slate-500">
-                      <span className="block font-semibold tabular-nums text-rose-600 dark:text-rose-400">
-                        {pct}%
+                    {hasErrors ? (
+                      <>
+                        <span className="hidden h-1.5 w-20 shrink-0 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700 sm:block">
+                          <span
+                            className="block h-full rounded-full bg-rose-500"
+                            style={{ width: `${pct}%` }}
+                          />
+                        </span>
+                        <span className="shrink-0 text-right text-xs text-slate-400 dark:text-slate-500">
+                          <span className="block font-semibold tabular-nums text-rose-600 dark:text-rose-400">
+                            {pct}%
+                          </span>
+                          {c.times_wrong} из {c.times_seen} · {formatDue(c)}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="shrink-0 text-right text-xs text-slate-400 dark:text-slate-500">
+                        <span className="block font-medium text-rose-500 dark:text-rose-400">
+                          вручную
+                        </span>
+                        {formatDue(c)}
                       </span>
-                      {c.times_wrong} из {c.times_seen} · {formatDue(c)}
-                    </span>
+                    )}
+
+                    {c.flagged && (
+                      <button
+                        type="button"
+                        onClick={() => unflag(c)}
+                        title="Убрать из проблемных"
+                        aria-label="Убрать из проблемных"
+                        className="shrink-0 rounded-lg p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-rose-600 dark:hover:bg-slate-800"
+                      >
+                        <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                          <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                        </svg>
+                      </button>
+                    )}
                   </li>
                 )
               })}
@@ -246,6 +286,20 @@ function Stat({ value, label, tone = '' }) {
       <p className={`text-2xl font-semibold tabular-nums ${tone}`}>{value}</p>
       <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{label}</p>
     </Card>
+  )
+}
+
+function FlagIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      className="h-3.5 w-3.5 shrink-0 text-rose-500 dark:text-rose-400"
+      title="Помечено вручную"
+    >
+      <path d="M4 2.75a.75.75 0 0 1 .75.75v13a.75.75 0 0 1-1.5 0v-13A.75.75 0 0 1 4 2.75Z" />
+      <path d="M4.75 4h9.5a.5.5 0 0 1 .38.82L12.5 7.5l2.13 2.68a.5.5 0 0 1-.38.82h-9.5V4Z" />
+    </svg>
   )
 }
 

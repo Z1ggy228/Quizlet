@@ -121,7 +121,7 @@ export async function statsBySet(setIds) {
 
 const CARD_FIELDS =
   'id, set_id, word_en, word_ru, image_path, context, mastery_level, position, created_at, ' +
-  'transcription, part_of_speech, ease_factor, interval_days, repetitions, due_date, times_seen, times_wrong'
+  'transcription, part_of_speech, ease_factor, interval_days, repetitions, due_date, times_seen, times_wrong, flagged'
 
 export async function listCards(setId) {
   return fetchAllPages(() =>
@@ -232,9 +232,18 @@ export async function recordAnswer(card, { mastery, quality, correct }) {
     times_seen: (card.times_seen ?? 0) + 1,
     times_wrong: (card.times_wrong ?? 0) + (correct ? 0 : 1),
   }
+  // Выучили — снимаем ручную пометку: слово всё равно уходит из проблемных,
+  // а флаг иначе всплыл бы снова при первой же будущей ошибке.
+  if (mastery >= MASTERED) patch.flagged = false
   const { error } = await supabase.from('cards').update(patch).eq('id', card.id)
   if (error) throw error
   return patch
+}
+
+/** Пометить/снять пометку «проблемное слово» вручную. */
+export async function setFlag(cardId, flagged) {
+  const { error } = await supabase.from('cards').update({ flagged }).eq('id', cardId)
+  if (error) throw error
 }
 
 /** Ручная правка транскрипции и части речи. */
@@ -324,20 +333,15 @@ export async function overallStats() {
     if (error) throw error
     return count ?? 0
   }
-  const [total, mastered, due, problem] = await Promise.all([
+  const [total, mastered, due] = await Promise.all([
     value(counter()),
     value(counter().gte('mastery_level', MASTERED)),
     value(counter().lte('due_date', now).lt('mastery_level', MASTERED)),
-    // Те же правила, что у списка проблемных: невыученные, с ошибками и с
-    // достаточным числом показов, чтобы доля промахов что-то значила.
-    value(
-      counter()
-        .gt('times_wrong', 0)
-        .gte('times_seen', MIN_SEEN_FOR_PROBLEM)
-        .lt('mastery_level', MASTERED),
-    ),
   ])
-  return { total, mastered, due, problem, learning: total - mastered }
+  // Число проблемных берём из самого списка (problemCards): правило там сложнее
+  // «flagged ИЛИ есть ошибки И ≥3 показов», и держать два источника правды,
+  // которые могут разойтись, не стоит.
+  return { total, mastered, due, learning: total - mastered }
 }
 
 /**
@@ -348,34 +352,37 @@ export async function overallStats() {
 export const MIN_SEEN_FOR_PROBLEM = 3
 
 /**
- * Слова, которые чаще всего заваливаются — по доле промахов, а не по их числу.
- * Абсолютный счётчик кренил список в сторону слов, которые просто чаще гоняли:
- * 5 ошибок из 50 (10%) оказывались выше 4 из 5 (80%).
+ * Проблемные слова: помеченные вручную (`flagged`) плюс те, что заваливаются
+ * сами. Сортировка по доле промахов, а не по их числу — абсолютный счётчик
+ * кренил список в сторону слов, которые просто чаще гоняли: 5 ошибок из 50
+ * (10%) оказывались выше 4 из 5 (80%). Помеченные руками идут первыми.
  *
- * Выученные слова из списка исключаются. Счётчик ошибок никогда не убывает, и
- * без этого фильтра слово, которое вы только что прогнали без единой ошибки,
- * продолжало бы висеть в проблемных: чистый прогон растит только знаменатель,
- * и доля падает еле-еле (4 из 5 → 4 из 8, то есть 80% → 50%). Ошибётесь снова —
- * уровень обнулится, и слово вернётся вместе со всей своей историей.
+ * Выученные слова исключаются. Счётчик ошибок никогда не убывает, и без этого
+ * фильтра слово, только что прогнанное без единой ошибки, висело бы в списке
+ * вечно: чистый прогон растит только знаменатель (4 из 5 → 4 из 8, то есть 80%
+ * → 50%). Ошибётесь снова — уровень обнулится, слово вернётся со всей историей.
+ * Ручную пометку тоже снимаем при выучивании — см. recordAnswer.
  *
- * Считаем на клиенте: PostgREST не умеет сортировать по выражению
- * times_wrong / times_seen, а заводить ради этого представление в базе не стоит.
+ * Порог в 3 показа — только для «набравших ошибки», ручная пометка его минует:
+ * пометили слово с первого раза — оно уже в списке. Фильтр по times_seen
+ * применяем на клиенте, поэтому в запросе только «flagged ИЛИ есть ошибки».
  */
 export async function problemCards() {
   const rows = await fetchAllPages(() =>
     supabase
       .from('cards')
       .select(CARD_FIELDS)
-      .gt('times_wrong', 0)
-      .gte('times_seen', MIN_SEEN_FOR_PROBLEM)
       .lt('mastery_level', MASTERED)
+      .or('flagged.eq.true,times_wrong.gt.0')
       .order('id'),
   )
   return rows
-    .map((c) => ({ ...c, wrong_rate: c.times_wrong / c.times_seen }))
+    .filter((c) => c.flagged || c.times_seen >= MIN_SEEN_FOR_PROBLEM)
+    .map((c) => ({ ...c, wrong_rate: c.times_seen ? c.times_wrong / c.times_seen : 0 }))
     .sort(
       (a, b) =>
-        b.wrong_rate - a.wrong_rate || // сначала доля промахов
+        (b.flagged ? 1 : 0) - (a.flagged ? 1 : 0) || // помеченные руками — вверх
+        b.wrong_rate - a.wrong_rate || // затем по доле промахов
         b.times_wrong - a.times_wrong || // при равной доле — где ошибок больше
         a.id.localeCompare(b.id), // и стабильный порядок при полном равенстве
     )

@@ -149,6 +149,18 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
     }
   }
 
+  /** Пометить текущее слово как проблемное (или снять пометку). */
+  function toggleFlag() {
+    const id = question.state.id
+    const cur = (nextStatesRef.current.find((s) => s.id === id) ?? question.state).card
+    const flagged = !cur.flagged
+    db.setFlag(id, flagged).catch((e) => setError('Не удалось пометить слово: ' + e.message))
+    const merge = (list) =>
+      list.map((s) => (s.id === id ? { ...s, card: { ...s.card, flagged } } : s))
+    nextStatesRef.current = merge(nextStatesRef.current)
+    setStates(merge)
+  }
+
   function answer(given) {
     if (feedback) return
     const st = question.state
@@ -237,7 +249,10 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
 
   if (!question) return null
 
-  const card = question.state.card
+  // Берём живую копию из states, а не из question: так пометка «проблемное»
+  // отражается на кнопке сразу после клика.
+  const active = states.find((s) => s.id === question.state.id) ?? question.state
+  const card = active.card
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -246,21 +261,53 @@ export default function Learn({ cards, setName, onMastery, onExit }) {
           ← <span className="hidden sm:inline">К набору</span>
         </Button>
         <span className="min-w-0 truncate text-sm text-slate-500 dark:text-slate-400">{setName}</span>
-        <Button
-          variant="ghost"
-          onClick={() => setSettingsOpen(true)}
-          className="shrink-0 px-2"
-          title="Настройки"
-        >
-          <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-            <path
-              fillRule="evenodd"
-              d="M8.34 1.804A1 1 0 0 1 9.32 1h1.36a1 1 0 0 1 .98.804l.295 1.473c.497.144.971.342 1.416.587l1.25-.834a1 1 0 0 1 1.262.125l.962.962a1 1 0 0 1 .125 1.262l-.834 1.25c.245.445.443.919.587 1.416l1.473.294a1 1 0 0 1 .804.98v1.361a1 1 0 0 1-.804.98l-1.473.295a6.95 6.95 0 0 1-.587 1.416l.834 1.25a1 1 0 0 1-.125 1.262l-.962.962a1 1 0 0 1-1.262.125l-1.25-.834c-.445.245-.919.443-1.416.587l-.294 1.473a1 1 0 0 1-.98.804H9.32a1 1 0 0 1-.98-.804l-.295-1.473a6.95 6.95 0 0 1-1.416-.587l-1.25.834a1 1 0 0 1-1.262-.125l-.962-.962a1 1 0 0 1-.125-1.262l.834-1.25a6.95 6.95 0 0 1-.587-1.416l-1.473-.294A1 1 0 0 1 1 10.68V9.32a1 1 0 0 1 .804-.98l1.473-.295c.144-.497.342-.971.587-1.416l-.834-1.25a1 1 0 0 1 .125-1.262l.962-.962A1 1 0 0 1 5.38 3.03l1.25.834a6.95 6.95 0 0 1 1.416-.587l.294-1.473ZM13 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </Button>
+        <div className="flex shrink-0 gap-1">
+          <Button
+            variant="ghost"
+            onClick={toggleFlag}
+            className={`px-2 ${card.flagged ? '!text-rose-500 dark:!text-rose-400' : ''}`}
+            title={card.flagged ? 'Убрать из проблемных' : 'Пометить как проблемное'}
+            aria-pressed={card.flagged}
+          >
+            <svg
+              viewBox="0 0 20 20"
+              fill={card.flagged ? 'currentColor' : 'none'}
+              stroke="currentColor"
+              strokeWidth="1.6"
+              className="h-5 w-5"
+            >
+              <path
+                strokeLinejoin="round"
+                d="M4 2.75a.75.75 0 0 1 .75.75v13a.75.75 0 0 1-1.5 0v-13A.75.75 0 0 1 4 2.75Z"
+              />
+              <path
+                strokeLinejoin="round"
+                d="M4.75 4h9.5a.5.5 0 0 1 .38.82L12.5 7.5l2.13 2.68a.5.5 0 0 1-.38.82h-9.5V4Z"
+              />
+            </svg>
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => setSettingsOpen(true)}
+            className="px-2"
+            title="Настройки"
+          >
+            <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+              <path
+                fillRule="evenodd"
+                d="M8.34 1.804A1 1 0 0 1 9.32 1h1.36a1 1 0 0 1 .98.804l.295 1.473c.497.144.971.342 1.416.587l1.25-.834a1 1 0 0 1 1.262.125l.962.962a1 1 0 0 1 .125 1.262l-.834 1.25c.245.445.443.919.587 1.416l1.473.294a1 1 0 0 1 .804.98v1.361a1 1 0 0 1-.804.98l-1.473.295a6.95 6.95 0 0 1-.587 1.416l.834 1.25a1 1 0 0 1-.125 1.262l-.962.962a1 1 0 0 1-1.262.125l-1.25-.834c-.445.245-.919.443-1.416.587l-.294 1.473a1 1 0 0 1-.98.804H9.32a1 1 0 0 1-.98-.804l-.295-1.473a6.95 6.95 0 0 1-1.416-.587l-1.25.834a1 1 0 0 1-1.262-.125l-.962-.962a1 1 0 0 1-.125-1.262l.834-1.25a6.95 6.95 0 0 1-.587-1.416l-1.473-.294A1 1 0 0 1 1 10.68V9.32a1 1 0 0 1 .804-.98l1.473-.295c.144-.497.342-.971.587-1.416l-.834-1.25a1 1 0 0 1 .125-1.262l.962-.962A1 1 0 0 1 5.38 3.03l1.25.834a6.95 6.95 0 0 1 1.416-.587l.294-1.473ZM13 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </Button>
+        </div>
       </div>
+
+      {card.flagged && (
+        <p className="mb-2 text-center text-xs font-medium text-rose-500 dark:text-rose-400">
+          Помечено как проблемное — попадёт в список в статистике
+        </p>
+      )}
 
       <ProgressBar mastered={mastered} total={total} />
 
