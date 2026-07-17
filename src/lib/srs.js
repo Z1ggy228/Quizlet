@@ -66,20 +66,18 @@ export function formatDue(card, now = new Date()) {
 }
 
 /**
- * Длина стрика по дням занятий (строки study_days: {day: 'YYYY-MM-DD', words_count}).
+ * Длина стрика по дням занятий (строки study_days: {day, words_count, goal}).
  *
  * День засчитывается, только если в этот день выполнена дневная цель — иначе
- * одно слово перед сном держало бы стрик вечно.
+ * одно слово перед сном держало бы стрик вечно. Планка берётся из самого дня:
+ * поэтому смена цели не переписывает прошлое.
  *
  * Сегодняшний пропуск стрик не рвёт: день ещё не кончился, поэтому отсчёт
  * ведём от вчера. Пропуск двух дней подряд обнуляет.
- *
- * Цель берётся текущая: сколько она была месяц назад, история не помнит, и
- * ради стрика хранить это отдельно не стоит.
  */
-export function streakFrom(days, today = new Date(), goal = 1) {
+export function streakFrom(days, today = new Date()) {
   const set = new Set(
-    days.filter((d) => (d.words_count ?? 0) >= goal).map((d) => (typeof d === 'string' ? d : d.day)),
+    days.filter((d) => (d.words_count ?? 0) >= (d.goal || 1)).map((d) => d.day),
   )
   if (!set.size) return 0
 

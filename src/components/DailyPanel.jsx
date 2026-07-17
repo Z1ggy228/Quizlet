@@ -27,8 +27,8 @@ export default function DailyPanel({ user }) {
   async function load() {
     try {
       const [days, settings] = await Promise.all([db.listStudyDays(), db.getSettings(user.id)])
-      // Стрик считаем от текущей цели: день засчитан, только если цель взята.
-      setStreak(streakFrom(days, new Date(), settings.daily_goal))
+      // Каждый день несёт свою планку — смена цели не трогает прошлое.
+      setStreak(streakFrom(days))
       setToday(days.find((d) => d.day === localDay())?.words_count ?? 0)
       setGoal(settings.daily_goal)
       setError('')

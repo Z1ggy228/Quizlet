@@ -39,7 +39,9 @@ export default function ActivityGrid({ days, goal }) {
   const [hovered, setHovered] = useState(null)
 
   const { columns, months, total, bestDay } = useMemo(() => {
-    const counts = new Map(days.map((d) => [d.day, d.words_count]))
+    // Планка у каждого дня своя — та, что стояла в тот день. Если день пуст,
+    // сравнивать не с чем: берём нынешнюю цель просто для оттенка.
+    const byDay = new Map(days.map((d) => [d.day, d]))
     const today = new Date()
     const start = mondayOf(today)
     start.setDate(start.getDate() - (WEEKS - 1) * 7)
@@ -56,19 +58,21 @@ export default function ActivityGrid({ days, goal }) {
         date.setDate(start.getDate() + w * 7 + d)
         const key = localDay(date)
         const future = date > today
-        const count = future ? null : (counts.get(key) ?? 0)
+        const row = byDay.get(key)
+        const count = future ? null : (row?.words_count ?? 0)
+        const dayGoal = row?.goal || goal
         if (count) {
           total += count
           if (!bestDay || count > bestDay.count) bestDay = { key, count, date }
         }
-        week.push({ key, date, count, future })
+        week.push({ key, date, count, future, goal: dayGoal })
         // Подпись месяца ставим над неделей, в которой месяц начинается.
         if (d === 0 && date.getDate() <= 7) months.push({ week: w, label: MONTHS[date.getMonth()] })
       }
       columns.push(week)
     }
     return { columns, months, total, bestDay }
-  }, [days])
+  }, [days, goal])
 
   const активных = columns.flat().filter((c) => c.count > 0).length
 
@@ -128,7 +132,7 @@ export default function ActivityGrid({ days, goal }) {
                     onClick={() => !cell.future && setHovered(cell)}
                     aria-label={cell.future ? '' : `${cell.key}: ${cell.count}`}
                     className={`activity-cell rounded-[3px] transition ${
-                      cell.future ? 'bg-transparent' : TONE[level(cell.count, goal)]
+                      cell.future ? 'bg-transparent' : TONE[level(cell.count, cell.goal)]
                     } ${hovered?.key === cell.key ? 'ring-2 ring-indigo-500' : ''}`}
                   />
                 ))}
@@ -145,7 +149,7 @@ export default function ActivityGrid({ days, goal }) {
                 hovered.count
                   ? plural(hovered.count, ['слово', 'слова', 'слов'])
                   : 'не занимались'
-              }${hovered.count >= goal ? ' · цель взята' : ''}`
+              }${hovered.count >= hovered.goal ? " · цель взята" : ""}`
             : ''}
         </p>
         <div className="flex shrink-0 items-center gap-1 text-[10px] text-slate-400 dark:text-slate-500">

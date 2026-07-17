@@ -1,17 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { imageUrl } from '../lib/supabase'
+import { nextPraise } from '../lib/praise'
+import { playClick, playCorrect } from '../lib/sound'
 import { Button, Card, Modal, OptionGroup, SpeakButton, WordInfo, useSetting } from './ui'
-
-const PRAISE = [
-  'Так держать!',
-  'Отлично!',
-  'Влёт!',
-  'Красота!',
-  'Ты в ударе!',
-  'Чётко!',
-  'Идеально!',
-  'Как по нотам!',
-]
 
 // Насколько далеко надо утащить карточку, чтобы это засчиталось за ответ.
 const SWIPE = 110
@@ -73,9 +64,11 @@ export default function Flashcards({ cards, setName, onExit }) {
     setLeaving(isKnown ? 'right' : 'left')
     if (isKnown) {
       setKnown((k) => [...k, card.id])
-      setPraise(PRAISE[Math.floor(Math.random() * PRAISE.length)])
+      setPraise(nextPraise())
+      playCorrect()
     } else {
       setUnknown((u) => [...u, card.id])
+      playClick()
     }
     // Даём карточке улететь, только потом показываем следующую.
     timer.current = setTimeout(() => {
@@ -267,7 +260,7 @@ export default function Flashcards({ cards, setName, onExit }) {
           </span>
         )}
         {praise && (
-          <span className="pointer-events-none absolute inset-x-0 top-1/3 animate-float-up text-center text-2xl font-bold text-emerald-500">
+          <span className="pointer-events-none absolute inset-x-0 top-1/3 z-10 animate-float-up text-center font-display text-3xl text-emerald-500 drop-shadow-[0_2px_8px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_8px_rgba(2,6,23,0.9)] sm:text-4xl">
             {praise}
           </span>
         )}

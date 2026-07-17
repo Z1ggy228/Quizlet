@@ -16,6 +16,8 @@
       колонки `position` для явного порядка наборов и карточек.
    3. [`supabase/migration_03_srs.sql`](supabase/migration_03_srs.sql) — поля
       интервального повторения и словаря, таблицы `user_settings` и `study_days`.
+   4. [`supabase/migration_04_day_goal.sql`](supabase/migration_04_day_goal.sql) — дневная
+      цель запоминается в самом дне, чтобы её изменение не переписывало историю.
 
    Все скрипты идемпотентные, повторный запуск ничего не сломает.
 
@@ -87,6 +89,9 @@ npm run preview  # локальный просмотр собранной вер
 | `src/lib/speech.js` | Озвучка через встроенный синтез речи браузера |
 | `src/lib/dictionary.js` | Транскрипция и часть речи из dictionaryapi.dev |
 | `src/lib/export.js` | Выгрузка в JSON и CSV |
+| `src/lib/sound.js` | Звуки ответов, синтез через Web Audio |
+| `src/lib/praise.js` | Похвалы за верный ответ |
+| `src/components/ActivityGrid.jsx` | Сетка активности по выученным словам |
 | `src/components/Listening.jsx` | Режим на слух |
 | `src/components/StatsView.jsx` | Статистика, повторение, экспорт |
 | `src/components/DailyPanel.jsx` | Стрик и дневная цель |

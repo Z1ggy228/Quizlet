@@ -15,7 +15,9 @@ import {
   WordInfo,
   useSetting,
 } from './ui'
-import { isCorrectAnswer, PRAISE, shuffle } from './Learn'
+import { isCorrectAnswer, shuffle } from './Learn'
+import { nextPraise } from '../lib/praise'
+import { playCorrect, playWrong } from '../lib/sound'
 
 const MASTERED = 3
 
@@ -112,6 +114,9 @@ export default function Listening({ cards, setName, onMastery, onExit }) {
     const correct = isCorrectAnswer(typed, expected)
     const mastery = correct ? Math.min(MASTERED, (card.mastery_level ?? 0) + 1) : 0
 
+    if (correct) playCorrect()
+    else playWrong()
+
     // Ответ на слух — такая же проверка памяти, как в Learn, поэтому он тоже
     // двигает расписание повторений и дневную цель.
     db.recordAnswer(card, { mastery, quality: qualityOf({ correct, type: 'input' }), correct })
@@ -132,7 +137,7 @@ export default function Listening({ cards, setName, onMastery, onExit }) {
     setFeedback({
       correct,
       given: typed,
-      praise: PRAISE[Math.floor(Math.random() * PRAISE.length)],
+      praise: nextPraise(),
     })
   }
 
@@ -171,7 +176,7 @@ export default function Listening({ cards, setName, onMastery, onExit }) {
 
       <Card className="relative overflow-hidden p-6 text-center">
         {feedback?.correct && (
-          <span className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2 animate-float-up text-sm font-semibold text-emerald-500">
+          <span className="pointer-events-none absolute inset-x-0 top-6 z-10 animate-float-up text-center font-display text-3xl text-emerald-500 drop-shadow-[0_2px_8px_rgba(255,255,255,0.9)] dark:drop-shadow-[0_2px_8px_rgba(2,6,23,0.9)] sm:text-4xl">
             {feedback.praise}
           </span>
         )}

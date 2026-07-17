@@ -365,6 +365,9 @@ export async function saveDailyGoal(userId, goal) {
     .from('user_settings')
     .upsert({ user_id: userId, daily_goal: goal }, { onConflict: 'user_id' })
   if (error) throw error
+  // Подтягиваем новую планку к сегодняшнему дню, не добавляя слов: иначе цифра
+  // «сегодня» жила бы по старой цели до следующего выученного слова.
+  await bumpStudyDay(0).catch(() => {})
 }
 
 /** Дни занятий за последний год — из них считается стрик. */
@@ -373,7 +376,7 @@ export async function listStudyDays(days = 400) {
   from.setDate(from.getDate() - days)
   const { data, error } = await supabase
     .from('study_days')
-    .select('day, words_count')
+    .select('day, words_count, goal')
     .gte('day', localDay(from))
     .order('day', { ascending: false })
   if (error) throw error
