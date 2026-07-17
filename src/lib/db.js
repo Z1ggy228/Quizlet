@@ -361,7 +361,7 @@ export const MIN_SEEN_FOR_PROBLEM = 3
  * Считаем на клиенте: PostgREST не умеет сортировать по выражению
  * times_wrong / times_seen, а заводить ради этого представление в базе не стоит.
  */
-export async function problemCards(limit = 15) {
+export async function problemCards() {
   const rows = await fetchAllPages(() =>
     supabase
       .from('cards')
@@ -379,7 +379,6 @@ export async function problemCards(limit = 15) {
         b.times_wrong - a.times_wrong || // при равной доле — где ошибок больше
         a.id.localeCompare(b.id), // и стабильный порядок при полном равенстве
     )
-    .slice(0, limit)
 }
 
 // ── Настройки, стрик и дневная цель ──────────────────────────────────────────

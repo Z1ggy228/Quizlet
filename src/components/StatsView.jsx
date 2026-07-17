@@ -27,7 +27,7 @@ export default function StatsView({ user }) {
       setLoading(true)
       const [s, p, days, settings] = await Promise.all([
         db.overallStats(),
-        db.problemCards(15),
+        db.problemCards(),
         db.listStudyDays(),
         db.getSettings(user.id),
       ])
@@ -154,12 +154,6 @@ export default function StatsView({ user }) {
           выучены: доведёте слово до конца — оно уйдёт из списка, начнёте снова ошибаться —
           вернётся со всей своей историей.
         </p>
-        {stats.problem > problem.length && (
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            Всего таких слов {stats.problem} — ниже {problem.length} самых тяжёлых, их же запускает
-            кнопка.
-          </p>
-        )}
         {problem.length === 0 ? (
           <p className="mt-4 rounded-lg border border-dashed border-slate-300 p-6 text-center text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
             Проблемных слов сейчас нет — те, что давались трудно, вы уже довели до конца. Список
@@ -167,13 +161,20 @@ export default function StatsView({ user }) {
           </p>
         ) : (
           <>
-            <div className="mt-4">
+            <div className="mt-4 flex flex-wrap items-center gap-3">
               <Button onClick={() => setSession({ mode: 'learn', cards: problem, title: 'Проблемные слова' })}>
                 Прогнать проблемные ({problem.length})
               </Button>
+              {/* Learn берёт слова по порядку пачками по семь, а список отсортирован
+                  от худших — значит уйти на середине не жалко, тяжёлое уже пройдено. */}
+              <span className="text-xs text-slate-400 dark:text-slate-500">
+                начиная с самых тяжёлых — можно выйти в любой момент
+              </span>
             </div>
 
-            <ul className="mt-4 space-y-1">
+            {/* Показываем примерно десяток, остальное прокруткой: список копится
+                без предела, а занимать им весь экран незачем. */}
+            <ul className="mt-4 max-h-[32rem] space-y-1 overflow-y-auto pr-1">
               {problem.map((c) => {
                 const pct = Math.round(c.wrong_rate * 100)
                 return (
