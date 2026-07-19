@@ -70,9 +70,12 @@ export default function App() {
       setSession(data.session)
       setLoading(false)
     })
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((event, s) => {
       setSession(s)
-      if (!s) go(rootPath(), { replace: true })
+      // Только настоящий выход, а не «сессии нет» при загрузке: на старте это
+      // событие приходит и разлогиненному, и тогда прямая ссылка, открытая с
+      // экрана входа, теряется — после входа он оказывается в списке папок.
+      if (event === 'SIGNED_OUT') go(rootPath(), { replace: true })
     })
     return () => sub.subscription.unsubscribe()
   }, [])
