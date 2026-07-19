@@ -35,24 +35,24 @@ async function nextPosition(table, column, parentId) {
 export async function listFolders() {
   const { data, error } = await supabase
     .from('folders')
-    .select('id, name, created_at')
+    .select('id, name, slug, created_at')
     .order('created_at', { ascending: true })
   if (error) throw error
   return data
 }
 
-export async function createFolder(userId, name) {
+export async function createFolder(userId, name, slug = null) {
   const { data, error } = await supabase
     .from('folders')
-    .insert({ user_id: userId, name })
+    .insert({ user_id: userId, name, slug: slug || null })
     .select()
     .single()
   if (error) throw error
   return data
 }
 
-export async function renameFolder(id, name) {
-  const { error } = await supabase.from('folders').update({ name }).eq('id', id)
+export async function renameFolder(id, name, slug = null) {
+  const { error } = await supabase.from('folders').update({ name, slug: slug || null }).eq('id', id)
   if (error) throw error
 }
 
@@ -67,26 +67,26 @@ export async function listSets(folderId) {
   return fetchAllPages(() =>
     supabase
       .from('sets')
-      .select('id, name, folder_id, position, created_at')
+      .select('id, name, slug, folder_id, position, created_at')
       .eq('folder_id', folderId)
       .order('position', { ascending: true })
       .order('created_at', { ascending: true }),
   )
 }
 
-export async function createSet(userId, folderId, name) {
+export async function createSet(userId, folderId, name, slug = null) {
   const position = await nextPosition('sets', 'folder_id', folderId)
   const { data, error } = await supabase
     .from('sets')
-    .insert({ user_id: userId, folder_id: folderId, name, position })
+    .insert({ user_id: userId, folder_id: folderId, name, slug: slug || null, position })
     .select()
     .single()
   if (error) throw error
   return data
 }
 
-export async function renameSet(id, name) {
-  const { error } = await supabase.from('sets').update({ name }).eq('id', id)
+export async function renameSet(id, name, slug = null) {
+  const { error } = await supabase.from('sets').update({ name, slug: slug || null }).eq('id', id)
   if (error) throw error
 }
 

@@ -1,5 +1,7 @@
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import { speak, speechSupported } from '../lib/speech'
+import { slugify } from '../lib/route'
+import { translateToEn } from '../lib/translate'
 
 const variants = {
   primary:
@@ -257,6 +259,91 @@ export function useSetting(key, initial) {
     }
   }, [key, value])
   return [value, setValue]
+}
+
+/**
+ * Адрес папки или набора: подсказываем перевод названия, но не затираем то,
+ * что вписали руками.
+ *
+ * Латиницу не переводим — «Lesson 3» и так даёт lesson-3, сеть тут не нужна.
+ * Ответ переводчика по предыдущему названию может приехать позже, чем по
+ * текущему, поэтому перед подстановкой сверяем, то ли ещё название на входе:
+ * ровно на этой гонке когда-то ловили чужую транскрипцию в карточках.
+ */
+export function useSlugField(name) {
+  const [value, setValue] = useState('')
+  const [auto, setAuto] = useState(true) // подставляем мы или вписали руками
+  const [busy, setBusy] = useState(false)
+  const askedRef = useRef('')
+
+  useEffect(() => {
+    if (!auto) return
+    const source = (name || '').trim()
+    if (!source) {
+      setValue('')
+      return
+    }
+    if (!/[а-яё]/i.test(source)) {
+      setValue(slugify(source))
+      return
+    }
+    const timer = setTimeout(async () => {
+      askedRef.current = source
+      setBusy(true)
+      try {
+        const en = await translateToEn(source)
+        if (askedRef.current !== source) return // название успело смениться
+        setValue(slugify(en || source))
+      } finally {
+        if (askedRef.current === source) setBusy(false)
+      }
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [name, auto])
+
+  return {
+    value,
+    busy,
+    /** Что уйдёт в базу и в ссылку. */
+    final: slugify(value),
+    edit: (next) => {
+      // Очистили поле — снова подставляем перевод: это единственный способ
+      // вернуть подсказку, не закрывая диалог. У существующей записи адрес
+      // сам собой не меняется при переименовании — иначе ссылки на неё молча
+      // ломались бы.
+      setAuto(!next.trim())
+      setValue(next)
+    },
+    reset: (initial = '') => {
+      setValue(initial)
+      setAuto(!initial)
+    },
+  }
+}
+
+/** Поле «Адрес» под названием: показывает и то, как ссылка будет выглядеть. */
+export function SlugField({ field, disabled }) {
+  return (
+    <div>
+      <Label>Адрес ссылки</Label>
+      <Input
+        value={field.value}
+        onChange={(e) => field.edit(e.target.value)}
+        placeholder="english-from-scratch"
+        disabled={disabled}
+        autoComplete="off"
+        autoCapitalize="off"
+        autoCorrect="off"
+        spellCheck="false"
+      />
+      <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+        {field.busy && <Spinner className="h-3 w-3" />}
+        <span className="truncate">
+          ziglish.ru/<span className="text-slate-700 dark:text-slate-300">{field.final || '…'}</span>
+        </span>
+      </p>
+    </div>
+  )
 }
 
 /** Выбор одного варианта из нескольких — плитками, а не радиокнопками. */

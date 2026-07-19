@@ -3,11 +3,13 @@ import { supabase, isSupabaseConfigured } from './lib/supabase'
 import * as db from './lib/db'
 import {
   CARDS,
+  currentPath,
   entitySlug,
   folderPath,
   folderSessionPath,
   go,
   parseRoute,
+  ROUTE_EVENT,
   rootPath,
   setPath,
   statsPath,
@@ -24,7 +26,7 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   // Где мы находимся — в адресе, а не в состоянии: иначе «назад» в браузере
   // уводит из приложения целиком, а F5 возвращает к списку папок.
-  const [route, setRoute] = useState(() => parseRoute(window.location.hash))
+  const [route, setRoute] = useState(() => parseRoute(currentPath()))
   // Папка и набор целиком: по прямой ссылке в памяти их нет, дочитываем по id.
   const [folder, setFolder] = useState(null)
   const [set, setSet] = useState(null)
@@ -34,9 +36,23 @@ export default function App() {
   const modeHistoryRef = useRef(false)
 
   useEffect(() => {
-    const onHash = () => setRoute(parseRoute(window.location.hash))
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
+    // popstate — кнопки «назад» и «вперёд», своё событие — наши переходы:
+    // pushState сам по себе ничего не вызывает.
+    const onNav = () => setRoute(parseRoute(currentPath()))
+    window.addEventListener('popstate', onNav)
+    window.addEventListener(ROUTE_EVENT, onNav)
+    return () => {
+      window.removeEventListener('popstate', onNav)
+      window.removeEventListener(ROUTE_EVENT, onNav)
+    }
+  }, [])
+
+  // Ссылка старого образца (#/angliyskiy-s-nulya) — переписываем на обычный
+  // путь, чтобы в адресной строке не оставалось решётки.
+  useEffect(() => {
+    if (window.location.hash.startsWith('#/')) {
+      window.history.replaceState(null, '', window.location.hash.slice(1))
+    }
   }, [])
 
   // Из режима могли выйти и кнопкой браузера — тогда снимать запись уже нечего.

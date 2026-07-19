@@ -20,9 +20,9 @@ function clean(word) {
     .trim()
 }
 
-async function viaGoogle(text) {
+async function viaGoogle(text, from, to) {
   const url =
-    'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ru&dt=t&q=' +
+    `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=` +
     encodeURIComponent(text)
   const res = await fetch(url, { signal: AbortSignal.timeout(6000) })
   if (!res.ok) return null
@@ -38,9 +38,9 @@ async function viaGoogle(text) {
   return out || null
 }
 
-async function viaMyMemory(text) {
+async function viaMyMemory(text, from, to) {
   const url =
-    'https://api.mymemory.translated.net/get?langpair=en|ru&q=' + encodeURIComponent(text)
+    `https://api.mymemory.translated.net/get?langpair=${from}|${to}&q=` + encodeURIComponent(text)
   const res = await fetch(url, { signal: AbortSignal.timeout(6000) })
   if (!res.ok) return null
   const data = await res.json()
@@ -51,13 +51,13 @@ async function viaMyMemory(text) {
 /**
  * @returns {Promise<string|null>} перевод или null, если не вышло.
  */
-export async function translateToRu(word) {
+async function translate(word, from, to) {
   const text = clean(word)
   if (!text || text.length > MAX_LEN) return null
 
   for (const source of [viaGoogle, viaMyMemory]) {
     try {
-      const out = await source(text)
+      const out = await source(text, from, to)
       // Сервис вернул то же самое слово — значит перевести не смог.
       if (out && out.toLowerCase() !== text.toLowerCase()) return out
     } catch {
@@ -66,3 +66,9 @@ export async function translateToRu(word) {
   }
   return null
 }
+
+/** Английское слово карточки → русский перевод. */
+export const translateToRu = (word) => translate(word, 'en', 'ru')
+
+/** Русское название папки или набора → английское, из него делается адрес. */
+export const translateToEn = (name) => translate(name, 'ru', 'en')

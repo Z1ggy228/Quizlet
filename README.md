@@ -22,6 +22,10 @@
       интервального повторения и словаря, таблицы `user_settings` и `study_days`.
    4. [`supabase/migration_04_day_goal.sql`](supabase/migration_04_day_goal.sql) — дневная
       цель запоминается в самом дне, чтобы её изменение не переписывало историю.
+   5. [`supabase/migration_05_flag.sql`](supabase/migration_05_flag.sql) — ручная пометка
+      «проблемное слово».
+   6. [`supabase/migration_06_slug.sql`](supabase/migration_06_slug.sql) — адрес папки и
+      набора словами: `ziglish.ru/english-from-scratch/lesson-3`.
 
    Все скрипты идемпотентные, повторный запуск ничего не сломает.
 

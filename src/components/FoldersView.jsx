@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import * as db from '../lib/db'
-import { Button, Card, EmptyState, ErrorText, Input, Modal, Spinner } from './ui'
+import { Button, Card, EmptyState, ErrorText, Input, Label, Modal, SlugField, Spinner, useSlugField } from './ui'
 import DailyPanel from './DailyPanel'
 
 export default function FoldersView({ user, onOpen }) {
@@ -10,6 +10,7 @@ export default function FoldersView({ user, onOpen }) {
   const [dialog, setDialog] = useState(null) // {type:'create'|'rename'|'delete', folder?}
   const [name, setName] = useState('')
   const [busy, setBusy] = useState(false)
+  const slug = useSlugField(name)
 
   useEffect(() => {
     load()
@@ -30,6 +31,7 @@ export default function FoldersView({ user, onOpen }) {
   function open(type, folder) {
     setDialog({ type, folder })
     setName(folder?.name ?? '')
+    slug.reset(folder?.slug ?? '')
     setError('')
   }
 
@@ -37,8 +39,8 @@ export default function FoldersView({ user, onOpen }) {
     e?.preventDefault()
     setBusy(true)
     try {
-      if (dialog.type === 'create') await db.createFolder(user.id, name.trim())
-      if (dialog.type === 'rename') await db.renameFolder(dialog.folder.id, name.trim())
+      if (dialog.type === 'create') await db.createFolder(user.id, name.trim(), slug.final)
+      if (dialog.type === 'rename') await db.renameFolder(dialog.folder.id, name.trim(), slug.final)
       if (dialog.type === 'delete') await db.deleteFolder(dialog.folder.id)
       setDialog(null)
       await load()
@@ -134,13 +136,17 @@ export default function FoldersView({ user, onOpen }) {
           </div>
         ) : (
           <form onSubmit={submit} className="space-y-4">
-            <Input
-              autoFocus
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Название папки"
-              required
-            />
+            <div>
+              <Label>Название</Label>
+              <Input
+                autoFocus
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Название папки"
+                required
+              />
+            </div>
+            <SlugField field={slug} />
             <ErrorText>{error}</ErrorText>
             <div className="flex justify-end gap-2">
               <Button type="button" variant="secondary" onClick={() => setDialog(null)}>

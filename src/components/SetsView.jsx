@@ -1,6 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import * as db from '../lib/db'
-import { Button, Card, EmptyState, ErrorText, Input, Modal, plural, Spinner } from './ui'
+import {
+  Button,
+  Card,
+  EmptyState,
+  ErrorText,
+  Input,
+  Label,
+  Modal,
+  plural,
+  SlugField,
+  Spinner,
+  useSlugField,
+} from './ui'
 import { IconButton, PencilIcon, PlusIcon, TrashIcon } from './FoldersView'
 import Flashcards from './Flashcards'
 import Learn from './Learn'
@@ -24,6 +36,7 @@ export default function SetsView({ user, folder, onOpen, sessionMode, onSession 
   const [dialog, setDialog] = useState(null)
   const [name, setName] = useState('')
   const [busy, setBusy] = useState(false)
+  const slug = useSlugField(name)
 
   // Сессия по всей папке: карточки всех наборов одним списком, только на время
   // сессии. Ничего не создаём в базе, прогресс пишется тем же карточкам по их id.
@@ -91,6 +104,7 @@ export default function SetsView({ user, folder, onOpen, sessionMode, onSession 
   function open(type, set) {
     setDialog({ type, set })
     setName(set?.name ?? '')
+    slug.reset(set?.slug ?? '')
     setError('')
   }
 
@@ -98,8 +112,8 @@ export default function SetsView({ user, folder, onOpen, sessionMode, onSession 
     e?.preventDefault()
     setBusy(true)
     try {
-      if (dialog.type === 'create') await db.createSet(user.id, folder.id, name.trim())
-      if (dialog.type === 'rename') await db.renameSet(dialog.set.id, name.trim())
+      if (dialog.type === 'create') await db.createSet(user.id, folder.id, name.trim(), slug.final)
+      if (dialog.type === 'rename') await db.renameSet(dialog.set.id, name.trim(), slug.final)
       if (dialog.type === 'delete') await db.deleteSet(dialog.set.id)
       setDialog(null)
       await load()
@@ -343,13 +357,17 @@ export default function SetsView({ user, folder, onOpen, sessionMode, onSession 
           </div>
         ) : (
           <form onSubmit={submit} className="space-y-4">
-            <Input
-              autoFocus
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Название набора"
-              required
-            />
+            <div>
+              <Label>Название</Label>
+              <Input
+                autoFocus
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Название набора"
+                required
+              />
+            </div>
+            <SlugField field={slug} />
             <ErrorText>{error}</ErrorText>
             <div className="flex justify-end gap-2">
               <Button type="button" variant="secondary" onClick={() => setDialog(null)}>

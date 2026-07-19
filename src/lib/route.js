@@ -2,17 +2,22 @@
  * Адрес страницы: разбор и сборка. Чистые функции без React — проверяются
  * прогоном в node.
  *
- * Адрес складывается из названий, а не из id: `#/angliyskiy-s-nulya/lesson-3/learn`
- * читается, а `#/f/8f3c…/s/1a90…` — нет. Кириллица в адресе браузером кодируется
- * в %D0%BB%D0%B8… и превращает ссылку в кашу, поэтому названия транслитерируются.
+ * Адрес складывается из названий, а не из id: `/english-from-scratch/lesson-3/learn`
+ * читается, а `/f/8f3c…/s/1a90…` — нет.
  *
- * Чем платим: id в базе не по названию, поэтому папку и набор приходится искать
- * перебором по списку (см. App.jsx) — списки короткие, это дешевле некрасивого
- * адреса. И переименование меняет ссылку: старая закладка уведёт на список папок.
+ * Английские слова берутся из колонки `slug` (миграция 06): её заполняет
+ * приложение, переводя название при сохранении. Пока колонка пустая, адрес
+ * собирается транслитерацией — старые ссылки продолжают работать, но выглядят
+ * как `angliyskiy-s-nulya`.
  *
- * Почему хеш, а не History API: приложение раздаётся статикой с Vercel, и при
- * обычных путях вида /lesson-3 сервер полез бы искать такой файл и отдал 404.
- * Хеш до сервера не доходит вовсе.
+ * Обычные пути, а не хеш: `#/...` в ссылке смотрится мусором. Цена — правило
+ * rewrite в [vercel.json](../../vercel.json): без него хостинг на `/lesson-3`
+ * пойдёт искать такой файл и отдаст 404. В обмен адрес чистый и попадает в
+ * историю браузера как обычная страница.
+ *
+ * Чем ещё платим: id в базе не по адресу, поэтому папку и набор приходится
+ * искать перебором по списку (см. App.jsx) — списки короткие, это дешевле
+ * лишней колонки в запросах.
  */
 
 /** Режимы занятий, которые живут в адресе: назад из них возвращает к набору. */
@@ -47,19 +52,22 @@ export function slugify(name) {
 }
 
 /**
- * Кусок адреса для папки или набора. Если от названия ничего не осталось
- * (одни смайлики или знаки препинания), берём id — ссылка будет некрасивой,
- * но рабочей.
+ * Кусок адреса для папки или набора: сохранённый английский slug, иначе
+ * транслитерация названия. Если не осталось и её (одни смайлики или знаки
+ * препинания), берём id — ссылка будет некрасивой, но рабочей.
  */
-export const entitySlug = (entity) => slugify(entity?.name) || entity?.id || ''
+export const entitySlug = (entity) =>
+  slugify(entity?.slug) || slugify(entity?.name) || entity?.id || ''
 
 /**
  * @returns {{view:'root'|'stats'|'folder'|'set'|'folderSession',
  *            folderSlug?:string, setSlug?:string, mode?:string}}
  */
-export function parseRoute(hash) {
-  const parts = String(hash || '')
-    .replace(/^#\/?/, '')
+export function parseRoute(pathname) {
+  const parts = String(pathname || '')
+    // Хеш-адреса времён предыдущей версии тоже понимаем: старая закладка
+    // #/angliyskiy-s-nulya/lesson-3 откроет то же место, а не корень.
+    .replace(/^[^#]*#/, '')
     .split('/')
     .filter(Boolean)
     .map(decodeURIComponent)
@@ -83,16 +91,23 @@ export function parseRoute(hash) {
   return { view: 'folder', folderSlug }
 }
 
-export const rootPath = () => '#/'
-export const statsPath = () => `#/${RESERVED.stats}`
-export const folderPath = (folder) => `#/${entitySlug(folder)}`
+export const rootPath = () => '/'
+export const statsPath = () => `/${RESERVED.stats}`
+export const folderPath = (folder) => `/${entitySlug(folder)}`
 export const folderSessionPath = (folder, mode) =>
   `${folderPath(folder)}/${RESERVED.all}/${mode}`
 export const setPath = (folder, set, mode = CARDS) =>
   `${folderPath(folder)}/${entitySlug(set)}` + (mode && mode !== CARDS ? `/${mode}` : '')
 
+/** Событие своего перехода: pushState сам по себе popstate не вызывает. */
+export const ROUTE_EVENT = 'ziglish:route'
+
 /** Переход: обычный — новой записью в истории, replace — вместо текущей. */
 export function go(path, { replace = false } = {}) {
-  if (replace) window.location.replace(path)
-  else window.location.hash = path
+  if (replace) window.history.replaceState(null, '', path)
+  else window.history.pushState(null, '', path)
+  window.dispatchEvent(new Event(ROUTE_EVENT))
 }
+
+/** Текущий адрес: путь, а для старых закладок — то, что осталось в хеше. */
+export const currentPath = () => window.location.pathname + window.location.hash
