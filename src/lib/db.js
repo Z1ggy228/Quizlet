@@ -41,6 +41,23 @@ export async function listFolders() {
   return data
 }
 
+/**
+ * Папка по id — для перехода по прямой ссылке, когда в памяти ничего нет
+ * (открыли закладку или нажали F5 внутри набора).
+ *
+ * maybeSingle, а не single: папки может уже не быть, и это не ошибка, а повод
+ * увести на список папок. Чужую RLS всё равно не отдаст.
+ */
+export async function getFolder(id) {
+  const { data, error } = await supabase
+    .from('folders')
+    .select('id, name, created_at')
+    .eq('id', id)
+    .maybeSingle()
+  if (error) throw error
+  return data
+}
+
 export async function createFolder(userId, name) {
   const { data, error } = await supabase
     .from('folders')
@@ -72,6 +89,17 @@ export async function listSets(folderId) {
       .order('position', { ascending: true })
       .order('created_at', { ascending: true }),
   )
+}
+
+/** Набор по id — тоже для прямых ссылок, см. getFolder. */
+export async function getSet(id) {
+  const { data, error } = await supabase
+    .from('sets')
+    .select('id, name, folder_id, position, created_at')
+    .eq('id', id)
+    .maybeSingle()
+  if (error) throw error
+  return data
 }
 
 export async function createSet(userId, folderId, name) {

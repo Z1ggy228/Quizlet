@@ -10,11 +10,14 @@ import Learn from './Learn'
 import Listening from './Listening'
 import Sentences from './Sentences'
 
-export default function SetView({ user, set }) {
+/**
+ * Режим занятия приходит из адреса (`#/f/../s/../learn`), а не хранится здесь:
+ * так «назад» в браузере выходит из занятия к набору, а не из приложения.
+ */
+export default function SetView({ user, set, mode = 'cards', onMode }) {
   const [cards, setCards] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [mode, setMode] = useState('cards') // 'cards' | 'flash' | 'learn'
   const [cardDialog, setCardDialog] = useState(null) // null | {card?}
   const [importOpen, setImportOpen] = useState(false)
   const [toDelete, setToDelete] = useState(null)
@@ -75,7 +78,7 @@ export default function SetView({ user, set }) {
   }
 
   if (mode === 'flash') {
-    return <Flashcards cards={cards} onExit={() => setMode('cards')} setName={set.name} />
+    return <Flashcards cards={cards} onExit={() => onMode('cards')} setName={set.name} />
   }
   if (mode === 'learn') {
     return (
@@ -83,7 +86,7 @@ export default function SetView({ user, set }) {
         cards={cards}
         setName={set.name}
         onMastery={applyMastery}
-        onExit={() => setMode('cards')}
+        onExit={() => onMode('cards')}
       />
     )
   }
@@ -93,13 +96,13 @@ export default function SetView({ user, set }) {
         cards={cards}
         setName={set.name}
         onMastery={applyMastery}
-        onExit={() => setMode('cards')}
+        onExit={() => onMode('cards')}
       />
     )
   }
   if (mode === 'sentences') {
     // onMastery нет намеренно: режим не двигает прогресс слов, см. Sentences.jsx.
-    return <Sentences cards={cards} setName={set.name} onExit={() => setMode('cards')} />
+    return <Sentences cards={cards} setName={set.name} onExit={() => onMode('cards')} />
   }
 
   const mastered = cards.filter((c) => c.mastery_level >= 3).length
@@ -118,7 +121,7 @@ export default function SetView({ user, set }) {
           title="Flashcards"
           hint="Карточки с переворотом"
           disabled={cards.length === 0}
-          onClick={() => setMode('flash')}
+          onClick={() => onMode('flash')}
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
               <path d="M2 4.75A1.75 1.75 0 0 1 3.75 3h12.5A1.75 1.75 0 0 1 18 4.75v8.5A1.75 1.75 0 0 1 16.25 15H3.75A1.75 1.75 0 0 1 2 13.25v-8.5ZM5 17.25a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1-.75-.75Z" />
@@ -129,7 +132,7 @@ export default function SetView({ user, set }) {
           title="Learn"
           hint="Адаптивный тренажёр"
           disabled={cards.length === 0}
-          onClick={() => setMode('learn')}
+          onClick={() => onMode('learn')}
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
               <path d="M10.394 2.08a1.75 1.75 0 0 0-.788 0l-7 1.75A1.75 1.75 0 0 0 1.25 5.53v.216c0 .524.234 1.02.638 1.35l6.75 5.5a1.75 1.75 0 0 0 2.224 0l6.75-5.5c.404-.33.638-.826.638-1.35V5.53a1.75 1.75 0 0 0-1.356-1.7l-7-1.75ZM3.5 9.35v3.9c0 .64.35 1.23.91 1.54 1.44.79 3.36 1.46 5.59 1.46s4.15-.67 5.59-1.46c.56-.31.91-.9.91-1.54v-3.9l-4.8 3.91a3.25 3.25 0 0 1-4.4 0L3.5 9.35Z" />
@@ -140,7 +143,7 @@ export default function SetView({ user, set }) {
           title="На слух"
           hint="Слушать и записывать"
           disabled={cards.length === 0}
-          onClick={() => setMode('listen')}
+          onClick={() => onMode('listen')}
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
               <path d="M10.5 3.75a.75.75 0 0 0-1.24-.57L5.9 6.25H3.5A1.5 1.5 0 0 0 2 7.75v4.5a1.5 1.5 0 0 0 1.5 1.5h2.4l3.36 3.07a.75.75 0 0 0 1.24-.57V3.75Z" />
@@ -152,7 +155,7 @@ export default function SetView({ user, set }) {
           title="Предложения"
           hint="Переводить фразы целиком"
           disabled={cards.length === 0}
-          onClick={() => setMode('sentences')}
+          onClick={() => onMode('sentences')}
           icon={
             <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
               <path

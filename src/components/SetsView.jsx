@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as db from '../lib/db'
 import { Button, Card, EmptyState, ErrorText, Input, Modal, plural, Spinner } from './ui'
 import { IconButton, PencilIcon, PlusIcon, TrashIcon } from './FoldersView'
@@ -16,7 +16,7 @@ function shuffleArray(arr) {
   return a
 }
 
-export default function SetsView({ user, folder, onOpen }) {
+export default function SetsView({ user, folder, onOpen, sessionMode, onSession }) {
   const [sets, setSets] = useState([])
   const [stats, setStats] = useState({}) // { [setId]: {total, mastered} }
   const [loading, setLoading] = useState(true)
@@ -27,15 +27,52 @@ export default function SetsView({ user, folder, onOpen }) {
 
   // Сессия по всей папке: карточки всех наборов одним списком, только на время
   // сессии. Ничего не создаём в базе, прогресс пишется тем же карточкам по их id.
-  const [session, setSession] = useState(null) // null | {mode, cards}
+  // Какой режим открыт, знает адрес (#/f/../all/learn) — поэтому «назад»
+  // выходит из занятия к папке, а F5 внутри занятия его не теряет.
+  const [sessionCards, setSessionCards] = useState(null)
+  const hadSessionRef = useRef(false)
   const [learnAllOpen, setLearnAllOpen] = useState(false)
   const [learnAllMode, setLearnAllMode] = useState('learn')
   const [shuffle, setShuffle] = useState(false)
-  const [starting, setStarting] = useState(false)
 
   useEffect(() => {
     load()
   }, [folder.id])
+
+  // Карточки папки читаем под открытое занятие: по прямой ссылке в памяти их
+  // нет, а держать полторы тысячи строк просто так незачем.
+  useEffect(() => {
+    if (!sessionMode) {
+      setSessionCards(null)
+      // Вернулись из занятия — счётчики наборов за это время изменились.
+      if (hadSessionRef.current) {
+        hadSessionRef.current = false
+        load()
+      }
+      return
+    }
+    hadSessionRef.current = true
+    let cancelled = false
+    ;(async () => {
+      try {
+        setError('')
+        const cards = await db.listFolderCards(folder.id)
+        if (cancelled) return
+        if (!cards.length) {
+          setError('В папке пока нет ни одной карточки.')
+          return onSession(null)
+        }
+        setSessionCards(shuffle ? shuffleArray(cards) : cards)
+      } catch (e) {
+        if (!cancelled) setError(e.message)
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+    // shuffle намеренно не в зависимостях: это настройка на момент старта.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionMode, folder.id])
 
   async function load() {
     try {
@@ -73,34 +110,23 @@ export default function SetsView({ user, folder, onOpen }) {
     }
   }
 
-  async function startFolderSession() {
-    setStarting(true)
-    setError('')
-    try {
-      const cards = await db.listFolderCards(folder.id)
-      if (!cards.length) throw new Error('В папке пока нет ни одной карточки.')
-      setSession({ mode: learnAllMode, cards: shuffle ? shuffleArray(cards) : cards })
-      setLearnAllOpen(false)
-    } catch (e) {
-      setError(e.message)
-    } finally {
-      setStarting(false)
+  if (sessionMode) {
+    if (!sessionCards) {
+      return (
+        <div className="flex justify-center py-16 text-slate-400">
+          <Spinner />
+        </div>
+      )
     }
-  }
-
-  if (session) {
-    const exit = () => {
-      setSession(null)
-      load() // счётчики и прогресс могли измениться за сессию
-    }
+    const exit = () => onSession(null)
     const title = `${folder.name} · все слова`
-    if (session.mode === 'flash')
-      return <Flashcards cards={session.cards} setName={title} onExit={exit} />
-    if (session.mode === 'listen')
-      return <Listening cards={session.cards} setName={title} onExit={exit} />
-    if (session.mode === 'sentences')
-      return <Sentences cards={session.cards} setName={title} onExit={exit} />
-    return <Learn cards={session.cards} setName={title} onExit={exit} />
+    if (sessionMode === 'flash')
+      return <Flashcards cards={sessionCards} setName={title} onExit={exit} />
+    if (sessionMode === 'listen')
+      return <Listening cards={sessionCards} setName={title} onExit={exit} />
+    if (sessionMode === 'sentences')
+      return <Sentences cards={sessionCards} setName={title} onExit={exit} />
+    return <Learn cards={sessionCards} setName={title} onExit={exit} />
   }
 
   const totalCards = Object.values(stats).reduce((a, s) => a + s.total, 0)
@@ -277,8 +303,13 @@ export default function SetsView({ user, folder, onOpen }) {
             <Button variant="secondary" onClick={() => setLearnAllOpen(false)}>
               Отмена
             </Button>
-            <Button onClick={startFolderSession} disabled={starting}>
-              {starting && <Spinner className="h-4 w-4" />} Начать
+            <Button
+              onClick={() => {
+                setLearnAllOpen(false)
+                onSession(learnAllMode)
+              }}
+            >
+              Начать
             </Button>
           </div>
         </div>

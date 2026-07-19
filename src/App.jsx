@@ -1,19 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { supabase, isSupabaseConfigured } from './lib/supabase'
+import * as db from './lib/db'
+import {
+  CARDS,
+  folderPath,
+  folderSessionPath,
+  go,
+  parseRoute,
+  rootPath,
+  setPath,
+  statsPath,
+} from './lib/route'
 import AuthScreen from './components/AuthScreen'
 import FoldersView from './components/FoldersView'
 import SetsView from './components/SetsView'
 import SetView from './components/SetView'
 import StatsView from './components/StatsView'
-import { Button, Card, Spinner } from './components/ui'
+import { Button, Card, ErrorText, Spinner } from './components/ui'
 
 export default function App() {
   const [session, setSession] = useState(null)
   const [loading, setLoading] = useState(true)
-  // Навигация без роутера: два уровня вложенности, обратно — по хлебным крошкам.
+  // Где мы находимся — в адресе, а не в состоянии: иначе «назад» в браузере
+  // уводит из приложения целиком, а F5 возвращает к списку папок.
+  const [route, setRoute] = useState(() => parseRoute(window.location.hash))
+  // Папка и набор целиком: по прямой ссылке в памяти их нет, дочитываем по id.
   const [folder, setFolder] = useState(null)
   const [set, setSet] = useState(null)
-  const [stats, setStats] = useState(false)
+  const [routeError, setRouteError] = useState('')
+  // Мы ли сами добавили в историю запись режима — от этого зависит, как из него
+  // выходить (см. changeMode ниже).
+  const modeHistoryRef = useRef(false)
+
+  useEffect(() => {
+    const onHash = () => setRoute(parseRoute(window.location.hash))
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
+  // Из режима могли выйти и кнопкой браузера — тогда снимать запись уже нечего.
+  useEffect(() => {
+    const inMode = route.view === 'folderSession' || (route.mode && route.mode !== CARDS)
+    if (!inMode) modeHistoryRef.current = false
+  }, [route.view, route.mode])
 
   useEffect(() => {
     if (!isSupabaseConfigured) {
@@ -26,13 +55,51 @@ export default function App() {
     })
     const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
       setSession(s)
-      if (!s) {
-        setFolder(null)
-        setSet(null)
-      }
+      if (!s) go(rootPath(), { replace: true })
     })
     return () => sub.subscription.unsubscribe()
   }, [])
+
+  // Подтягиваем папку и набор под текущий адрес. Пока не подтянули, экран ниже
+  // показывает спиннер: рисовать набор без его названия нечем.
+  useEffect(() => {
+    if (!session) return
+    let cancelled = false
+
+    async function resolve() {
+      if (!route.folderId) {
+        setFolder(null)
+        setSet(null)
+        return
+      }
+      try {
+        setRouteError('')
+        const f =
+          folder?.id === route.folderId ? folder : await db.getFolder(route.folderId)
+        if (cancelled) return
+        // Папку могли удалить, а ссылка осталась. replace, а не обычный переход:
+        // иначе «назад» вернёт на ту же мёртвую ссылку.
+        if (!f) return go(rootPath(), { replace: true })
+
+        let s = null
+        if (route.setId) {
+          s = set?.id === route.setId ? set : await db.getSet(route.setId)
+          if (cancelled) return
+          if (!s) return go(folderPath(route.folderId), { replace: true })
+        }
+        setFolder(f)
+        setSet(s)
+      } catch (e) {
+        if (!cancelled) setRouteError(e.message)
+      }
+    }
+
+    resolve()
+    return () => {
+      cancelled = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session, route.folderId, route.setId])
 
   if (!isSupabaseConfigured) return <ConfigNotice />
 
@@ -47,11 +114,33 @@ export default function App() {
   if (!session) return <AuthScreen />
 
   const user = session.user
-  const home = () => {
-    setFolder(null)
-    setSet(null)
-    setStats(false)
+  const home = () => go(rootPath())
+
+  /**
+   * Вход в занятие — новой записью в истории, выход — шагом назад по ней.
+   *
+   * Если выходить обычным переходом, в истории остаётся пара «набор → режим →
+   * набор», и первое нажатие «назад» выглядит как холостое. Шаг назад снимает
+   * запись режима ровно так, как её и добавили. Но когда режим открыт по прямой
+   * ссылке (закладка или F5 посреди занятия), снимать нечего — там нужен
+   * replace, иначе «назад» уведёт из приложения.
+   */
+  const enterMode = (path) => {
+    modeHistoryRef.current = true
+    go(path)
   }
+  const exitMode = (fallback) => {
+    if (modeHistoryRef.current) {
+      modeHistoryRef.current = false
+      return window.history.back()
+    }
+    go(fallback, { replace: true })
+  }
+  // Данные под адрес доехали? Пока нет — рисуем спиннер вместо чужого экрана.
+  const ready =
+    route.view === 'root' ||
+    route.view === 'stats' ||
+    (folder?.id === route.folderId && (!route.setId || set?.id === route.setId))
 
   return (
     <div className="min-h-full">
@@ -62,7 +151,7 @@ export default function App() {
             <span className="hidden font-display text-lg sm:inline">Ziglish</span>
           </button>
 
-          {stats ? (
+          {route.view === 'stats' ? (
             <nav className="flex min-w-0 items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
               <span className="text-slate-300 dark:text-slate-600">/</span>
               <span className="text-slate-900 dark:text-slate-100">Статистика</span>
@@ -72,18 +161,14 @@ export default function App() {
               folder={folder}
               set={set}
               onRoot={home}
-              onFolder={() => setSet(null)}
+              onFolder={() => go(folderPath(folder.id))}
             />
           )}
 
           <div className="ml-auto flex shrink-0 items-center gap-1">
             <Button
               variant="ghost"
-              onClick={() => {
-                setStats((v) => !v)
-                setFolder(null)
-                setSet(null)
-              }}
+              onClick={() => go(route.view === 'stats' ? rootPath() : statsPath())}
               className="px-2"
               aria-label="Статистика"
               title="Статистика"
@@ -117,14 +202,40 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-5xl px-4 py-6 sm:py-8">
-        {stats ? (
+        {routeError ? (
+          <div className="space-y-4">
+            <ErrorText>{routeError}</ErrorText>
+            <Button onClick={home}>К списку папок</Button>
+          </div>
+        ) : !ready ? (
+          <div className="flex justify-center py-16 text-slate-400">
+            <Spinner />
+          </div>
+        ) : route.view === 'stats' ? (
           <StatsView user={user} />
-        ) : set ? (
-          <SetView user={user} set={set} />
-        ) : folder ? (
-          <SetsView user={user} folder={folder} onOpen={setSet} />
+        ) : route.view === 'set' ? (
+          <SetView
+            user={user}
+            set={set}
+            mode={route.mode}
+            onMode={(m) =>
+              m === CARDS
+                ? exitMode(setPath(folder.id, set.id))
+                : enterMode(setPath(folder.id, set.id, m))
+            }
+          />
+        ) : route.view === 'folder' || route.view === 'folderSession' ? (
+          <SetsView
+            user={user}
+            folder={folder}
+            sessionMode={route.view === 'folderSession' ? route.mode : null}
+            onSession={(m) =>
+              m ? enterMode(folderSessionPath(folder.id, m)) : exitMode(folderPath(folder.id))
+            }
+            onOpen={(s) => go(setPath(folder.id, s.id))}
+          />
         ) : (
-          <FoldersView user={user} onOpen={setFolder} />
+          <FoldersView user={user} onOpen={(f) => go(folderPath(f.id))} />
         )}
       </main>
     </div>
