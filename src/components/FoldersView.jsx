@@ -75,17 +75,21 @@ export default function FoldersView({ user, onOpen }) {
         <ul className="space-y-2">
           {folders.map((f) => (
             <li key={f.id}>
-              <Card className="group flex items-center gap-2 p-4 transition hover:ring-indigo-300 dark:hover:ring-indigo-700">
+              <Card className="group relative flex items-center gap-2 p-4 transition hover:ring-indigo-300 dark:hover:ring-indigo-700">
+                {/* before:inset-0 растягивает область клика на всю карточку вместе с
+                    паддингом: сама кнопка занимает только текст, и попасть мимо неё,
+                    целясь в край плашки, было легко. Кнопки справа поднимаем над
+                    этим слоем через z-10, иначе они окажутся под ним. */}
                 <button
                   onClick={() => onOpen(f)}
-                  className="flex min-w-0 flex-1 items-center gap-3 text-left"
+                  className="flex min-w-0 flex-1 items-center gap-3 text-left before:absolute before:inset-0 before:content-['']"
                 >
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400">
                     <FolderIcon />
                   </span>
                   <span className="truncate font-display font-medium">{f.name}</span>
                 </button>
-                <div className="flex shrink-0 gap-1">
+                <div className="relative z-10 flex shrink-0 gap-1">
                   <IconButton label="Переименовать" onClick={() => open('rename', f)}>
                     <PencilIcon />
                   </IconButton>

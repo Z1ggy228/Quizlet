@@ -535,7 +535,9 @@ function ProgressBar({ mastered, total }) {
               }}
               title={`${count} слов`}
             >
-              {reached && <span className="h-2 w-2 rounded-full bg-white" />}
+              {/* Кружок почти во всю отметку: внутренний диаметр 20px (24px минус
+                  рамка), точка 16px — заметна на телефоне, но ободок виден. */}
+              {reached && <span className="h-4 w-4 rounded-full bg-white" />}
             </span>
           )
         })}

@@ -5,6 +5,7 @@ import { IconButton, PencilIcon, PlusIcon, TrashIcon } from './FoldersView'
 import Flashcards from './Flashcards'
 import Learn from './Learn'
 import Listening from './Listening'
+import Sentences from './Sentences'
 
 function shuffleArray(arr) {
   const a = [...arr]
@@ -97,6 +98,8 @@ export default function SetsView({ user, folder, onOpen }) {
       return <Flashcards cards={session.cards} setName={title} onExit={exit} />
     if (session.mode === 'listen')
       return <Listening cards={session.cards} setName={title} onExit={exit} />
+    if (session.mode === 'sentences')
+      return <Sentences cards={session.cards} setName={title} onExit={exit} />
     return <Learn cards={session.cards} setName={title} onExit={exit} />
   }
 
@@ -164,15 +167,16 @@ export default function SetsView({ user, folder, onOpen }) {
                 // ! обязателен: Card уже несёт bg-white и ring-slate-200, приоритет у
                 // одиночных утилит одинаковый, и в собранном css побеждает bg-white —
                 // без ! плашка выученного набора остаётся белой.
-                className={`flex items-center gap-2 p-4 transition ${
+                className={`relative flex items-center gap-2 p-4 transition ${
                   done
                     ? '!bg-emerald-50 !ring-emerald-400 dark:!bg-emerald-950/40 dark:!ring-emerald-700'
                     : 'hover:ring-indigo-300 dark:hover:ring-indigo-700'
                 }`}
               >
+                {/* Клик по всей плашке, а не только по тексту: см. FoldersView. */}
                 <button
                   onClick={() => onOpen(s)}
-                  className="flex min-w-0 flex-1 flex-col gap-1.5 text-left"
+                  className="flex min-w-0 flex-1 flex-col gap-1.5 text-left before:absolute before:inset-0 before:content-['']"
                 >
                   <span className="flex w-full items-center gap-2">
                     {done && (
@@ -200,7 +204,7 @@ export default function SetsView({ user, folder, onOpen }) {
 
                   <ProgressLine pct={pct} done={done} />
                 </button>
-                <div className="flex shrink-0 gap-1">
+                <div className="relative z-10 flex shrink-0 gap-1">
                   <IconButton label="Переименовать" onClick={() => open('rename', s)}>
                     <PencilIcon />
                   </IconButton>
@@ -225,7 +229,7 @@ export default function SetsView({ user, folder, onOpen }) {
             сохраняется тем же карточкам, что и при изучении набора по отдельности.
           </p>
 
-          <div className="grid gap-2 sm:grid-cols-3">
+          <div className="grid gap-2 sm:grid-cols-2">
             <ModeOption
               title="Learn"
               hint="Адаптивный тренажёр"
@@ -243,6 +247,12 @@ export default function SetsView({ user, folder, onOpen }) {
               hint="Слушать и записывать"
               active={learnAllMode === 'listen'}
               onClick={() => setLearnAllMode('listen')}
+            />
+            <ModeOption
+              title="Предложения"
+              hint="Переводить фразы целиком"
+              active={learnAllMode === 'sentences'}
+              onClick={() => setLearnAllMode('sentences')}
             />
           </div>
 

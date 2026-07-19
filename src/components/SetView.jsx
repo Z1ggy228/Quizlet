@@ -8,6 +8,7 @@ import ImportDialog from './ImportDialog'
 import Flashcards from './Flashcards'
 import Learn from './Learn'
 import Listening from './Listening'
+import Sentences from './Sentences'
 
 export default function SetView({ user, set }) {
   const [cards, setCards] = useState([])
@@ -96,6 +97,10 @@ export default function SetView({ user, set }) {
       />
     )
   }
+  if (mode === 'sentences') {
+    // onMastery нет намеренно: режим не двигает прогресс слов, см. Sentences.jsx.
+    return <Sentences cards={cards} setName={set.name} onExit={() => setMode('cards')} />
+  }
 
   const mastered = cards.filter((c) => c.mastery_level >= 3).length
 
@@ -108,7 +113,7 @@ export default function SetView({ user, set }) {
         </p>
       </div>
 
-      <div className="mb-6 grid gap-3 sm:grid-cols-3">
+      <div className="mb-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <ModeButton
           title="Flashcards"
           hint="Карточки с переворотом"
@@ -140,6 +145,21 @@ export default function SetView({ user, set }) {
             <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
               <path d="M10.5 3.75a.75.75 0 0 0-1.24-.57L5.9 6.25H3.5A1.5 1.5 0 0 0 2 7.75v4.5a1.5 1.5 0 0 0 1.5 1.5h2.4l3.36 3.07a.75.75 0 0 0 1.24-.57V3.75Z" />
               <path d="M13.28 6.22a.75.75 0 0 1 1.06 0 5.35 5.35 0 0 1 0 7.56.75.75 0 1 1-1.06-1.06 3.85 3.85 0 0 0 0-5.44.75.75 0 0 1 0-1.06Zm2.47-2.47a.75.75 0 0 1 1.06 0 8.85 8.85 0 0 1 0 12.5.75.75 0 1 1-1.06-1.06 7.35 7.35 0 0 0 0-10.38.75.75 0 0 1 0-1.06Z" />
+            </svg>
+          }
+        />
+        <ModeButton
+          title="Предложения"
+          hint="Переводить фразы целиком"
+          disabled={cards.length === 0}
+          onClick={() => setMode('sentences')}
+          icon={
+            <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+              <path
+                fillRule="evenodd"
+                d="M3 4.25A2.25 2.25 0 0 1 5.25 2h9.5A2.25 2.25 0 0 1 17 4.25v8.5A2.25 2.25 0 0 1 14.75 15H8.6l-3.44 2.75A.75.75 0 0 1 4 17.16V15h-.25A1.75 1.75 0 0 1 2 13.25v-9Zm3.25 2a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5h-7.5Zm0 3.5a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5Z"
+                clipRule="evenodd"
+              />
             </svg>
           }
         />
