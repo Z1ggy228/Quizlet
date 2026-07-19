@@ -3,6 +3,7 @@ import { supabase, isSupabaseConfigured } from './lib/supabase'
 import * as db from './lib/db'
 import {
   CARDS,
+  entitySlug,
   folderPath,
   folderSessionPath,
   go,
@@ -60,32 +61,48 @@ export default function App() {
     return () => sub.subscription.unsubscribe()
   }, [])
 
-  // Подтягиваем папку и набор под текущий адрес. Пока не подтянули, экран ниже
-  // показывает спиннер: рисовать набор без его названия нечем.
+  /**
+   * Подтягиваем папку и набор под текущий адрес. Пока не подтянули, экран ниже
+   * показывает спиннер: рисовать набор, не зная его названия, нечем.
+   *
+   * В адресе название, а не id, поэтому ищем перебором по списку. Списки
+   * короткие (папок единицы, наборов десятки), и лишний запрос случается только
+   * при заходе по прямой ссылке — при переходах внутри приложения нужный объект
+   * уже в руках и совпадает по slug.
+   */
   useEffect(() => {
     if (!session) return
     let cancelled = false
 
     async function resolve() {
-      if (!route.folderId) {
+      if (!route.folderSlug) {
         setFolder(null)
         setSet(null)
         return
       }
       try {
         setRouteError('')
-        const f =
-          folder?.id === route.folderId ? folder : await db.getFolder(route.folderId)
-        if (cancelled) return
-        // Папку могли удалить, а ссылка осталась. replace, а не обычный переход:
-        // иначе «назад» вернёт на ту же мёртвую ссылку.
+        let f = entitySlug(folder) === route.folderSlug ? folder : null
+        if (!f) {
+          const folders = await db.listFolders()
+          if (cancelled) return
+          f = folders.find((x) => entitySlug(x) === route.folderSlug) ?? null
+        }
+        // Папку могли удалить или переименовать, а ссылка осталась. replace, а не
+        // обычный переход: иначе «назад» вернёт на ту же мёртвую ссылку.
         if (!f) return go(rootPath(), { replace: true })
 
         let s = null
-        if (route.setId) {
-          s = set?.id === route.setId ? set : await db.getSet(route.setId)
-          if (cancelled) return
-          if (!s) return go(folderPath(route.folderId), { replace: true })
+        if (route.setSlug) {
+          s = set?.folder_id === f.id && entitySlug(set) === route.setSlug ? set : null
+          if (!s) {
+            // Наборы отсортированы по позиции: при одинаковых названиях ссылка
+            // всегда ведёт в один и тот же — первый.
+            const sets = await db.listSets(f.id)
+            if (cancelled) return
+            s = sets.find((x) => entitySlug(x) === route.setSlug) ?? null
+          }
+          if (!s) return go(folderPath(f), { replace: true })
         }
         setFolder(f)
         setSet(s)
@@ -99,7 +116,7 @@ export default function App() {
       cancelled = true
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session, route.folderId, route.setId])
+  }, [session, route.folderSlug, route.setSlug])
 
   if (!isSupabaseConfigured) return <ConfigNotice />
 
@@ -140,7 +157,8 @@ export default function App() {
   const ready =
     route.view === 'root' ||
     route.view === 'stats' ||
-    (folder?.id === route.folderId && (!route.setId || set?.id === route.setId))
+    (entitySlug(folder) === route.folderSlug &&
+      (!route.setSlug || entitySlug(set) === route.setSlug))
 
   return (
     <div className="min-h-full">
@@ -151,19 +169,10 @@ export default function App() {
             <span className="hidden font-display text-lg sm:inline">Ziglish</span>
           </button>
 
-          {route.view === 'stats' ? (
-            <nav className="flex min-w-0 items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
-              <span className="text-slate-300 dark:text-slate-600">/</span>
-              <span className="text-slate-900 dark:text-slate-100">Статистика</span>
-            </nav>
-          ) : (
-            <Breadcrumbs
-              folder={folder}
-              set={set}
-              onRoot={home}
-              onFolder={() => go(folderPath(folder.id))}
-            />
-          )}
+          {/* Хлебных крошек тут больше нет: где мы находимся, видно по заголовку
+              экрана и по адресу, а «на уровень выше» отдано кнопке «назад» в
+              браузере — она теперь работает (см. route.js). Логотип слева
+              возвращает к списку папок. */}
 
           <div className="ml-auto flex shrink-0 items-center gap-1">
             <Button
@@ -220,8 +229,8 @@ export default function App() {
             mode={route.mode}
             onMode={(m) =>
               m === CARDS
-                ? exitMode(setPath(folder.id, set.id))
-                : enterMode(setPath(folder.id, set.id, m))
+                ? exitMode(setPath(folder, set))
+                : enterMode(setPath(folder, set, m))
             }
           />
         ) : route.view === 'folder' || route.view === 'folderSession' ? (
@@ -230,44 +239,15 @@ export default function App() {
             folder={folder}
             sessionMode={route.view === 'folderSession' ? route.mode : null}
             onSession={(m) =>
-              m ? enterMode(folderSessionPath(folder.id, m)) : exitMode(folderPath(folder.id))
+              m ? enterMode(folderSessionPath(folder, m)) : exitMode(folderPath(folder))
             }
-            onOpen={(s) => go(setPath(folder.id, s.id))}
+            onOpen={(s) => go(setPath(folder, s))}
           />
         ) : (
-          <FoldersView user={user} onOpen={(f) => go(folderPath(f.id))} />
+          <FoldersView user={user} onOpen={(f) => go(folderPath(f))} />
         )}
       </main>
     </div>
-  )
-}
-
-function Breadcrumbs({ folder, set, onRoot, onFolder }) {
-  if (!folder) return null
-  return (
-    <nav className="flex min-w-0 items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
-      <span className="text-slate-300 dark:text-slate-600">/</span>
-      <button onClick={onRoot} className="shrink-0 hover:text-slate-900 dark:hover:text-slate-100">
-        Папки
-      </button>
-      <span className="text-slate-300 dark:text-slate-600">/</span>
-      <button
-        onClick={onFolder}
-        className={`max-w-[8rem] truncate hover:text-slate-900 dark:hover:text-slate-100 ${
-          set ? '' : 'text-slate-900 dark:text-slate-100'
-        }`}
-      >
-        {folder.name}
-      </button>
-      {set && (
-        <>
-          <span className="text-slate-300 dark:text-slate-600">/</span>
-          <span className="max-w-[8rem] truncate text-slate-900 dark:text-slate-100">
-            {set.name}
-          </span>
-        </>
-      )}
-    </nav>
   )
 }
 
