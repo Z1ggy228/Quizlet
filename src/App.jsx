@@ -5,7 +5,7 @@ import FoldersView from './components/FoldersView'
 import SetsView from './components/SetsView'
 import SetView from './components/SetView'
 import StatsView from './components/StatsView'
-import { Button, Card, Spinner, ThemeToggle } from './components/ui'
+import { Button, Card, Spinner } from './components/ui'
 
 export default function App() {
   const [session, setSession] = useState(null)
@@ -77,9 +77,6 @@ export default function App() {
           )}
 
           <div className="ml-auto flex shrink-0 items-center gap-1">
-            <span className="hidden max-w-[12rem] truncate text-xs text-slate-500 dark:text-slate-400 lg:inline">
-              {user.email}
-            </span>
             <Button
               variant="ghost"
               onClick={() => {
@@ -95,7 +92,6 @@ export default function App() {
                 <path d="M15.5 2A1.5 1.5 0 0 0 14 3.5v13a1.5 1.5 0 0 0 3 0v-13A1.5 1.5 0 0 0 15.5 2ZM10 7a1.5 1.5 0 0 0-1.5 1.5v8a1.5 1.5 0 0 0 3 0v-8A1.5 1.5 0 0 0 10 7ZM4.5 11A1.5 1.5 0 0 0 3 12.5v4a1.5 1.5 0 0 0 3 0v-4A1.5 1.5 0 0 0 4.5 11Z" />
               </svg>
             </Button>
-            <ThemeToggle />
             <Button
               variant="ghost"
               onClick={() => supabase.auth.signOut()}

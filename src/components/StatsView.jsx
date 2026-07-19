@@ -5,7 +5,6 @@ import { formatDue } from '../lib/srs'
 import { Button, Card, EmptyState, ErrorText, plural, SpeakButton, Spinner } from './ui'
 import ActivityGrid from './ActivityGrid'
 import Learn from './Learn'
-import Listening from './Listening'
 
 export default function StatsView({ user }) {
   const [stats, setStats] = useState(null)
@@ -13,8 +12,7 @@ export default function StatsView({ user }) {
   const [activity, setActivity] = useState({ days: [], goal: db.DEFAULT_DAILY_GOAL })
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [session, setSession] = useState(null) // null | {mode, cards}
-  const [starting, setStarting] = useState('')
+  const [session, setSession] = useState(null) // null | {cards, title}
   const [exporting, setExporting] = useState('')
   const [exported, setExported] = useState('')
 
@@ -39,20 +37,6 @@ export default function StatsView({ user }) {
       setError(e.message)
     } finally {
       setLoading(false)
-    }
-  }
-
-  async function startReview(mode) {
-    setStarting(mode)
-    setError('')
-    try {
-      const cards = await db.listReviewCards()
-      if (!cards.length) throw new Error('Повторять нечего — на сегодня всё чисто.')
-      setSession({ mode, cards, title: 'Повторение' })
-    } catch (e) {
-      setError(e.message)
-    } finally {
-      setStarting('')
     }
   }
 
@@ -94,11 +78,7 @@ export default function StatsView({ user }) {
       setSession(null)
       load() // за сессию поменялись и счётчики ошибок, и сроки повторения
     }
-    return session.mode === 'listen' ? (
-      <Listening cards={session.cards} setName={session.title} onExit={exit} />
-    ) : (
-      <Learn cards={session.cards} setName={session.title} onExit={exit} />
-    )
+    return <Learn cards={session.cards} setName={session.title} onExit={exit} />
   }
 
   if (loading) {
@@ -130,8 +110,6 @@ export default function StatsView({ user }) {
         <Stat value={stats.total} label="всего слов" />
         <Stat value={stats.mastered} label="выучено" tone="text-emerald-600 dark:text-emerald-400" />
         <Stat value={stats.learning} label="в работе" tone="text-indigo-600 dark:text-indigo-400" />
-        {/* Сколько слов ждёт повторения — видно в блоке ниже. Здесь полезнее то,
-            что не выводится больше нигде: сколько слов упорно не даётся. */}
         <Stat value={problem.length} label="проблемные" tone="text-rose-600 dark:text-rose-400" />
       </div>
 
@@ -143,26 +121,6 @@ export default function StatsView({ user }) {
         <div className="mt-4">
           <ActivityGrid days={activity.days} goal={activity.goal} />
         </div>
-      </Card>
-
-      {/* Повторение поверх папок: важно не «где лежит слово», а «когда его пора показать». */}
-      <Card className="p-5">
-        <h2 className="text-lg font-semibold">На повторение</h2>
-        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          {stats.due > 0
-            ? `${plural(stats.due, ['слово ждёт', 'слова ждут', 'слов ждут'])} повторения — из всех наборов сразу, независимо от папок.`
-            : 'Сегодня повторять нечего. Слова вернутся, когда подойдёт их срок по интервальному повторению.'}
-        </p>
-        {stats.due > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Button onClick={() => startReview('learn')} disabled={!!starting}>
-              {starting === 'learn' && <Spinner className="h-4 w-4" />} Повторить в Learn
-            </Button>
-            <Button variant="secondary" onClick={() => startReview('listen')} disabled={!!starting}>
-              {starting === 'listen' && <Spinner className="h-4 w-4" />} Повторить на слух
-            </Button>
-          </div>
-        )}
       </Card>
 
       <Card className="p-4 sm:p-5">

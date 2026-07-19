@@ -287,33 +287,5 @@ export function OptionGroup({ label, value, onChange, options }) {
   )
 }
 
-export function useTheme() {
-  const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'))
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', dark)
-    localStorage.setItem('theme', dark ? 'dark' : 'light')
-  }, [dark])
-  return [dark, setDark]
-}
-
-export function ThemeToggle() {
-  const [dark, setDark] = useTheme()
-  return (
-    <Button
-      variant="ghost"
-      onClick={() => setDark(!dark)}
-      aria-label={dark ? 'Светлая тема' : 'Тёмная тема'}
-      className="px-2"
-    >
-      {dark ? (
-        <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-          <path d="M10 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 2ZM10 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 1.75a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5a.75.75 0 0 1 .75-.75ZM18 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 18 10ZM4.25 10.75a.75.75 0 0 0 0-1.5h-1.5a.75.75 0 0 0 0 1.5h1.5ZM15.657 4.343a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.06a.75.75 0 0 1 1.06 0ZM6.464 14.596a.75.75 0 0 0-1.06-1.06l-1.061 1.06a.75.75 0 1 0 1.06 1.06l1.061-1.06ZM4.343 4.343a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM14.596 13.536a.75.75 0 0 0-1.06 1.06l1.06 1.061a.75.75 0 0 0 1.06-1.06l-1.06-1.061Z" />
-        </svg>
-      ) : (
-        <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-          <path d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z" />
-        </svg>
-      )}
-    </Button>
-  )
-}
+// Переключателя тем здесь больше нет: тема одна, тёмная, класс dark стоит на
+// <html> в index.html. Утилиты dark: в компонентах остались — они и рисуют её.

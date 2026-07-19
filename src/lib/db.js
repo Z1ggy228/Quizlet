@@ -307,26 +307,13 @@ export async function removeCardImage(path) {
 const MASTERED = 3
 
 /**
- * Очередь на повторение: карточки, у которых наступил срок по SM-2, плюс просто
- * недоученные. Не привязана к папкам — это отдельный поток «что горит сегодня».
+ * Сводка по всем словам пользователя.
+ *
+ * Срок по SM-2 здесь не считается: экран «на повторение» убран, а расписание
+ * продолжает жить в самих карточках — его показывает `formatDue` в списке
+ * проблемных.
  */
-export async function listReviewCards(limit = 200) {
-  const now = new Date().toISOString()
-  const due = await fetchAllPages(() =>
-    supabase
-      .from('cards')
-      .select(CARD_FIELDS)
-      .lte('due_date', now)
-      .lt('mastery_level', MASTERED)
-      .order('due_date', { ascending: true })
-      .order('id'),
-  )
-  return due.slice(0, limit)
-}
-
-/** Сводка по всем словам пользователя. */
 export async function overallStats() {
-  const now = new Date().toISOString()
   // Фильтры вешаются только на то, что вернул select(): у from() их просто нет,
   // и .gte() до select() падает с TypeError.
   const counter = () => supabase.from('cards').select('id', { count: 'exact', head: true })
@@ -335,15 +322,14 @@ export async function overallStats() {
     if (error) throw error
     return count ?? 0
   }
-  const [total, mastered, due] = await Promise.all([
+  const [total, mastered] = await Promise.all([
     value(counter()),
     value(counter().gte('mastery_level', MASTERED)),
-    value(counter().lte('due_date', now).lt('mastery_level', MASTERED)),
   ])
   // Число проблемных берём из самого списка (problemCards): правило там сложнее
   // «flagged ИЛИ есть ошибки И ≥3 показов», и держать два источника правды,
   // которые могут разойтись, не стоит.
-  return { total, mastered, due, learning: total - mastered }
+  return { total, mastered, learning: total - mastered }
 }
 
 /**

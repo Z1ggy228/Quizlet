@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { Button, Card, ErrorText, Input, Label, Spinner, ThemeToggle } from './ui'
+import { Button, Card, ErrorText, Input, Label, Spinner } from './ui'
 
 export default function AuthScreen() {
   const [mode, setMode] = useState('signin') // 'signin' | 'signup'
@@ -38,12 +38,9 @@ export default function AuthScreen() {
   return (
     <div className="flex min-h-full items-center justify-center px-4 py-10">
       <div className="w-full max-w-sm">
-        <div className="mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src="/favicon.svg" alt="" className="h-9 w-9 rounded-lg" />
-            <span className="font-display text-xl">Ziglish</span>
-          </div>
-          <ThemeToggle />
+        <div className="mb-6 flex items-center gap-2">
+          <img src="/favicon.svg" alt="" className="h-9 w-9 rounded-lg" />
+          <span className="font-display text-xl">Ziglish</span>
         </div>
 
         <Card className="p-6">
